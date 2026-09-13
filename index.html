@@ -2073,7 +2073,7 @@
       ctx.restore();
     }
 
-    // Gleaming Royal Gold Coin (Swarna Mudra with sacred Om relief)
+    // Gleaming Royal Gold Coin (Swarna Mudra with royal sunburst star emblem)
     function drawCoin(x, y, radius, angle, bob) {
       ctx.save();
       ctx.translate(x, y + bob);
@@ -2105,7 +2105,7 @@
         const bx = Math.cos(bAngle) * (radius * 0.84);
         const by = Math.sin(bAngle) * (radius * 0.84);
         ctx.beginPath();
-        ctx.arc(bx, by, 1.4, 0, Math.PI * 2);
+        ctx.arc(bx, by, radius * 0.055, 0, Math.PI * 2);
         ctx.fill();
       }
 
@@ -2125,15 +2125,58 @@
       ctx.lineWidth = 1;
       ctx.stroke();
 
-      // Sacred Embossed Om (ॐ) in Relief
-      ctx.fillStyle = '#6b3600'; // shadow relief
-      ctx.font = `bold ${Math.round(radius * 0.84)}px "Segoe UI", sans-serif`;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText('ॐ', 0.8, 1.2);
+      // Inner decorative engraved ring
+      ctx.strokeStyle = '#8f5200';
+      ctx.lineWidth = 1.1;
+      ctx.beginPath();
+      ctx.arc(0, 0, radius * 0.52, 0, Math.PI * 2);
+      ctx.stroke();
 
-      ctx.fillStyle = '#fffdf0'; // highlight relief
-      ctx.fillText('ॐ', 0, 0);
+      // Royal 8-pointed sculpted gold sunburst star in relief
+      const starR_outer = radius * 0.44;
+      const starR_inner = radius * 0.20;
+
+      // Drop shadow relief
+      ctx.fillStyle = '#7a3800';
+      ctx.beginPath();
+      for (let s = 0; s < 16; s++) {
+        const a = (s * Math.PI) / 8 - Math.PI / 2;
+        const r = (s % 2 === 0) ? starR_outer : starR_inner;
+        const sx = 0.8 + Math.cos(a) * r;
+        const sy = 1.0 + Math.sin(a) * r;
+        if (s === 0) ctx.moveTo(sx, sy);
+        else ctx.lineTo(sx, sy);
+      }
+      ctx.closePath();
+      ctx.fill();
+
+      // Highlight relief star
+      const starGrad = ctx.createLinearGradient(-starR_outer, -starR_outer, starR_outer, starR_outer);
+      starGrad.addColorStop(0, '#ffffff');
+      starGrad.addColorStop(0.35, '#fff6b3');
+      starGrad.addColorStop(0.7, '#ffc02b');
+      starGrad.addColorStop(1, '#d48000');
+      ctx.fillStyle = starGrad;
+      ctx.beginPath();
+      for (let s = 0; s < 16; s++) {
+        const a = (s * Math.PI) / 8 - Math.PI / 2;
+        const r = (s % 2 === 0) ? starR_outer : starR_inner;
+        const sx = Math.cos(a) * r;
+        const sy = Math.sin(a) * r;
+        if (s === 0) ctx.moveTo(sx, sy);
+        else ctx.lineTo(sx, sy);
+      }
+      ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle = '#8a4b00';
+      ctx.lineWidth = 0.8;
+      ctx.stroke();
+
+      // Center glowing jewel dome
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(0, 0, radius * 0.11, 0, Math.PI * 2);
+      ctx.fill();
 
       // Rotating Star Gleam Sparkle
       const gleamX = radius * 0.44;
