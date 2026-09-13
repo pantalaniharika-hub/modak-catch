@@ -1945,107 +1945,129 @@
       ctx.restore();
     }
 
-    // Clear Half Coconut (Authentic cracked shell with white meat and coconut water)
+    // Sacred Puja Half Coconut (Authentic Kobbari Chippa with pure white meat, deep brown shell & auspicious Kumkum Tilak)
     function drawCoconut(x, y, radius, angle, bob) {
       ctx.save();
       ctx.translate(x, y + bob);
       ctx.rotate(angle);
 
-      // Warm fresh natural glow
-      ctx.shadowColor = 'rgba(255, 255, 255, 0.5)';
-      ctx.shadowBlur = 16;
+      // Warm divine coconut aura glow
+      ctx.shadowColor = 'rgba(255, 235, 190, 0.55)';
+      ctx.shadowBlur = 18;
 
-      // 1. Fresh green decorative leaves behind the coconut
-      ctx.fillStyle = '#2d6a4f';
+      // 1. Outer Coconut Shell Bowl (Deep rich textured husk)
+      const shellGrad = ctx.createLinearGradient(0, -radius * 0.4, 0, radius * 1.25);
+      shellGrad.addColorStop(0, '#5a3416');
+      shellGrad.addColorStop(0.35, '#3d200a');
+      shellGrad.addColorStop(0.75, '#261205');
+      shellGrad.addColorStop(1, '#140802');
+
+      ctx.fillStyle = shellGrad;
       ctx.beginPath();
-      ctx.moveTo(-radius * 0.3, -radius * 0.4);
-      ctx.quadraticCurveTo(-radius * 0.9, -radius * 1.3, -radius * 1.25, -radius * 0.9);
-      ctx.quadraticCurveTo(-radius * 0.95, -radius * 0.4, -radius * 0.2, -radius * 0.2);
-      ctx.fill();
-
-      ctx.fillStyle = '#40916c';
-      ctx.beginPath();
-      ctx.moveTo(radius * 0.2, -radius * 0.4);
-      ctx.quadraticCurveTo(radius * 0.85, -radius * 1.25, radius * 1.2, -radius * 0.8);
-      ctx.quadraticCurveTo(radius * 0.85, -radius * 0.35, radius * 0.1, -radius * 0.2);
-      ctx.fill();
-
-      // 2. Outer Fibrous Coconut Husk (Lower bowl hemisphere)
-      const huskGrad = ctx.createRadialGradient(0, 6, 2, 0, 6, radius * 1.08);
-      huskGrad.addColorStop(0, '#5a3518');
-      huskGrad.addColorStop(0.65, '#3b200c');
-      huskGrad.addColorStop(1, '#201005');
-
-      ctx.fillStyle = huskGrad;
-      ctx.beginPath();
-      ctx.arc(0, 2, radius, 0, Math.PI, false);
+      // Semi-spherical bowl with natural organic coconut shape
+      ctx.moveTo(-radius * 0.98, -radius * 0.08);
+      ctx.bezierCurveTo(-radius * 1.05, radius * 0.55, -radius * 0.45, radius * 1.18, 0, radius * 1.22);
+      ctx.bezierCurveTo(radius * 0.45, radius * 1.18, radius * 1.05, radius * 0.55, radius * 0.98, -radius * 0.08);
+      ctx.quadraticCurveTo(0, -radius * 0.38, -radius * 0.98, -radius * 0.08);
       ctx.closePath();
       ctx.fill();
 
-      // Outer husk fibrous hair texture lines
-      ctx.strokeStyle = '#201005';
+      // Outer fibrous husk strands (natural coir fiber hairs along shell)
+      ctx.strokeStyle = '#220f04';
       ctx.lineWidth = 1.3;
-      for (let f = -radius * 0.85; f <= radius * 0.85; f += 7) {
-        const a = Math.PI * 0.5 + (f / radius) * 0.92;
-        const hx = Math.cos(a) * radius;
-        const hy = 2 + Math.sin(a) * radius;
+      const fiberAngles = [-0.8, -0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.6, 0.8];
+      fiberAngles.forEach(fx => {
+        const fy = Math.sqrt(Math.max(0, 1 - fx * fx * 0.85)) * radius * 1.12;
         ctx.beginPath();
-        ctx.moveTo(hx, hy);
-        ctx.lineTo(hx * 1.15, hy + 2);
+        ctx.moveTo(fx * radius, fy * 0.92);
+        ctx.lineTo(fx * radius * 1.18, fy * 1.12);
         ctx.stroke();
-      }
+      });
 
-      // 3. The Elliptical Rim of the Cracked Half Coconut
-      const rimH = radius * 0.44;
+      // 2. The Rim of the Cut (Tilted ellipse facing the player)
+      const rimY = -radius * 0.08;
+      const rx = radius * 0.96;
+      const ry = radius * 0.52;
 
-      // Outer brown bark rim
-      ctx.fillStyle = '#4a2810';
+      // Hard dark woody shell rim edge
+      ctx.fillStyle = '#422008';
       ctx.beginPath();
-      ctx.ellipse(0, 2, radius, rimH, 0, 0, Math.PI * 2);
+      ctx.ellipse(0, rimY, rx, ry, 0, 0, Math.PI * 2);
       ctx.fill();
-      ctx.strokeStyle = '#241205';
-      ctx.lineWidth = 1.4;
+      ctx.strokeStyle = '#1d0b03';
+      ctx.lineWidth = 1.6;
       ctx.stroke();
 
-      // 4. Pristine, Pure-White Coconut Meat (Kernel) Ring
+      // Thin inner brown husk skin (tegmen)
+      ctx.fillStyle = '#6b360f';
+      ctx.beginPath();
+      ctx.ellipse(0, rimY, rx * 0.93, ry * 0.93, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // 3. PURE WHITE COCONUT MEAT (Cut Rim Surface)
       ctx.fillStyle = '#ffffff';
       ctx.beginPath();
-      ctx.ellipse(0, 2, radius * 0.88, rimH * 0.88, 0, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Depth gradient along inside curve of meat
-      const meatShade = ctx.createLinearGradient(0, 2 - rimH, 0, 2 + rimH);
-      meatShade.addColorStop(0, 'rgba(230, 225, 215, 0.9)');
-      meatShade.addColorStop(1, 'rgba(255, 255, 255, 1)');
-      ctx.fillStyle = meatShade;
-      ctx.beginPath();
-      ctx.ellipse(0, 2, radius * 0.88, rimH * 0.88, 0, 0, Math.PI * 2);
-      ctx.fill();
-
-      // 5. Inner Clear Sweet Coconut Water Basin
-      const waterGrad = ctx.createRadialGradient(0, 3, 2, 0, 3, radius * 0.62);
-      waterGrad.addColorStop(0, '#f0faff');
-      waterGrad.addColorStop(0.45, '#c8edf5');
-      waterGrad.addColorStop(0.85, '#7bc9db');
-      waterGrad.addColorStop(1, '#4a9fb3');
-
-      ctx.fillStyle = waterGrad;
-      ctx.beginPath();
-      ctx.ellipse(0, 3, radius * 0.62, rimH * 0.62, 0, 0, Math.PI * 2);
+      ctx.ellipse(0, rimY, rx * 0.88, ry * 0.88, 0, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.shadowBlur = 0;
 
-      // 6. Glistening Water Light Reflection
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+      // 4. Concave Inner Bowl of White Coconut Meat!
+      const innerRx = rx * 0.62;
+      const innerRy = ry * 0.64;
+      const innerY = rimY + ry * 0.20;
+
+      // Volumetric concave depth gradient on the white meat
+      const bowlGrad = ctx.createRadialGradient(
+        -innerRx * 0.2, innerY - innerRy * 0.2, innerRx * 0.1,
+        0, innerY, innerRx
+      );
+      bowlGrad.addColorStop(0, '#ffffff'); // bright center
+      bowlGrad.addColorStop(0.35, '#faf7f2');
+      bowlGrad.addColorStop(0.7, '#ebe4d8');
+      bowlGrad.addColorStop(0.9, '#ded4c4');
+      bowlGrad.addColorStop(1, '#c8bbae'); // shadow under the lip of the meat
+
+      ctx.fillStyle = bowlGrad;
       ctx.beginPath();
-      ctx.ellipse(-radius * 0.22, 1.8, radius * 0.22, rimH * 0.25, -0.35, 0, Math.PI * 2);
+      ctx.ellipse(0, innerY, innerRx, innerRy, 0, 0, Math.PI * 2);
       ctx.fill();
 
-      // Bright white glint star
-      ctx.fillStyle = '#ffffff';
+      // Gentle shadow contour along upper inner lip
+      ctx.strokeStyle = 'rgba(160, 140, 120, 0.4)';
+      ctx.lineWidth = 1.2;
       ctx.beginPath();
-      ctx.arc(-radius * 0.25, 1.5, 1.8, 0, Math.PI * 2);
+      ctx.ellipse(0, innerY, innerRx, innerRy, 0, Math.PI, Math.PI * 2);
+      ctx.stroke();
+
+      // 5. Glistening Moist Coconut Meat Sheen (Light reflection)
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+      ctx.beginPath();
+      ctx.ellipse(-innerRx * 0.28, innerY - innerRy * 0.15, innerRx * 0.28, innerRy * 0.22, -0.3, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Star sparkle glint on the fresh moist coconut meat
+      ctx.fillStyle = '#ffffff';
+      const glintX = rx * 0.52;
+      const glintY = rimY - ry * 0.22;
+      ctx.beginPath();
+      ctx.arc(glintX, glintY, 2.0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(glintX - 4, glintY); ctx.lineTo(glintX + 4, glintY);
+      ctx.moveTo(glintX, glintY - 4); ctx.lineTo(glintX, glintY + 4);
+      ctx.stroke();
+
+      // 6. Sacred Puja Kumkum / Sindoor Tilak Dot inside the coconut
+      ctx.fillStyle = '#d90429';
+      ctx.beginPath();
+      ctx.arc(0, innerY, 2.8, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#ffe600';
+      ctx.beginPath();
+      ctx.arc(0, innerY, 1.1, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.restore();
@@ -2685,7 +2707,7 @@
             // High-clarity festive burst particles
             let colors = ['#ffd166', '#ffb703', '#ffffff'];
             if (item.type === 'laddoo') colors = ['#ffb703', '#fb8500', '#2ec4b6', '#ffffff'];
-            else if (item.type === 'coconut') colors = ['#5a3518', '#ffffff', '#7bc9db', '#40916c'];
+            else if (item.type === 'coconut') colors = ['#ffffff', '#fff8f0', '#5a3416', '#d90429', '#ffd166'];
             else if (item.type === 'coin') colors = ['#ffd700', '#ffe600', '#fff8cc', '#ff9e00'];
             else if (item.type === 'modak') colors = ['#ffd166', '#ffffff', '#ff9e00', '#d90429'];
 
