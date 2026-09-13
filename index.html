@@ -553,18 +553,88 @@
         <div class="hero-art-container">
           <!-- Mushak & Ganesha Blessing Illustration -->
           <svg viewBox="0 0 100 100" width="100" height="100">
-            <!-- Lord Ganesha Above -->
-            <polygon points="50,6 59,19 41,19" fill="#ffd166" stroke="#e65100" stroke-width="1.2"/>
-            <circle cx="50" cy="5" r="2.5" fill="#d00000"/>
-            <ellipse cx="32" cy="30" rx="11" ry="13" fill="#ffb703" stroke="#e65100" stroke-width="1.2"/>
-            <ellipse cx="68" cy="30" rx="11" ry="13" fill="#ffb703" stroke="#e65100" stroke-width="1.2"/>
-            <ellipse cx="50" cy="31" rx="14" ry="15" fill="#ffb703" stroke="#e65100" stroke-width="1.2"/>
-            <path d="M47 21 Q50 26 53 21" stroke="#d00000" stroke-width="2" fill="none"/>
-            <circle cx="50" cy="22" r="1" fill="#ffe600"/>
-            <ellipse cx="45" cy="27" rx="1.5" ry="2" fill="#370617"/>
-            <ellipse cx="55" cy="27" rx="1.5" ry="2" fill="#370617"/>
-            <path d="M50 33 C51 40 55 43 58 41 C60 39 59 36 55 36" stroke="#e65100" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-            <circle cx="57" cy="38" r="2" fill="#ffd166"/>
+            <defs>
+              <radialGradient id="divineGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ffd166" stop-opacity="0.85"/>
+                <stop offset="60%" stop-color="#ff9e00" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#ff7700" stop-opacity="0"/>
+              </radialGradient>
+              <linearGradient id="mukutGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffd166"/>
+                <stop offset="50%" stop-color="#ffe600"/>
+                <stop offset="100%" stop-color="#d48b14"/>
+              </linearGradient>
+              <radialGradient id="ganeshSkin" cx="45%" cy="40%" r="60%">
+                <stop offset="0%" stop-color="#ffe082"/>
+                <stop offset="40%" stop-color="#ffb300"/>
+                <stop offset="85%" stop-color="#fb8500"/>
+                <stop offset="100%" stop-color="#ba3c00"/>
+              </radialGradient>
+            </defs>
+
+            <!-- Divine Prabhavali Halo & Rays -->
+            <circle cx="50" cy="27" r="23" fill="url(#divineGlow)"/>
+            <circle cx="50" cy="27" r="20" fill="#24040c" stroke="#ffd166" stroke-width="1.2"/>
+            <path d="M50 4 L50 9 M66 11 L62 15 M73 27 L68 27 M66 43 L62 39 M34 11 L38 15 M27 27 L32 27 M34 43 L38 39" stroke="#ffd166" stroke-width="1" opacity="0.75"/>
+
+            <!-- Natural Elephant Ears (Shupakarna) with Kundalas -->
+            <!-- Left Ear -->
+            <path d="M38 20 C24 16 22 28 26 36 C29 41 36 38 38 32 Z" fill="url(#ganeshSkin)" stroke="#8c2e00" stroke-width="1"/>
+            <ellipse cx="30" cy="28" rx="5" ry="7" fill="#ff758f" opacity="0.5"/>
+            <circle cx="28" cy="37" r="2" fill="#ffd166"/>
+            <circle cx="28" cy="40" r="1" fill="#fff"/>
+            <!-- Right Ear -->
+            <path d="M62 20 C76 16 78 28 74 36 C71 41 64 38 62 32 Z" fill="url(#ganeshSkin)" stroke="#8c2e00" stroke-width="1"/>
+            <ellipse cx="70" cy="28" rx="5" ry="7" fill="#ff758f" opacity="0.5"/>
+            <circle cx="72" cy="37" r="2" fill="#ffd166"/>
+            <circle cx="72" cy="40" r="1" fill="#fff"/>
+
+            <!-- Majestic Elephant Head (Dual Kumbha Lobes & Volume) -->
+            <ellipse cx="44" cy="22" rx="8" ry="9" fill="url(#ganeshSkin)"/>
+            <ellipse cx="56" cy="22" rx="8" ry="9" fill="url(#ganeshSkin)"/>
+            <ellipse cx="50" cy="27" rx="12" ry="11" fill="url(#ganeshSkin)"/>
+
+            <!-- Tiered Royal Kireetam (Crown) -->
+            <path d="M39 19 L61 19 L58 12 L42 12 Z" fill="url(#mukutGold)" stroke="#8c4d00" stroke-width="0.8"/>
+            <circle cx="45" cy="15.5" r="1.2" fill="#d90429"/>
+            <circle cx="50" cy="15.5" r="1.4" fill="#2ec4b6"/>
+            <circle cx="55" cy="15.5" r="1.2" fill="#d90429"/>
+            <!-- Upper Tiers & Kalash Spire -->
+            <path d="M43 12 L57 12 L54 6 L46 6 Z" fill="url(#mukutGold)" stroke="#8c4d00" stroke-width="0.8"/>
+            <path d="M47 6 L53 6 L50 2 Z" fill="url(#mukutGold)"/>
+            <circle cx="50" cy="2" r="1.5" fill="#ffe600"/>
+            <circle cx="50" cy="2" r="0.6" fill="#ffffff"/>
+
+            <!-- Sacred Sandalwood Tripundra & Kumkum Tilak -->
+            <path d="M46 22 Q50 20 54 22 M46 24 Q50 22 54 24" stroke="#fff9db" stroke-width="0.9" fill="none"/>
+            <path d="M50 20 L50 28" stroke="#d90429" stroke-width="1.8" stroke-linecap="round"/>
+            <circle cx="50" cy="23" r="0.9" fill="#ffe600"/>
+
+            <!-- Benevolent Almond Eyes (Karuna Drishti) -->
+            <!-- Left Eye -->
+            <path d="M42 27 Q45 25 47 27 Q45 29 42 27" fill="#ffffff" stroke="#2b0b00" stroke-width="0.6"/>
+            <circle cx="45" cy="27" r="1" fill="#5c2409"/>
+            <circle cx="45" cy="27" r="0.5" fill="#110401"/>
+            <circle cx="45.3" cy="26.7" r="0.3" fill="#ffffff"/>
+            <!-- Right Eye -->
+            <path d="M58 27 Q55 25 53 27 Q55 29 58 27" fill="#ffffff" stroke="#2b0b00" stroke-width="0.6"/>
+            <circle cx="55" cy="27" r="1" fill="#5c2409"/>
+            <circle cx="55" cy="27" r="0.5" fill="#110401"/>
+            <circle cx="54.7" cy="26.7" r="0.3" fill="#ffffff"/>
+
+            <!-- Tusks (Ivory & Broken Ekadanta) -->
+            <!-- Right Tusk (curved, ivory) -->
+            <path d="M55 33 Q59 34 61 31 Q58 35 54 36 Z" fill="#fffef2" stroke="#cbb28d" stroke-width="0.5"/>
+            <!-- Left Tusk (broken Ekadanta) -->
+            <path d="M46 33 L43 35 L44 36 L47 34 Z" fill="#fffef2" stroke="#cbb28d" stroke-width="0.5"/>
+
+            <!-- Volumetric Trunk (Vakratunda) with Modak -->
+            <path d="M47 30 Q45 37 53 40 Q62 42 62 37 Q62 34 58 34 Q53 34 53 30 Z" fill="url(#ganeshSkin)" stroke="#8c2e00" stroke-width="1"/>
+            <circle cx="59" cy="35" r="2.6" fill="#ffe600" stroke="#e85d04" stroke-width="0.6"/>
+            <circle cx="59" cy="33.5" r="0.6" fill="#d90429"/>
+            <!-- Pearl Necklace -->
+            <path d="M43 37 Q50 43 57 37" stroke="#ffd166" stroke-width="1.2" fill="none"/>
+            <circle cx="50" cy="41" r="1.3" fill="#d90429"/>
 
             <!-- Mushak holding Thali below -->
             <ellipse cx="36" cy="65" rx="7" ry="7" fill="#9aa5b1"/>
@@ -1068,11 +1138,11 @@
       });
     }
 
-    // --- Backdrop Artwork: Lord Ganesha in Place of Diyas ---
+    // --- Backdrop Artwork: Authentic Sacred Temple Architecture with Real Lord Ganesha Shrines ---
     function drawBackgroundDecorations() {
-      // Faint Pandal Arch Silhouette at top
       ctx.save();
-      ctx.strokeStyle = 'rgba(255, 209, 102, 0.07)';
+      // Faint Pandal Arch Silhouette at top
+      ctx.strokeStyle = 'rgba(255, 209, 102, 0.08)';
       ctx.lineWidth = 2.5;
       ctx.beginPath();
       ctx.arc(V_WIDTH / 2, 0, V_WIDTH * 0.45, 0, Math.PI);
@@ -1082,13 +1152,49 @@
       ctx.arc(V_WIDTH / 2, 0, V_WIDTH * 0.49, 0, Math.PI);
       ctx.stroke();
 
-      // Subtle temple pillar accents on sides
-      ctx.fillStyle = 'rgba(255, 209, 102, 0.04)';
-      ctx.fillRect(0, 0, 20, V_HEIGHT);
-      ctx.fillRect(V_WIDTH - 20, 0, 20, V_HEIGHT);
+      // Temple Mandap Pillars (Left & Right Architectural Frames)
+      const pillarW = 54;
+      // Left Pillar
+      const leftPillarGrad = ctx.createLinearGradient(0, 0, pillarW, 0);
+      leftPillarGrad.addColorStop(0, 'rgba(38, 5, 13, 0.92)');
+      leftPillarGrad.addColorStop(0.75, 'rgba(62, 10, 22, 0.65)');
+      leftPillarGrad.addColorStop(1, 'rgba(20, 2, 6, 0.15)');
+      ctx.fillStyle = leftPillarGrad;
+      ctx.fillRect(0, 0, pillarW, V_HEIGHT);
+
+      // Right Pillar
+      const rightPillarGrad = ctx.createLinearGradient(V_WIDTH, 0, V_WIDTH - pillarW, 0);
+      rightPillarGrad.addColorStop(0, 'rgba(38, 5, 13, 0.92)');
+      rightPillarGrad.addColorStop(0.75, 'rgba(62, 10, 22, 0.65)');
+      rightPillarGrad.addColorStop(1, 'rgba(20, 2, 6, 0.15)');
+      ctx.fillStyle = rightPillarGrad;
+      ctx.fillRect(V_WIDTH - pillarW, 0, pillarW, V_HEIGHT);
+
+      // Carved Golden Borders along Pillars
+      ctx.strokeStyle = 'rgba(255, 209, 102, 0.32)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(pillarW, 0); ctx.lineTo(pillarW, V_HEIGHT);
+      ctx.moveTo(V_WIDTH - pillarW, 0); ctx.lineTo(V_WIDTH - pillarW, V_HEIGHT);
+      ctx.stroke();
+
+      // Hanging Marigold Beads along pillar borders
+      for (let y = 24; y < V_HEIGHT - 24; y += 32) {
+        ctx.fillStyle = '#ff8800';
+        ctx.beginPath();
+        ctx.arc(pillarW, y, 3.2, 0, Math.PI * 2);
+        ctx.arc(V_WIDTH - pillarW, y, 3.2, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#ffe600';
+        ctx.beginPath();
+        ctx.arc(pillarW, y + 11, 2.5, 0, Math.PI * 2);
+        ctx.arc(V_WIDTH - pillarW, y + 11, 2.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
 
       // Floor Rangoli Watermark
-      ctx.strokeStyle = 'rgba(255, 209, 102, 0.06)';
+      ctx.strokeStyle = 'rgba(255, 209, 102, 0.08)';
       ctx.lineWidth = 1.5;
       ctx.beginPath();
       ctx.arc(V_WIDTH / 2, V_HEIGHT, 130, Math.PI, 0);
@@ -1099,97 +1205,556 @@
       ctx.stroke();
       ctx.restore();
 
-      // IN THE PLACE OF DIYAS: Lord Ganesha Shrines on the pillars!
-      drawGaneshaShrine(12, V_HEIGHT * 0.35);
-      drawGaneshaShrine(12, V_HEIGHT * 0.65);
-      drawGaneshaShrine(V_WIDTH - 12, V_HEIGHT * 0.35);
-      drawGaneshaShrine(V_WIDTH - 12, V_HEIGHT * 0.65);
+      // GRAND, MAJESTIC, LIVING LORD GANESHA SANCTUMS
+      // Inward-facing: left sanctum faces right toward player, right sanctum faces left toward player
+      const shrineY = V_HEIGHT * 0.40;
+      drawGrandLivingGanesha(28, shrineY, 1);
+      drawGrandLivingGanesha(V_WIDTH - 28, shrineY, -1);
     }
 
-    // Divine Lord Ganesha Shrine Medallion (Replaces the old wall diyas)
-    function drawGaneshaShrine(x, y) {
+    // Divine, Majestic, Lifelike Lord Ganesha Temple Sanctum (Grand Authentic Iconography)
+    function drawGrandLivingGanesha(x, y, facing) {
       ctx.save();
       ctx.translate(x, y);
+      ctx.scale(facing, 1);
 
-      // Soft Radiating Divine Halo Glow
-      const glow = ctx.createRadialGradient(0, 0, 4, 0, 0, 28);
-      glow.addColorStop(0, 'rgba(255, 215, 0, 0.5)');
-      glow.addColorStop(0.5, 'rgba(255, 140, 0, 0.22)');
+      // --- 1. Soft Warm Radiating Divine Aura Glow ---
+      const glow = ctx.createRadialGradient(0, -6, 8, 0, -6, 52);
+      glow.addColorStop(0, 'rgba(255, 215, 0, 0.65)');
+      glow.addColorStop(0.45, 'rgba(255, 140, 0, 0.28)');
       glow.addColorStop(1, 'transparent');
       ctx.fillStyle = glow;
       ctx.beginPath();
-      ctx.arc(0, 0, 28, 0, Math.PI * 2);
+      ctx.arc(0, -6, 52, 0, Math.PI * 2);
       ctx.fill();
 
-      // Ornate Shrine Medallion Rim
-      ctx.fillStyle = 'rgba(43, 6, 17, 0.9)';
-      ctx.beginPath();
-      ctx.arc(0, 0, 18, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.strokeStyle = '#ffd166';
-      ctx.lineWidth = 1.6;
-      ctx.stroke();
+      // --- 2. Grand Temple Sanctum Arch (Makara Torana) ---
+      const archW = 28;
+      const archTopY = -48;
+      const archBotY = 46;
 
-      // Lotus Base at bottom of shrine
-      ctx.fillStyle = '#ff4d6d';
+      // Sanctum Alcove Interior (Deep Ceremonial Crimson)
+      const alcoveGrad = ctx.createLinearGradient(0, archTopY, 0, archBotY);
+      alcoveGrad.addColorStop(0, '#2e040e');
+      alcoveGrad.addColorStop(0.5, '#420715');
+      alcoveGrad.addColorStop(1, '#180206');
+      ctx.fillStyle = alcoveGrad;
       ctx.beginPath();
-      ctx.ellipse(0, 12, 10, 4, 0, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Lord Ganesha Deity Silhouette
-      // Crown (Mukut)
-      ctx.fillStyle = '#ffd166';
-      ctx.beginPath();
-      ctx.moveTo(0, -15);
-      ctx.lineTo(5, -7);
-      ctx.lineTo(-5, -7);
+      ctx.moveTo(-archW, archBotY);
+      ctx.lineTo(-archW, archTopY + 16);
+      ctx.quadraticCurveTo(-archW, archTopY, 0, archTopY);
+      ctx.quadraticCurveTo(archW, archTopY, archW, archTopY + 16);
+      ctx.lineTo(archW, archBotY);
       ctx.closePath();
       ctx.fill();
-      ctx.fillStyle = '#d00000';
-      ctx.beginPath();
-      ctx.arc(0, -15, 1.3, 0, Math.PI * 2);
-      ctx.fill();
 
-      // Ears
-      ctx.fillStyle = '#ffb703';
-      ctx.beginPath();
-      ctx.ellipse(-8, -2, 5, 6, -0.15, 0, Math.PI * 2);
-      ctx.ellipse(8, -2, 5, 6, 0.15, 0, Math.PI * 2);
-      ctx.fill();
+      // Ornate Golden Arch Border with Scalloped Filigree
+      ctx.strokeStyle = '#ffd166';
+      ctx.lineWidth = 2.2;
+      ctx.stroke();
 
-      // Head
-      ctx.beginPath();
-      ctx.arc(0, -2, 7.5, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Red Tilak
-      ctx.fillStyle = '#d00000';
-      ctx.beginPath();
-      ctx.arc(0, -5, 1.2, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Eyes
-      ctx.strokeStyle = '#370617';
+      ctx.strokeStyle = 'rgba(255, 230, 100, 0.4)';
       ctx.lineWidth = 1;
       ctx.beginPath();
-      ctx.arc(-2.5, -3, 1.2, 0.2, Math.PI - 0.2);
-      ctx.arc(2.5, -3, 1.2, 0.2, Math.PI - 0.2);
+      ctx.moveTo(-archW + 3, archBotY);
+      ctx.lineTo(-archW + 3, archTopY + 18);
+      ctx.quadraticCurveTo(-archW + 3, archTopY + 3, 0, archTopY + 3);
+      ctx.quadraticCurveTo(archW - 3, archTopY + 3, archW - 3, archTopY + 18);
+      ctx.lineTo(archW - 3, archBotY);
       ctx.stroke();
 
-      // Sacred Curved Trunk
-      ctx.strokeStyle = '#e65100';
-      ctx.lineWidth = 2.2;
-      ctx.lineCap = 'round';
+      // --- 3. Hanging Brass Temple Bell (Ghanta) Above Sanctum ---
+      ctx.strokeStyle = '#ffd166';
+      ctx.lineWidth = 1.2;
       ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.quadraticCurveTo(1, 6, 4, 5);
+      ctx.moveTo(0, archTopY - 14);
+      ctx.lineTo(0, archTopY + 2);
       ctx.stroke();
 
-      // Modak on trunk tip
+      const bellGrad = ctx.createLinearGradient(-4, archTopY + 2, 4, archTopY + 2);
+      bellGrad.addColorStop(0, '#ffd166');
+      bellGrad.addColorStop(0.5, '#fff6bd');
+      bellGrad.addColorStop(1, '#d48b14');
+      ctx.fillStyle = bellGrad;
+      ctx.beginPath();
+      ctx.moveTo(-2, archTopY + 2);
+      ctx.lineTo(2, archTopY + 2);
+      ctx.lineTo(4.5, archTopY + 8);
+      ctx.lineTo(-4.5, archTopY + 8);
+      ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle = '#783c00';
+      ctx.lineWidth = 0.8;
+      ctx.stroke();
+      // Bell Clapper
+      ctx.fillStyle = '#ffd166';
+      ctx.beginPath();
+      ctx.arc(0, archTopY + 9.5, 1.2, 0, Math.PI * 2);
+      ctx.fill();
+
+      // --- 4. Golden Sunburst Prabhavali Halo behind Head ---
+      const haloX = 2;
+      const haloY = -12;
+      const haloR = 24;
+      ctx.fillStyle = 'rgba(255, 209, 102, 0.18)';
+      ctx.beginPath();
+      ctx.arc(haloX, haloY, haloR, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Radiating Halo Rays
+      ctx.strokeStyle = 'rgba(255, 215, 0, 0.65)';
+      ctx.lineWidth = 1.3;
+      for (let a = 0; a < Math.PI * 2; a += Math.PI / 8) {
+        const x1 = haloX + Math.cos(a) * (haloR - 3);
+        const y1 = haloY + Math.sin(a) * (haloR - 3);
+        const x2 = haloX + Math.cos(a) * (haloR + 3);
+        const y2 = haloY + Math.sin(a) * (haloR + 3);
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+      }
+
+      // --- 5. Blooming Padmasana Lotus Throne Base ---
+      const lotusY = 38;
+      // Golden Plinth Foundation
+      ctx.fillStyle = '#d48b14';
+      ctx.fillRect(-archW + 4, lotusY + 4, (archW - 4) * 2, 4);
+      ctx.strokeStyle = '#ffd166';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(-archW + 4, lotusY + 4, (archW - 4) * 2, 4);
+
+      // Outer Crimson Petals
+      ctx.fillStyle = '#b7094c';
+      for (let p = -4; p <= 4; p++) {
+        ctx.beginPath();
+        ctx.ellipse(p * 5.2, lotusY + 2, 4.5, 3.2, p * 0.12, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      // Inner Glowing Rose Petals with Golden Tips
+      ctx.fillStyle = '#ff758f';
+      for (let p = -3; p <= 3; p++) {
+        ctx.beginPath();
+        ctx.ellipse(p * 5.6, lotusY - 1, 4.0, 2.6, p * 0.10, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#ffe600';
+        ctx.beginPath();
+        ctx.arc(p * 5.6, lotusY - 3.2, 0.85, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#ff758f';
+      }
+
+      // --- 6. Lord Ganesha's Seated Divine Torso & Attire ---
+      // Rich volumetric golden-saffron body
+      const bodyGrad = ctx.createRadialGradient(4, 18, 2, 4, 18, 20);
+      bodyGrad.addColorStop(0, '#ffd166');
+      bodyGrad.addColorStop(0.4, '#ffb300');
+      bodyGrad.addColorStop(0.8, '#fb8500');
+      bodyGrad.addColorStop(1, '#ba3c00');
+
+      // Torso Volume
+      ctx.fillStyle = bodyGrad;
+      ctx.beginPath();
+      ctx.ellipse(3, 18, 14, 13, 0.05, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Royal Silk Pitambara Dhoti (Folded legs in Lalitasana)
+      const dhotiGrad = ctx.createLinearGradient(-15, 24, 18, 36);
+      dhotiGrad.addColorStop(0, '#d9480f');
+      dhotiGrad.addColorStop(0.5, '#f76707');
+      dhotiGrad.addColorStop(1, '#c92a2a');
+      ctx.fillStyle = dhotiGrad;
+      ctx.beginPath();
+      ctx.moveTo(-16, 26);
+      ctx.quadraticCurveTo(0, 36, 18, 28);
+      ctx.quadraticCurveTo(12, 36, -4, 37);
+      ctx.quadraticCurveTo(-14, 37, -16, 26);
+      ctx.closePath();
+      ctx.fill();
+
+      // Gold Zari Embroidered Border on Dhoti
+      ctx.strokeStyle = '#ffd166';
+      ctx.lineWidth = 1.4;
+      ctx.stroke();
+
+      // Sacred Yajnopavita (Holy Thread running across chest)
+      ctx.strokeStyle = '#fff8db';
+      ctx.lineWidth = 1.1;
+      ctx.beginPath();
+      ctx.moveTo(-6, 8);
+      ctx.quadraticCurveTo(2, 18, 11, 26);
+      ctx.stroke();
+
+      // Golden Udara-bandha (Waistband with jewel)
+      ctx.strokeStyle = '#ffd166';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.arc(3, 23, 10, 0.3, Math.PI - 0.3);
+      ctx.stroke();
+      ctx.fillStyle = '#d90429';
+      ctx.beginPath();
+      ctx.arc(3, 31, 1.4, 0, Math.PI * 2);
+      ctx.fill();
+
+      // --- 7. Divine Arms & Mudras ---
+      // Right Arm: Raised Abhaya Mudra (Hand of Protection & Blessing!)
+      ctx.fillStyle = bodyGrad;
+      ctx.beginPath();
+      ctx.moveTo(14, 12);
+      ctx.quadraticCurveTo(20, 10, 22, 5);
+      ctx.lineTo(19, 3);
+      ctx.quadraticCurveTo(17, 8, 12, 14);
+      ctx.closePath();
+      ctx.fill();
+
+      // Forearm & Raised Blessing Palm
+      ctx.beginPath();
+      ctx.ellipse(21, 2, 4.5, 6, 0.2, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#8c2e00';
+      ctx.lineWidth = 0.8;
+      ctx.stroke();
+
+      // Golden Kangan (Bracelets)
+      ctx.fillStyle = '#ffd166';
+      ctx.fillRect(18.5, 6.5, 4, 1.8);
+
+      // Auspicious Red & Gold Lotus Mark on Blessing Palm
+      ctx.fillStyle = '#d90429';
+      ctx.beginPath();
+      ctx.arc(21, 2, 1.5, 0, Math.PI * 2);
+      ctx.fill();
       ctx.fillStyle = '#ffe600';
       ctx.beginPath();
-      ctx.arc(4, 4, 1.4, 0, Math.PI * 2);
+      ctx.arc(21, 2, 0.7, 0, Math.PI * 2);
       ctx.fill();
+
+      // Left Arm: Cradling Modak / Sacred Sweets
+      ctx.fillStyle = bodyGrad;
+      ctx.beginPath();
+      ctx.moveTo(-8, 13);
+      ctx.quadraticCurveTo(-15, 17, -14, 25);
+      ctx.lineTo(-10, 26);
+      ctx.quadraticCurveTo(-11, 20, -5, 16);
+      ctx.closePath();
+      ctx.fill();
+
+      // Golden Bowl of Sweets on lap
+      ctx.fillStyle = '#ffd166';
+      ctx.beginPath();
+      ctx.arc(-11, 25, 4, 0, Math.PI);
+      ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle = '#e65100';
+      ctx.lineWidth = 0.7;
+      ctx.stroke();
+      ctx.fillStyle = '#ffe600';
+      ctx.beginPath();
+      ctx.arc(-11, 23.5, 2.2, 0, Math.PI * 2);
+      ctx.fill();
+
+      // --- 8. Authentic Volumetric Elephant Head (Gaja Vadana) ---
+      const headGrad = ctx.createRadialGradient(3, -11, 3, 3, -11, 18);
+      headGrad.addColorStop(0, '#ffe082');
+      headGrad.addColorStop(0.35, '#ffb300');
+      headGrad.addColorStop(0.75, '#fb8500');
+      headGrad.addColorStop(1, '#ba3c00');
+
+      // Dual Kumbha Cranium Lobes (Pronounced forehead lobes)
+      ctx.fillStyle = headGrad;
+      // Left Lobe
+      ctx.beginPath();
+      ctx.ellipse(-3, -17, 7.5, 9, -0.15, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Right Lobe (prominent in 3/4 view)
+      ctx.beginPath();
+      ctx.ellipse(8, -16, 8.5, 10, 0.15, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Brow & Forehead Central Volume
+      ctx.beginPath();
+      ctx.ellipse(3.5, -10, 12, 10.5, 0.08, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Soft volumetric contour
+      ctx.strokeStyle = '#852400';
+      ctx.lineWidth = 0.9;
+      ctx.beginPath();
+      ctx.arc(3.5, -10, 12, 0.35, Math.PI * 1.6);
+      ctx.stroke();
+
+      // --- 9. Majestic Fan-Shaped Elephant Ear (Shupakarna) ---
+      const earGrad = ctx.createRadialGradient(-10, -9, 3, -10, -9, 18);
+      earGrad.addColorStop(0, '#ffd166');
+      earGrad.addColorStop(0.65, '#ff9e00');
+      earGrad.addColorStop(1, '#ba3c00');
+      ctx.fillStyle = earGrad;
+      ctx.beginPath();
+      ctx.moveTo(-1, -17);
+      ctx.quadraticCurveTo(-18, -20, -19, -8);
+      ctx.quadraticCurveTo(-19, 4, -9, 7);
+      ctx.quadraticCurveTo(-3, 6, 0, 0);
+      ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle = '#782200';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // Inner Ear Rosy Shading
+      ctx.fillStyle = 'rgba(255, 130, 160, 0.45)';
+      ctx.beginPath();
+      ctx.ellipse(-10.5, -7, 6, 7.5, -0.15, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Dangling Golden Temple Kundala (Earring with Pearl Drop)
+      ctx.fillStyle = '#ffd166';
+      ctx.beginPath();
+      ctx.arc(-8.5, 7.5, 2.4, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#e65100';
+      ctx.lineWidth = 0.8;
+      ctx.stroke();
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(-8.5, 11.5, 1.5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // --- 10. Lifelike Living Divine Eye (Karuna Netra) ---
+      // White Almond Sclera
+      ctx.fillStyle = '#fffdfa';
+      ctx.beginPath();
+      ctx.moveTo(2, -9.5);
+      ctx.quadraticCurveTo(6.8, -13.5, 12, -10.5);
+      ctx.quadraticCurveTo(6.8, -6.8, 2, -9.5);
+      ctx.fill();
+
+      // Warm Amber-Brown Iris
+      ctx.fillStyle = '#5c2409';
+      ctx.beginPath();
+      ctx.arc(7.2, -10.0, 2.5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Deep Black Pupil
+      ctx.fillStyle = '#0f0301';
+      ctx.beginPath();
+      ctx.arc(7.2, -10.0, 1.4, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Glistening Catchlight Reflection (The Spark of Life!)
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(8.0, -10.8, 0.9, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Kohl-Lined Upper Eyelid & Wing
+      ctx.strokeStyle = '#1a0500';
+      ctx.lineWidth = 1.1;
+      ctx.beginPath();
+      ctx.moveTo(2, -9.5);
+      ctx.quadraticCurveTo(6.8, -13.5, 12.8, -10.8);
+      ctx.stroke();
+
+      // Benevolent Arched Eyebrow
+      ctx.strokeStyle = '#5c2409';
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      ctx.moveTo(2.8, -14.5);
+      ctx.quadraticCurveTo(8.0, -17.0, 13.5, -13.5);
+      ctx.stroke();
+
+      // --- 11. Sacred Tilak (Chandan Tripundra + Kumkum + Bindi) ---
+      // Sandalwood White Paste Stripes
+      ctx.strokeStyle = 'rgba(255, 246, 195, 0.95)';
+      ctx.lineWidth = 1.0;
+      ctx.beginPath();
+      ctx.arc(1.5, -12.8, 5.2, -0.4, 0.5);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(1.5, -11.5, 5.2, -0.4, 0.5);
+      ctx.stroke();
+
+      // Central Vermillion Kumkum Tilak
+      ctx.fillStyle = '#d90429';
+      ctx.beginPath();
+      ctx.ellipse(1.5, -10.8, 1.2, 2.8, 0.05, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Golden Third-Eye Jewel / Bindi
+      ctx.fillStyle = '#ffe600';
+      ctx.beginPath();
+      ctx.arc(1.5, -10.8, 0.75, 0, Math.PI * 2);
+      ctx.fill();
+
+      // --- 12. Sacred Tusks (Danta & Ekadanta) ---
+      // Right Tusk (Curved, sharp, polished ivory)
+      ctx.fillStyle = '#fffef4';
+      ctx.beginPath();
+      ctx.moveTo(6.5, -2.5);
+      ctx.quadraticCurveTo(11.0, -1.0, 13.0, -4.0);
+      ctx.quadraticCurveTo(10.5, 0.5, 5.5, 0);
+      ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle = '#cbb28d';
+      ctx.lineWidth = 0.65;
+      ctx.stroke();
+      // Gold Cuff Band on Tusk
+      ctx.fillStyle = '#ffd166';
+      ctx.fillRect(5.8, -2.5, 1.8, 2.4);
+
+      // Left Tusk (Broken Ekadanta)
+      ctx.fillStyle = '#fffef4';
+      ctx.beginPath();
+      ctx.moveTo(-0.5, -3.8);
+      ctx.lineTo(-3.2, -1.2);
+      ctx.lineTo(-1.6, 0.0);
+      ctx.lineTo(0.8, -2.5);
+      ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle = '#cbb28d';
+      ctx.lineWidth = 0.65;
+      ctx.stroke();
+
+      // --- 13. Volumetric Curved Trunk (Vakratunda) Holding Golden Modak ---
+      const trunkGrad = ctx.createLinearGradient(0, -6, 22, 12);
+      trunkGrad.addColorStop(0, '#ffd166');
+      trunkGrad.addColorStop(0.35, '#ff9e00');
+      trunkGrad.addColorStop(0.75, '#e85d04');
+      trunkGrad.addColorStop(1, '#9d2800');
+
+      ctx.fillStyle = trunkGrad;
+      ctx.beginPath();
+      ctx.moveTo(4.0, -6.5); // base near eye
+      // Sweeping curve towards player
+      ctx.quadraticCurveTo(9.5, 0, 15.0, 5.5);
+      ctx.quadraticCurveTo(20.5, 9.5, 23.5, 6.5);
+      ctx.quadraticCurveTo(24.5, 2.5, 20.5, 1.5); // curled tip
+      // Inner under-curve
+      ctx.quadraticCurveTo(16.5, 3.0, 12.0, -1.2);
+      ctx.quadraticCurveTo(6.8, -5.2, 1.5, -5.2);
+      ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle = '#751a00';
+      ctx.lineWidth = 1.1;
+      ctx.stroke();
+
+      // Natural Trunk Skin Wrinkles / Folds
+      ctx.strokeStyle = 'rgba(135, 30, 0, 0.45)';
+      ctx.lineWidth = 0.85;
+      for (let r = 0; r < 5; r++) {
+        const rx = 5.2 + r * 2.8;
+        const ry = -3.8 + r * 2.4;
+        ctx.beginPath();
+        ctx.moveTo(rx - 1.0, ry);
+        ctx.lineTo(rx + 2.2, ry + 1.4);
+        ctx.stroke();
+      }
+
+      // Golden Sacred Modak held in trunk tip
+      ctx.fillStyle = '#ffe600';
+      ctx.beginPath();
+      ctx.arc(20.5, 1.2, 3.4, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#e65100';
+      ctx.lineWidth = 0.85;
+      ctx.stroke();
+      ctx.fillStyle = '#d00000';
+      ctx.beginPath();
+      ctx.arc(20.5, -0.6, 0.9, 0, Math.PI * 2);
+      ctx.fill();
+
+      // --- 14. Imperial Multi-Tiered Royal Crown (Kireetam) ---
+      const crownGrad = ctx.createLinearGradient(-6, -22, 14, -22);
+      crownGrad.addColorStop(0, '#d48b14');
+      crownGrad.addColorStop(0.5, '#ffe600');
+      crownGrad.addColorStop(1, '#ff9e00');
+
+      // Tier 1: Jeweled Base Band (Patta)
+      ctx.fillStyle = crownGrad;
+      ctx.beginPath();
+      ctx.moveTo(-5.0, -16.5);
+      ctx.lineTo(13.5, -14.0);
+      ctx.lineTo(12.0, -20.5);
+      ctx.lineTo(-3.8, -22.0);
+      ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle = '#783c00';
+      ctx.lineWidth = 0.95;
+      ctx.stroke();
+
+      // Ruby & Emerald Insets on Crown Base
+      ctx.fillStyle = '#d90429';
+      ctx.beginPath(); ctx.arc(-0.5, -19.0, 1.4, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#2ec4b6';
+      ctx.beginPath(); ctx.arc(4.8, -18.5, 1.3, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#d90429';
+      ctx.beginPath(); ctx.arc(9.8, -17.8, 1.3, 0, Math.PI * 2); ctx.fill();
+
+      // Tier 2: Sculpted Petal Mid-Tier
+      ctx.fillStyle = crownGrad;
+      ctx.beginPath();
+      ctx.moveTo(-2.8, -22.0);
+      ctx.lineTo(10.5, -20.5);
+      ctx.lineTo(8.2, -30.0);
+      ctx.lineTo(0.5, -30.8);
+      ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle = '#783c00';
+      ctx.lineWidth = 0.85;
+      ctx.stroke();
+
+      // Tier 3: Conical Upper Spire
+      ctx.beginPath();
+      ctx.moveTo(1.0, -30.8);
+      ctx.lineTo(7.5, -30.0);
+      ctx.lineTo(5.5, -37.5);
+      ctx.lineTo(2.8, -37.8);
+      ctx.closePath();
+      ctx.fill();
+
+      // Golden Kalash Finial Spire Peak
+      ctx.fillStyle = '#ffe600';
+      ctx.beginPath();
+      ctx.arc(4.2, -39.0, 2.0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.moveTo(4.2, -41.2);
+      ctx.lineTo(3.0, -38.2);
+      ctx.lineTo(5.4, -38.2);
+      ctx.closePath();
+      ctx.fill();
+
+      // Divine Radiance Star Sparkle on Crown
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(4.2, -39.8, 0.9, 0, Math.PI * 2);
+      ctx.fill();
+
+      // --- 15. Royal Pearl Necklace (Haar) & Silk Garment ---
+      // Layered Pearl & Gold Necklace
+      ctx.strokeStyle = '#ffe600';
+      ctx.lineWidth = 1.6;
+      ctx.beginPath();
+      ctx.arc(2.5, 3.5, 8.5, 0.2, Math.PI - 0.2);
+      ctx.stroke();
+
+      // Center Ruby Pendant
+      ctx.fillStyle = '#d90429';
+      ctx.beginPath();
+      ctx.arc(2.5, 12.0, 2.0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Saffron Silk Pitambara Drapery over Shoulder
+      ctx.fillStyle = '#ff7700';
+      ctx.beginPath();
+      ctx.moveTo(-8.5, 4.5);
+      ctx.quadraticCurveTo(-4.5, 13.5, 0.5, 17.5);
+      ctx.quadraticCurveTo(-2.5, 10.5, -6.0, 4.5);
+      ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle = '#ffd166';
+      ctx.lineWidth = 0.85;
+      ctx.stroke();
 
       ctx.restore();
     }
