@@ -537,21 +537,30 @@
             <circle cx="55" cy="68" r="2.2" fill="#222f3e"/>
             <circle cx="50" cy="73" r="2.5" fill="#f8a5c2"/>
             
-            <!-- Thali -->
-            <ellipse cx="50" cy="85" rx="42" ry="10" fill="#ffd166" stroke="#e65100" stroke-width="1.5"/>
-            <ellipse cx="50" cy="83" rx="36" ry="7" fill="#991b00"/>
-            <circle cx="43" cy="82" r="4.5" fill="#ffd166"/>
-            <circle cx="50" cy="80" r="5" fill="#ffb703"/>
-            <circle cx="57" cy="82" r="4.5" fill="#ffd166"/>
+            <!-- Festive Woven Basket -->
+            <!-- Basket Body -->
+            <path d="M18 78 Q15 88 28 92 Q50 96 72 92 Q85 88 82 78 Z" fill="#d48b14" stroke="#6b3a00" stroke-width="1.5"/>
+            <!-- Woven cross pattern -->
+            <path d="M28 80 L38 93 M40 79 L48 94 M52 79 L60 94 M64 80 L72 93" stroke="#ffd166" stroke-width="1" opacity="0.6"/>
+            <path d="M72 80 L62 93 M60 79 L52 94 M48 79 L40 94 M36 80 L28 93" stroke="#6b3a00" stroke-width="1" opacity="0.6"/>
+            <!-- Rim -->
+            <ellipse cx="50" cy="78" rx="34" ry="7" fill="#421600" stroke="#ffd166" stroke-width="2"/>
+            <!-- Handles -->
+            <path d="M16 78 Q10 74 15 70 Q20 74 18 78" stroke="#ffd166" stroke-width="2" fill="none"/>
+            <path d="M84 78 Q90 74 85 70 Q80 74 82 78" stroke="#ffd166" stroke-width="2" fill="none"/>
+            <!-- Modaks inside basket -->
+            <circle cx="42" cy="76" r="4.5" fill="#ffd166"/>
+            <circle cx="50" cy="74" r="5" fill="#ffb703"/>
+            <circle cx="58" cy="76" r="4.5" fill="#ffd166"/>
           </svg>
         </div>
 
         <h1 class="title-banner">MODAK CATCH</h1>
-        <div class="subtitle">Mushak's Divine Offering</div>
+        <div class="subtitle">Mushak's Festive Basket</div>
 
         <div class="instruction-box">
           <p class="instruction-text">
-            Guide <strong>Mushak the mouse</strong> to catch sacred offerings for Lord Ganesha!
+            Guide <strong>Mushak the mouse</strong> to catch sacred offerings in his <strong>festive basket</strong> for Lord Ganesha!<br>
             Avoid fiery chillies to protect his offerings.
           </p>
           <div class="legend-grid">
@@ -837,12 +846,12 @@
     let screenShake = 0;
     let toastTimeout = null;
 
-    // Player: Mushak the Mouse holding the Thali (Pure Cursor Gliding with Squash/Stretch)
+    // Player: Mushak the Mouse holding the Festive Basket (Pure Cursor Gliding with Squash/Stretch)
     const player = {
       x: V_WIDTH / 2,
       y: V_HEIGHT - 65,
-      width: 112,
-      height: 28,
+      width: 120,
+      height: 38,
       targetX: V_WIDTH / 2,
       scaleX: 1,
       scaleY: 1
@@ -1366,24 +1375,27 @@
       ctx.restore();
     }
 
-    // --- The Player: Mushak the Mouse holding the Golden Thali ---
+    // --- The Player: Mushak the Mouse holding the Festive Woven Basket ---
     function drawPlayer() {
       ctx.save();
       ctx.translate(player.x, player.y);
       ctx.scale(player.scaleX, player.scaleY);
 
+      const bW = player.width;
+      const bH = player.height;
+
       // Soft Radiant Highlight Beneath Basket
-      const underGlow = ctx.createRadialGradient(0, 12, 10, 0, 12, player.width * 0.7);
+      const underGlow = ctx.createRadialGradient(0, 16, 10, 0, 16, bW * 0.75);
       underGlow.addColorStop(0, 'rgba(255, 183, 3, 0.45)');
       underGlow.addColorStop(0.7, 'rgba(232, 93, 4, 0.15)');
       underGlow.addColorStop(1, 'transparent');
       ctx.fillStyle = underGlow;
       ctx.beginPath();
-      ctx.ellipse(0, 12, player.width * 0.75, 26, 0, 0, Math.PI * 2);
+      ctx.ellipse(0, 16, bW * 0.8, 28, 0, 0, Math.PI * 2);
       ctx.fill();
 
-      // Mushak the Mouse seated behind the Thali
-      const mY = -26;
+      // Mushak the Mouse seated behind the Basket
+      const mY = -30;
 
       // Tail curling playfully behind to the left
       ctx.strokeStyle = '#9aa5b1';
@@ -1391,47 +1403,47 @@
       ctx.lineCap = 'round';
       ctx.beginPath();
       ctx.moveTo(-16, mY + 12);
-      ctx.quadraticCurveTo(-38, mY + 4, -30, mY - 14);
-      ctx.quadraticCurveTo(-24, mY - 24, -32, mY - 30);
+      ctx.quadraticCurveTo(-42, mY + 4, -34, mY - 16);
+      ctx.quadraticCurveTo(-26, mY - 26, -34, mY - 32);
       ctx.stroke();
 
       // Mouse Body
       ctx.fillStyle = '#8395a7';
       ctx.beginPath();
-      ctx.ellipse(0, mY + 6, 20, 17, 0, 0, Math.PI * 2);
+      ctx.ellipse(0, mY + 6, 22, 18, 0, 0, Math.PI * 2);
       ctx.fill();
 
       // Mouse Ears (Left & Right)
       ctx.fillStyle = '#8395a7';
       ctx.beginPath();
-      ctx.arc(-16, mY - 16, 11, 0, Math.PI * 2);
+      ctx.arc(-18, mY - 16, 12, 0, Math.PI * 2);
       ctx.fill();
       ctx.fillStyle = '#ffb8b8';
       ctx.beginPath();
-      ctx.arc(-16, mY - 16, 6.5, 0, Math.PI * 2);
+      ctx.arc(-18, mY - 16, 7, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.fillStyle = '#8395a7';
       ctx.beginPath();
-      ctx.arc(16, mY - 16, 11, 0, Math.PI * 2);
+      ctx.arc(18, mY - 16, 12, 0, Math.PI * 2);
       ctx.fill();
       ctx.fillStyle = '#ffb8b8';
       ctx.beginPath();
-      ctx.arc(16, mY - 16, 6.5, 0, Math.PI * 2);
+      ctx.arc(18, mY - 16, 7, 0, Math.PI * 2);
       ctx.fill();
 
       // Head
       ctx.fillStyle = '#9aa5b1';
       ctx.beginPath();
-      ctx.ellipse(0, mY - 8, 16, 14, 0, 0, Math.PI * 2);
+      ctx.ellipse(0, mY - 7, 17, 15, 0, 0, Math.PI * 2);
       ctx.fill();
 
       // Festive Tiny Saffron Pagri / Crown
       ctx.fillStyle = '#ff7700';
       ctx.beginPath();
-      ctx.moveTo(-10, mY - 18);
-      ctx.lineTo(0, mY - 28);
-      ctx.lineTo(10, mY - 18);
+      ctx.moveTo(-11, mY - 18);
+      ctx.lineTo(0, mY - 29);
+      ctx.lineTo(11, mY - 18);
       ctx.closePath();
       ctx.fill();
       ctx.strokeStyle = '#ffd166';
@@ -1439,82 +1451,145 @@
       ctx.stroke();
       ctx.fillStyle = '#ffd166';
       ctx.beginPath();
-      ctx.arc(0, mY - 28, 2.5, 0, Math.PI * 2);
+      ctx.arc(0, mY - 29, 2.5, 0, Math.PI * 2);
       ctx.fill();
 
-      // Cute Snout & Nose
+      // Cute Snout & Pink Nose
       ctx.fillStyle = '#f8a5c2';
       ctx.beginPath();
-      ctx.arc(0, mY - 3, 3.5, 0, Math.PI * 2);
+      ctx.arc(0, mY - 2, 4, 0, Math.PI * 2);
       ctx.fill();
 
       // Whiskers
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
-      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.65)';
+      ctx.lineWidth = 1.2;
       ctx.beginPath();
-      ctx.moveTo(-3, mY - 3); ctx.lineTo(-14, mY - 5);
-      ctx.moveTo(-3, mY - 2); ctx.lineTo(-14, mY);
-      ctx.moveTo(3, mY - 3); ctx.lineTo(14, mY - 5);
-      ctx.moveTo(3, mY - 2); ctx.lineTo(14, mY);
+      ctx.moveTo(-3, mY - 2); ctx.lineTo(-16, mY - 4);
+      ctx.moveTo(-3, mY - 1); ctx.lineTo(-16, mY + 2);
+      ctx.moveTo(3, mY - 2); ctx.lineTo(16, mY - 4);
+      ctx.moveTo(3, mY - 1); ctx.lineTo(16, mY + 2);
       ctx.stroke();
 
-      // Big Happy Eyes
+      // Big Shiny Happy Eyes
       ctx.fillStyle = '#222f3e';
       ctx.beginPath();
-      ctx.arc(-6, mY - 10, 3.5, 0, Math.PI * 2);
-      ctx.arc(6, mY - 10, 3.5, 0, Math.PI * 2);
+      ctx.arc(-6, mY - 9, 3.8, 0, Math.PI * 2);
+      ctx.arc(6, mY - 9, 3.8, 0, Math.PI * 2);
       ctx.fill();
       ctx.fillStyle = '#ffffff';
       ctx.beginPath();
-      ctx.arc(-7, mY - 11, 1.3, 0, Math.PI * 2);
-      ctx.arc(5, mY - 11, 1.3, 0, Math.PI * 2);
+      ctx.arc(-7.2, -10.2, 1.4, 0, Math.PI * 2);
+      ctx.arc(4.8, -10.2, 1.4, 0, Math.PI * 2);
       ctx.fill();
 
-      // Paws holding the Thali
-      ctx.fillStyle = '#f8a5c2';
+      // --- THE TRADITIONAL FESTIVE BASKET (Deep Woven Cane/Golden Tokri) ---
+      const topW = bW * 0.52;    // half width of top rim
+      const botW = bW * 0.36;    // half width of bottom base
+      const topY = -bH * 0.35;   // top rim Y
+      const botY = bH * 0.55;    // bottom base Y
+
+      // Basket Drop Shadow
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.45)';
       ctx.beginPath();
-      ctx.ellipse(-player.width * 0.38, 2, 7, 5, 0.2, 0, Math.PI * 2);
-      ctx.ellipse(player.width * 0.38, 2, 7, 5, -0.2, 0, Math.PI * 2);
+      ctx.ellipse(0, botY + 4, botW * 1.1, 7, 0, 0, Math.PI * 2);
       ctx.fill();
 
-      // --- Golden Puja Thali ---
-      const thaliW = player.width;
-      const thaliH = player.height;
+      // Basket Outer Body (Deep Curved Tokri)
+      const basketGrad = ctx.createLinearGradient(-topW, 0, topW, 0);
+      basketGrad.addColorStop(0, '#a05a04');
+      basketGrad.addColorStop(0.2, '#d48b14');
+      basketGrad.addColorStop(0.5, '#ffd166');
+      basketGrad.addColorStop(0.8, '#d48b14');
+      basketGrad.addColorStop(1, '#8c4d00');
 
-      ctx.fillStyle = '#662200';
+      ctx.fillStyle = basketGrad;
       ctx.beginPath();
-      ctx.ellipse(0, 4, thaliW * 0.52, thaliH * 0.6, 0, 0, Math.PI * 2);
+      ctx.moveTo(-topW, topY);
+      ctx.quadraticCurveTo(-topW * 1.05, (topY + botY) * 0.5, -botW, botY);
+      ctx.quadraticCurveTo(0, botY + 8, botW, botY);
+      ctx.quadraticCurveTo(topW * 1.05, (topY + botY) * 0.5, topW, topY);
+      ctx.closePath();
       ctx.fill();
-
-      const thaliGrad = ctx.createLinearGradient(-thaliW/2, 0, thaliW/2, 0);
-      thaliGrad.addColorStop(0, '#ffd166');
-      thaliGrad.addColorStop(0.25, '#ffe600');
-      thaliGrad.addColorStop(0.5, '#fff9db');
-      thaliGrad.addColorStop(0.75, '#ffb703');
-      thaliGrad.addColorStop(1, '#d47a00');
-
-      ctx.fillStyle = thaliGrad;
-      ctx.beginPath();
-      ctx.ellipse(0, 0, thaliW * 0.5, thaliH * 0.55, 0, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.strokeStyle = '#ffffff';
+      ctx.strokeStyle = '#6b3a00';
       ctx.lineWidth = 1.6;
       ctx.stroke();
 
-      ctx.fillStyle = '#991b00';
+      // Traditional Wicker Weave Texture (Cross-Hatch Pattern)
+      ctx.save();
+      ctx.clip(); // clip pattern to basket body
+      ctx.strokeStyle = 'rgba(90, 45, 0, 0.55)';
+      ctx.lineWidth = 1.4;
+
+      for (let x = -topW * 1.8; x < topW * 1.8; x += 12) {
+        ctx.beginPath();
+        ctx.moveTo(x, topY - 5);
+        ctx.lineTo(x + 28, botY + 10);
+        ctx.stroke();
+      }
+      for (let x = -topW * 1.8; x < topW * 1.8; x += 12) {
+        ctx.beginPath();
+        ctx.moveTo(x + 28, topY - 5);
+        ctx.lineTo(x, botY + 10);
+        ctx.stroke();
+      }
+      // Horizontal Cane Strips
+      ctx.strokeStyle = 'rgba(255, 235, 150, 0.35)';
+      ctx.lineWidth = 2;
+      for (let y = topY + 6; y < botY; y += 7) {
+        ctx.beginPath();
+        ctx.moveTo(-topW * 1.1, y);
+        ctx.quadraticCurveTo(0, y + 4, topW * 1.1, y);
+        ctx.stroke();
+      }
+      ctx.restore();
+
+      // Hollow Dark Interior of Basket Opening
+      ctx.fillStyle = '#421600';
       ctx.beginPath();
-      ctx.ellipse(0, -1, thaliW * 0.42, thaliH * 0.38, 0, 0, Math.PI * 2);
+      ctx.ellipse(0, topY, topW * 0.94, 9, 0, 0, Math.PI * 2);
       ctx.fill();
 
-      // Rim Garland
-      ctx.fillStyle = '#ff9900';
-      for (let i = -4; i <= 4; i++) {
-        const xOffset = (i / 4.5) * (thaliW * 0.44);
-        const yOffset = Math.sin(Math.acos(xOffset / (thaliW * 0.48))) * 4;
+      // Ornate Braided Basket Rim
+      const rimGrad = ctx.createLinearGradient(-topW, 0, topW, 0);
+      rimGrad.addColorStop(0, '#ffe600');
+      rimGrad.addColorStop(0.5, '#fff9db');
+      rimGrad.addColorStop(1, '#ffb703');
+
+      ctx.strokeStyle = rimGrad;
+      ctx.lineWidth = 3.8;
+      ctx.beginPath();
+      ctx.ellipse(0, topY, topW, 10, 0, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // Festive Red Garland Beads along the Basket Rim
+      ctx.fillStyle = '#d00000';
+      for (let i = -5; i <= 5; i++) {
+        const ox = (i / 5.2) * (topW * 0.92);
+        const oy = topY + Math.sin(Math.acos(Math.min(1, Math.max(-1, ox / topW)))) * 7;
         ctx.beginPath();
-        ctx.arc(xOffset, yOffset, 3, 0, Math.PI * 2);
+        ctx.arc(ox, oy, 2.5, 0, Math.PI * 2);
         ctx.fill();
       }
+
+      // Two Curved Side Handles
+      ctx.strokeStyle = '#ffd166';
+      ctx.lineWidth = 2.8;
+      ctx.beginPath();
+      ctx.arc(-topW - 2, topY + 6, 7, Math.PI * 0.6, Math.PI * 1.8);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(topW + 2, topY + 6, 7, -Math.PI * 0.8, Math.PI * 0.4);
+      ctx.stroke();
+
+      // Mushak's Cute Paws gripping the Basket handles!
+      ctx.fillStyle = '#f8a5c2';
+      ctx.beginPath();
+      ctx.ellipse(-topW + 4, topY + 3, 6.5, 4.5, -0.3, 0, Math.PI * 2);
+      ctx.ellipse(topW - 4, topY + 3, 6.5, 4.5, 0.3, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#e07a9b';
+      ctx.lineWidth = 1;
+      ctx.stroke();
 
       ctx.restore();
     }
@@ -1683,11 +1758,11 @@
             drawChilli(item.x, item.y, item.radius, item.rotation, bob);
           }
 
-          // Catch Collision Check with Player's Thali
-          const basketTop = player.y - player.height * 0.42;
-          const basketBottom = player.y + player.height * 0.6;
-          const basketLeft = player.x - player.width * 0.48;
-          const basketRight = player.x + player.width * 0.48;
+          // Catch Collision Check with Player's Festive Basket
+          const basketTop = player.y - player.height * 0.45;
+          const basketBottom = player.y + player.height * 0.65;
+          const basketLeft = player.x - player.width * 0.52;
+          const basketRight = player.x + player.width * 0.52;
 
           if (
             item.y + item.radius >= basketTop &&
