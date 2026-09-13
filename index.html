@@ -51,6 +51,7 @@
       display: flex;
       flex-direction: column;
       cursor: crosshair;
+      touch-action: none;
     }
 
     @media (min-width: 560px) {
@@ -442,6 +443,41 @@
       opacity: 1;
       transform: translateX(-50%) translateY(0);
     }
+
+    /* In-Game Guidance Tooltip above basket */
+    #guide-banner {
+      position: absolute;
+      bottom: 92px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(28, 4, 10, 0.90);
+      border: 1.5px solid var(--gold-pure);
+      color: #fffdf7;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 7px 16px;
+      border-radius: 20px;
+      pointer-events: none;
+      z-index: 40;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.6), 0 0 12px rgba(255, 183, 3, 0.4);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      animation: pulseGuide 1.8s infinite alternate ease-in-out;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    #guide-banner.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(-50%) translateY(12px);
+    }
+
+    @keyframes pulseGuide {
+      0% { transform: translateX(-50%) scale(0.98); }
+      100% { transform: translateX(-50%) scale(1.02); }
+    }
   </style>
 </head>
 <body>
@@ -503,6 +539,11 @@
     <!-- Alert / Toast -->
     <div id="notification-toast">Oops! Modaks only, no spicy chillies! 🌶️ -1 Life</div>
 
+    <!-- In-Game Guidance Tooltip above basket -->
+    <div id="guide-banner" class="hidden">
+      <span>👈</span> Slide mouse, touch, or use ◄ ► arrows to catch! <span>👉</span>
+    </div>
+
     <!-- Canvas -->
     <canvas id="gameCanvas"></canvas>
 
@@ -560,39 +601,39 @@
 
         <div class="instruction-box">
           <p class="instruction-text">
-            Guide <strong>Mushak the mouse</strong> to catch sacred offerings in his <strong>festive basket</strong> for Lord Ganesha!<br>
-            Avoid fiery chillies to protect his offerings.
+            Steer <strong>Mushak's festive woven basket</strong> at the bottom to catch sacred offerings falling from above for Lord Ganesha!<br>
+            Catch consecutive offerings for combo multipliers (up to 5x)! Avoid fiery red chillies! 🌶️
           </p>
           <div class="legend-grid">
             <div class="legend-item">
               <span style="font-size: 18px;">🥟</span>
-              <span>Modak</span>
+              <span>Modak (+1)</span>
             </div>
             <div class="legend-item">
               <span style="font-size: 18px;">🟡</span>
-              <span>Laddoo</span>
+              <span>Laddoo (+1)</span>
             </div>
             <div class="legend-item">
               <span style="font-size: 18px;">🥥</span>
-              <span>Coconut</span>
+              <span>Coconut (+1)</span>
             </div>
             <div class="legend-item">
               <span style="font-size: 18px;">🌺</span>
-              <span>Flower</span>
+              <span>Flower (+1)</span>
             </div>
             <div class="legend-item">
               <span style="font-size: 18px;">🌶️</span>
-              <span style="color: #ff5400; font-weight: bold;">Chilli!</span>
+              <span style="color: #ff5400; font-weight: bold;">Chilli (-1 Life)</span>
             </div>
           </div>
         </div>
 
         <button id="start-btn" class="btn-primary">
-          <span>✨ Start Offering ✨</span>
+          <span>✨ Start Catching ✨</span>
         </button>
 
         <div class="controls-hint">
-          🖱️ <strong>Move Mouse</strong> or 📱 <strong>Touch</strong> &nbsp;—&nbsp; Mushak glides smoothly to follow your cursor
+          🎮 <strong>HOW TO CATCH:</strong> Slide your <strong>Mouse</strong>, <strong>Touch & Drag</strong>, or use <strong>◄ ► Arrow Keys</strong>. The basket glides smoothly horizontally to catch falling offerings!
         </div>
       </div>
     </div>
@@ -849,9 +890,9 @@
     // Player: Mushak the Mouse holding the Festive Basket (Pure Cursor Gliding with Squash/Stretch)
     const player = {
       x: V_WIDTH / 2,
-      y: V_HEIGHT - 65,
-      width: 120,
-      height: 38,
+      y: V_HEIGHT - 75,
+      width: 136,
+      height: 44,
       targetX: V_WIDTH / 2,
       scaleX: 1,
       scaleY: 1
@@ -875,46 +916,59 @@
     function resizeCanvas() {
       const rect = container.getBoundingClientRect();
       const dpr = window.devicePixelRatio || 1;
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      canvas.width = Math.round(rect.width * dpr);
+      canvas.height = Math.round(rect.height * dpr);
     }
 
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    // --- Pure Real-Time Horizontal Cursor & Touch Tracker ---
+    // --- Comprehensive Real-Time Horizontal Cursor, Touch & Keyboard Controls ---
     function updateCursorTracking(clientX) {
       const rect = container.getBoundingClientRect();
       const relativeX = clientX - rect.left;
       const normalizedX = (relativeX / rect.width) * V_WIDTH;
-      player.targetX = Math.max(player.width / 2 + 16, Math.min(V_WIDTH - player.width / 2 - 16, normalizedX));
+      player.targetX = Math.max(player.width / 2 + 10, Math.min(V_WIDTH - player.width / 2 - 10, normalizedX));
     }
 
-    container.addEventListener('pointermove', (e) => {
+    window.addEventListener('pointermove', (e) => {
       if (gameState === 'PLAYING') {
         updateCursorTracking(e.clientX);
       }
     });
 
-    container.addEventListener('pointerenter', (e) => {
+    window.addEventListener('pointerdown', (e) => {
       if (gameState === 'PLAYING') {
         updateCursorTracking(e.clientX);
       }
     });
 
-    container.addEventListener('touchmove', (e) => {
+    window.addEventListener('touchmove', (e) => {
       if (gameState === 'PLAYING' && e.touches.length > 0) {
         updateCursorTracking(e.touches[0].clientX);
       }
     }, { passive: true });
 
-    container.addEventListener('touchstart', (e) => {
+    window.addEventListener('touchstart', (e) => {
       if (gameState === 'PLAYING' && e.touches.length > 0) {
         sound.init();
         updateCursorTracking(e.touches[0].clientX);
       }
     }, { passive: true });
+
+    // Keyboard support: Left/Right Arrow and A/D keys
+    const activeKeys = {};
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'a' || e.key === 'A' || e.key === 'd' || e.key === 'D') {
+        activeKeys[e.key] = true;
+      }
+    });
+
+    window.addEventListener('keyup', (e) => {
+      if (activeKeys[e.key]) {
+        delete activeKeys[e.key];
+      }
+    });
 
     // --- Particle and Float Text Systems ---
     function createCatchBurst(x, y, colorTheme) {
@@ -1617,6 +1671,9 @@
       startScreen.classList.add('hidden');
       gameOverScreen.classList.add('hidden');
       pauseScreen.classList.add('hidden');
+
+      const guideBanner = document.getElementById('guide-banner');
+      if (guideBanner) guideBanner.classList.remove('hidden');
     }
 
     function togglePause() {
@@ -1632,6 +1689,9 @@
     function triggerGameOver() {
       gameState = 'GAMEOVER';
       sound.playGameOver();
+
+      const guideBanner = document.getElementById('guide-banner');
+      if (guideBanner) guideBanner.classList.add('hidden');
 
       finalScoreEl.textContent = score;
       finalComboEl.textContent = `${bestCombo}x`;
@@ -1703,13 +1763,14 @@
       const dt = Math.min((timestamp - lastFrameTime) / 1000, 0.1);
       lastFrameTime = timestamp;
 
-      ctx.save();
-      const dpr = window.devicePixelRatio || 1;
       const rect = container.getBoundingClientRect();
-      ctx.clearRect(0, 0, rect.width * dpr, rect.height * dpr);
+      const dpr = window.devicePixelRatio || 1;
+      const scaleX = (rect.width * dpr) / V_WIDTH;
+      const scaleY = (rect.height * dpr) / V_HEIGHT;
 
-      const currentScale = rect.width / V_WIDTH;
-      ctx.scale(currentScale * dpr, (rect.height / V_HEIGHT) * dpr);
+      // Absolute clean transform directly mapping (0..V_WIDTH, 0..V_HEIGHT) to full canvas
+      ctx.setTransform(scaleX, 0, 0, scaleY, 0, 0);
+      ctx.clearRect(0, 0, V_WIDTH, V_HEIGHT);
 
       if (screenShake > 0) {
         const shakeX = (Math.random() - 0.5) * screenShake;
@@ -1723,8 +1784,17 @@
       drawAmbientSparks();
 
       if (gameState === 'PLAYING') {
-        // Basket Lerp Smoothing: glides towards cursor horizontal position
-        player.x += (player.targetX - player.x) * 0.20;
+        // Keyboard controls support
+        const keySpeed = 16;
+        if (activeKeys['ArrowLeft'] || activeKeys['a'] || activeKeys['A']) {
+          player.targetX = Math.max(player.width / 2 + 10, player.targetX - keySpeed);
+        }
+        if (activeKeys['ArrowRight'] || activeKeys['d'] || activeKeys['D']) {
+          player.targetX = Math.min(V_WIDTH - player.width / 2 - 10, player.targetX + keySpeed);
+        }
+
+        // Basket Lerp Smoothing: glides towards target horizontal position
+        player.x += (player.targetX - player.x) * 0.22;
 
         // Squash & Stretch Spring Recovery
         player.scaleX += (1.0 - player.scaleX) * 0.16;
@@ -1740,6 +1810,7 @@
         // Update & Draw Items
         for (let i = items.length - 1; i >= 0; i--) {
           const item = items[i];
+          const prevY = item.y;
           item.age += 1;
           item.y += item.speed;
           item.rotation += item.rotSpeed;
@@ -1759,17 +1830,19 @@
           }
 
           // Catch Collision Check with Player's Festive Basket
-          const basketTop = player.y - player.height * 0.45;
-          const basketBottom = player.y + player.height * 0.65;
-          const basketLeft = player.x - player.width * 0.52;
-          const basketRight = player.x + player.width * 0.52;
+          const basketTop = player.y - player.height * 0.50;
+          const basketBottom = player.y + player.height * 0.72;
+          const basketLeft = player.x - player.width * 0.54;
+          const basketRight = player.x + player.width * 0.54;
 
-          if (
-            item.y + item.radius >= basketTop &&
-            item.y - item.radius <= basketBottom &&
-            item.x >= basketLeft &&
-            item.x <= basketRight
-          ) {
+          const itemBottom = item.y + item.radius;
+          const itemTop = item.y - item.radius;
+
+          const isInsideY = (itemBottom >= basketTop && itemTop <= basketBottom) ||
+                            (prevY < basketBottom && item.y >= basketTop);
+          const isInsideX = item.x >= basketLeft && item.x <= basketRight;
+
+          if (isInsideY && isInsideX) {
             // Check if it's the Fiery Chilli (Hazard!)
             if (item.type === 'chilli') {
               addFloatText('Ouch! 🌶️', item.x, basketTop - 25, '#ff3300', 24);
@@ -1787,10 +1860,15 @@
             scoreDisplay.textContent = score;
 
             // Basket Squash & Stretch Bounce
-            player.scaleX = 1.18;
-            player.scaleY = 0.82;
+            player.scaleX = 1.24;
+            player.scaleY = 0.76;
 
             sound.playCatch(item.type);
+
+            if (totalItemsCaught >= 2) {
+              const guideBanner = document.getElementById('guide-banner');
+              if (guideBanner) guideBanner.classList.add('hidden');
+            }
 
             if (comboStreak === 3 || comboStreak === 6 || comboStreak === 10 || comboStreak === 15) {
               sound.playComboFanfare(mult);
@@ -1893,7 +1971,6 @@
         ctx.restore();
       }
 
-      ctx.restore();
       requestAnimationFrame(gameLoop);
     }
 
