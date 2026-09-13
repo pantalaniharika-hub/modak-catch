@@ -49,6 +49,7 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      outline: none;
     }
 
     @media (min-width: 600px) {
@@ -223,6 +224,66 @@
       height: 100%;
       display: block;
       touch-action: none;
+      cursor: pointer;
+    }
+
+    /* Prominent On-Screen Navigation Arrow Buttons */
+    .nav-arrow-btn {
+      position: absolute;
+      bottom: 22px;
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(157, 2, 8, 0.92) 0%, rgba(55, 6, 23, 0.95) 100%);
+      border: 2.5px solid var(--gold);
+      color: #ffe600;
+      font-size: 26px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7), 0 0 16px rgba(255, 183, 3, 0.5);
+      z-index: 40;
+      pointer-events: auto;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      transition: transform 0.08s, background 0.15s, box-shadow 0.15s, border-color 0.15s;
+    }
+
+    .nav-arrow-btn:hover {
+      background: linear-gradient(135deg, #d00000 0%, #7d0c24 100%);
+      transform: scale(1.08);
+      box-shadow: 0 8px 25px rgba(255, 183, 3, 0.75);
+    }
+
+    .nav-arrow-btn:active, .nav-arrow-btn.pressed {
+      transform: scale(0.92);
+      background: linear-gradient(135deg, #ff7700 0%, #d00000 100%);
+      color: #fff;
+      border-color: #ffffff;
+      box-shadow: 0 2px 10px rgba(255, 119, 0, 0.9);
+    }
+
+    #left-arrow-btn {
+      left: 18px;
+    }
+
+    #right-arrow-btn {
+      right: 18px;
+    }
+
+    .arrow-label {
+      position: absolute;
+      bottom: -16px;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--gold);
+      font-weight: 700;
+      pointer-events: none;
+      white-space: nowrap;
     }
 
     /* Overlays & Modals */
@@ -275,13 +336,13 @@
       font-weight: 600;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .hero-art-container {
       width: 130px;
       height: 130px;
-      margin: 0 auto 18px auto;
+      margin: 0 auto 16px auto;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -299,7 +360,7 @@
       background: rgba(0, 0, 0, 0.35);
       border-radius: 14px;
       padding: 14px;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
       border: 1px solid rgba(255, 183, 3, 0.2);
     }
 
@@ -401,9 +462,10 @@
 
     .controls-hint {
       margin-top: 14px;
-      font-size: 11px;
-      color: rgba(255, 255, 255, 0.55);
+      font-size: 12px;
+      color: #ffd166;
       letter-spacing: 0.5px;
+      line-height: 1.5;
     }
 
     /* OOPS popup notification */
@@ -435,7 +497,7 @@
 </head>
 <body>
 
-  <div id="game-container">
+  <div id="game-container" tabindex="0">
     <!-- Pandal Floral Toran -->
     <div class="toran-garland">
       <div class="marigold-drop"></div>
@@ -495,6 +557,16 @@
 
     <!-- Canvas -->
     <canvas id="gameCanvas"></canvas>
+
+    <!-- On-Screen Arrow Click/Touch Buttons -->
+    <button id="left-arrow-btn" class="nav-arrow-btn" aria-label="Move Left" title="Click to Move Left">
+      ◀
+      <span class="arrow-label">Left</span>
+    </button>
+    <button id="right-arrow-btn" class="nav-arrow-btn" aria-label="Move Right" title="Click to Move Right">
+      ▶
+      <span class="arrow-label">Right</span>
+    </button>
 
     <!-- START SCREEN -->
     <div id="start-screen" class="overlay-screen">
@@ -567,7 +639,8 @@
         </button>
 
         <div class="controls-hint">
-          ⌨️ Arrow Keys / A & D &nbsp;•&nbsp; 🖱️ Mouse Drag &nbsp;•&nbsp; 📱 Touch Drag
+          🔘 Click/Tap On-Screen <strong>◀ ▶ Buttons</strong><br>
+          ⌨️ <strong>Arrow Keys / A & D</strong> &nbsp;•&nbsp; 🖱️ <strong>Mouse Drag/Click</strong> &nbsp;•&nbsp; 📱 <strong>Touch Drag</strong>
         </div>
       </div>
     </div>
@@ -659,7 +732,6 @@
           gain.connect(this.ctx.destination);
 
           if (type === 'modak') {
-            // Sweet clear temple bell
             osc.type = 'sine';
             osc.frequency.setValueAtTime(587.33, now); // D5
             osc.frequency.exponentialRampToValueAtTime(880, now + 0.12); // A5
@@ -668,7 +740,6 @@
             osc.start(now);
             osc.stop(now + 0.35);
           } else if (type === 'flower') {
-            // Soft warm flute/pluck
             osc.type = 'triangle';
             osc.frequency.setValueAtTime(659.25, now); // E5
             osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.15); // G5
@@ -677,7 +748,6 @@
             osc.start(now);
             osc.stop(now + 0.3);
           } else if (type === 'coin') {
-            // Bright sparkling metallic double ring
             osc.type = 'sine';
             osc.frequency.setValueAtTime(987.77, now); // B5
             osc.frequency.setValueAtTime(1318.51, now + 0.08); // E6
@@ -693,7 +763,7 @@
         if (this.muted || !this.ctx) return;
         try {
           const now = this.ctx.currentTime;
-          const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+          const notes = [523.25, 659.25, 783.99, 1046.50];
           notes.forEach((freq, i) => {
             const osc = this.ctx.createOscillator();
             const gain = this.ctx.createGain();
@@ -731,7 +801,6 @@
       playMushak() {
         if (this.muted || !this.ctx) return;
         try {
-          // Playful mouse squeak + boing
           const now = this.ctx.currentTime;
           const osc = this.ctx.createOscillator();
           const gain = this.ctx.createGain();
@@ -752,7 +821,7 @@
         if (this.muted || !this.ctx) return;
         try {
           const now = this.ctx.currentTime;
-          const chord = [392, 493.88, 587.33]; // G major devotional chord
+          const chord = [392, 493.88, 587.33];
           chord.forEach(f => {
             const osc = this.ctx.createOscillator();
             const gain = this.ctx.createGain();
@@ -772,9 +841,9 @@
     // --- Main Game System ---
     const sound = new SoundEngine();
 
+    const container = document.getElementById('game-container');
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
-    const container = document.getElementById('game-container');
 
     // UI Elements
     const startScreen = document.getElementById('start-screen');
@@ -785,6 +854,8 @@
     const resumeBtn = document.getElementById('resume-btn');
     const soundBtn = document.getElementById('sound-btn');
     const pauseBtn = document.getElementById('pause-btn');
+    const leftArrowBtn = document.getElementById('left-arrow-btn');
+    const rightArrowBtn = document.getElementById('right-arrow-btn');
 
     const scoreDisplay = document.getElementById('score-display');
     const comboBadge = document.getElementById('combo-badge');
@@ -817,7 +888,7 @@
 
     let lastSpawnTime = 0;
     let lastMushakSpawnTime = 0;
-    let spawnInterval = 1100; // ms
+    let spawnInterval = 1100;
     let baseFallSpeed = 3.2;
 
     let screenShake = 0;
@@ -830,7 +901,7 @@
       width: 110,
       height: 28,
       targetX: V_WIDTH / 2,
-      speed: 12,
+      speed: 16,
       bounceScale: 1,
       keys: { left: false, right: false }
     };
@@ -940,8 +1011,6 @@
       const chosenType = types[Math.floor(Math.random() * types.length)];
       const radius = 18;
       const x = Math.random() * (V_WIDTH - radius * 4) + radius * 2;
-      
-      // Speed scales gently with score
       const speed = baseFallSpeed + Math.min(score * 0.05, 4.5);
 
       items.push({
@@ -956,10 +1025,8 @@
     }
 
     function spawnMushak() {
-      // Mushak darts horizontally across the screen carrying a modak
       const direction = Math.random() > 0.5 ? 1 : -1;
       const x = direction === 1 ? -45 : V_WIDTH + 45;
-      // Height between mid-screen and lower third
       const y = Math.random() * (V_HEIGHT * 0.35) + (V_HEIGHT * 0.42);
       const speed = (Math.random() * 1.5 + 3.2) * direction;
 
@@ -976,7 +1043,6 @@
 
     // --- Drawing Routines ---
     function drawPandalBackground() {
-      // Temple Pillars on left and right
       const pillarW = 28;
       
       // Left Pillar
@@ -1017,7 +1083,6 @@
 
     function drawDiya(x, y) {
       ctx.save();
-      // Diya Base
       ctx.fillStyle = '#ffb703';
       ctx.beginPath();
       ctx.ellipse(x, y, 10, 5, 0, 0, Math.PI);
@@ -1026,7 +1091,6 @@
       ctx.lineWidth = 1;
       ctx.stroke();
 
-      // Flickering Flame
       const flicker = Math.sin(Date.now() * 0.015 + x) * 2;
       const flameGrad = ctx.createRadialGradient(x, y - 6, 1, x, y - 6, 8);
       flameGrad.addColorStop(0, '#ffffff');
@@ -1068,7 +1132,6 @@
       ctx.translate(x, y);
       ctx.rotate(angle);
 
-      // Modak Body (Dumpling form)
       const grad = ctx.createRadialGradient(-3, -3, 2, 0, 4, radius);
       grad.addColorStop(0, '#fffbe6');
       grad.addColorStop(0.4, '#ffd166');
@@ -1084,7 +1147,6 @@
       ctx.closePath();
       ctx.fill();
 
-      // Pleat creases (sacred modak folds)
       ctx.strokeStyle = '#c67d0a';
       ctx.lineWidth = 1.3;
       ctx.beginPath();
@@ -1094,7 +1156,6 @@
       ctx.quadraticCurveTo(radius * 0.3, 0, radius * 0.35, radius * 0.9);
       ctx.stroke();
 
-      // Saffron Strand / Dot at pinnacle
       ctx.fillStyle = '#d00000';
       ctx.beginPath();
       ctx.arc(0, -radius * 1.15, 2.5, 0, Math.PI * 2);
@@ -1124,7 +1185,6 @@
         ctx.restore();
       }
 
-      // Yellow Center & Stamen
       ctx.fillStyle = '#ffb703';
       ctx.beginPath();
       ctx.arc(0, 0, radius * 0.28, 0, Math.PI * 2);
@@ -1151,7 +1211,6 @@
       ctx.translate(x, y);
       ctx.rotate(angle);
 
-      // Gold Gradient
       const grad = ctx.createRadialGradient(-3, -3, 2, 0, 0, radius);
       grad.addColorStop(0, '#fff3b0');
       grad.addColorStop(0.4, '#ffd166');
@@ -1166,14 +1225,12 @@
       ctx.lineWidth = 1.8;
       ctx.stroke();
 
-      // Inner Stamped Ring
       ctx.strokeStyle = 'rgba(176, 96, 0, 0.7)';
       ctx.lineWidth = 1.2;
       ctx.beginPath();
       ctx.arc(0, 0, radius * 0.7, 0, Math.PI * 2);
       ctx.stroke();
 
-      // Sacred OM/Swastik Motif Center
       ctx.fillStyle = '#9d0208';
       ctx.font = 'bold 13px sans-serif';
       ctx.textAlign = 'center';
@@ -1183,36 +1240,32 @@
       ctx.restore();
     }
 
-    // --- Draw Mushak the Mouse (Lord Ganesha's Mount) ---
+    // --- Draw Mushak the Mouse ---
     function drawMushak(mushak) {
       ctx.save();
       ctx.translate(mushak.x, mushak.y);
       if (mushak.direction === -1) {
-        ctx.scale(-1, 1); // Flip facing left
+        ctx.scale(-1, 1);
       }
 
       mushak.bobble += 0.2;
       const bobY = Math.sin(mushak.bobble) * 2;
 
-      // Soft Mouse Body
       ctx.fillStyle = '#8d99ae';
       ctx.beginPath();
       ctx.ellipse(0, bobY, 18, 11, 0, 0, Math.PI * 2);
       ctx.fill();
 
-      // Mouse Head
       ctx.fillStyle = '#adb5bd';
       ctx.beginPath();
       ctx.ellipse(14, bobY - 2, 10, 8, 0.2, 0, Math.PI * 2);
       ctx.fill();
 
-      // Nose / Snout
       ctx.fillStyle = '#ff758f';
       ctx.beginPath();
       ctx.arc(23, bobY - 1, 2.5, 0, Math.PI * 2);
       ctx.fill();
 
-      // Mouse Ear with pink inside
       ctx.fillStyle = '#adb5bd';
       ctx.beginPath();
       ctx.arc(10, bobY - 10, 5, 0, Math.PI * 2);
@@ -1222,13 +1275,11 @@
       ctx.arc(10, bobY - 10, 3, 0, Math.PI * 2);
       ctx.fill();
 
-      // Eye
       ctx.fillStyle = '#212529';
       ctx.beginPath();
       ctx.arc(17, bobY - 4, 1.8, 0, Math.PI * 2);
       ctx.fill();
 
-      // Tail curling playfully behind
       ctx.strokeStyle = '#8d99ae';
       ctx.lineWidth = 2.5;
       ctx.beginPath();
@@ -1236,7 +1287,6 @@
       ctx.quadraticCurveTo(-26, bobY - 8, -22, bobY - 16);
       ctx.stroke();
 
-      // Stolen Mini Modak in paws!
       ctx.save();
       ctx.translate(19, bobY + 5);
       drawModak(0, 0, 8, 0.2);
@@ -1251,7 +1301,6 @@
       ctx.translate(player.x, player.y);
       ctx.scale(player.bounceScale, player.bounceScale);
 
-      // --- Adorable Respectful Ganesha Character Avatar Seated Behind Thali ---
       const gY = -28;
 
       // Ears
@@ -1313,7 +1362,7 @@
       ctx.quadraticCurveTo(2, gY + 12, 8, gY + 10);
       ctx.stroke();
 
-      // Hands holding the Thali
+      // Hands holding Thali
       ctx.fillStyle = '#ffb703';
       ctx.beginPath();
       ctx.ellipse(-player.width * 0.42, 4, 7, 7, 0, 0, Math.PI * 2);
@@ -1324,11 +1373,9 @@
       ctx.fill();
       ctx.stroke();
 
-      // --- The Golden Puja Thali (Basket) ---
+      // Thali Outer Glow
       const thaliW = player.width;
       const thaliH = player.height;
-
-      // Outer Glow
       const glowGrad = ctx.createRadialGradient(0, 0, thaliW * 0.2, 0, 0, thaliW * 0.6);
       glowGrad.addColorStop(0, 'rgba(255, 209, 102, 0.4)');
       glowGrad.addColorStop(1, 'transparent');
@@ -1365,7 +1412,7 @@
       ctx.ellipse(0, -1, thaliW * 0.42, thaliH * 0.38, 0, 0, Math.PI * 2);
       ctx.fill();
 
-      // Decorative Floral Garland on Thali Rim
+      // Rim Garland
       ctx.fillStyle = '#ff8800';
       for (let i = -4; i <= 4; i++) {
         const xOffset = (i / 4.5) * (thaliW * 0.44);
@@ -1378,50 +1425,142 @@
       ctx.restore();
     }
 
-    // --- Input Handlers ---
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
-        player.keys.left = true;
-      }
-      if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
-        player.keys.right = true;
-      }
-      if (e.key === 'Escape' || e.key === 'p' || e.key === 'P') {
-        togglePause();
-      }
-    });
+    // --- Movement Helpers ---
+    function movePlayerRelative(deltaX) {
+      player.targetX += deltaX;
+      player.targetX = Math.max(player.width / 2 + 18, Math.min(V_WIDTH - player.width / 2 - 18, player.targetX));
+    }
 
-    window.addEventListener('keyup', (e) => {
-      if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
-        player.keys.left = false;
-      }
-      if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
-        player.keys.right = false;
-      }
-    });
+    function movePlayerToNormalized(targetX) {
+      player.targetX = Math.max(player.width / 2 + 18, Math.min(V_WIDTH - player.width / 2 - 18, targetX));
+    }
 
     // Pointer & Touch Controls (Desktop Mouse & Mobile Touch)
     function handlePointerMove(clientX) {
       const rect = container.getBoundingClientRect();
       const relativeX = clientX - rect.left;
       const normalizedX = (relativeX / rect.width) * V_WIDTH;
-      player.targetX = Math.max(player.width / 2 + 18, Math.min(V_WIDTH - player.width / 2 - 18, normalizedX));
+      movePlayerToNormalized(normalizedX);
     }
 
+    // --- Input Handlers (Keyboard, Mouse, Touch, and Buttons) ---
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
+        e.preventDefault();
+        if (!player.keys.left) {
+          movePlayerRelative(-55); // Immediate responsive nudge on tap
+        }
+        player.keys.left = true;
+      }
+      if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
+        e.preventDefault();
+        if (!player.keys.right) {
+          movePlayerRelative(55); // Immediate responsive nudge on tap
+        }
+        player.keys.right = true;
+      }
+      if (e.key === 'Escape' || e.key === 'p' || e.key === 'P') {
+        e.preventDefault();
+        togglePause();
+      }
+    });
+
+    window.addEventListener('keyup', (e) => {
+      if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
+        e.preventDefault();
+        player.keys.left = false;
+      }
+      if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
+        e.preventDefault();
+        player.keys.right = false;
+      }
+    });
+
+    // On-Screen Arrow Buttons (Click + Hold support)
+    function setupArrowButton(btn, direction) {
+      let holdTimer = null;
+      let holdInterval = null;
+
+      function startAction(e) {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        sound.init();
+        btn.classList.add('pressed');
+        movePlayerRelative(direction * 55);
+
+        clearTimers();
+        holdTimer = setTimeout(() => {
+          holdInterval = setInterval(() => {
+            movePlayerRelative(direction * 22);
+          }, 35);
+        }, 180);
+      }
+
+      function stopAction(e) {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        btn.classList.remove('pressed');
+        clearTimers();
+      }
+
+      function clearTimers() {
+        if (holdTimer) clearTimeout(holdTimer);
+        if (holdInterval) clearInterval(holdInterval);
+        holdTimer = null;
+        holdInterval = null;
+      }
+
+      // Pointer & Touch Events
+      btn.addEventListener('pointerdown', startAction);
+      btn.addEventListener('pointerup', stopAction);
+      btn.addEventListener('pointercancel', stopAction);
+      btn.addEventListener('mouseleave', stopAction);
+
+      btn.addEventListener('touchstart', startAction, { passive: false });
+      btn.addEventListener('touchend', stopAction, { passive: false });
+
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        sound.init();
+        movePlayerRelative(direction * 55);
+      });
+    }
+
+    setupArrowButton(leftArrowBtn, -1);
+    setupArrowButton(rightArrowBtn, 1);
+
+    // Canvas / Container Mouse & Touch Move
     container.addEventListener('mousemove', (e) => {
       if (gameState === 'PLAYING') {
+        // Only track mouse drag/move if not on navigation buttons
+        if (e.target.closest('.nav-arrow-btn') || e.target.closest('.icon-btn')) return;
+        handlePointerMove(e.clientX);
+      }
+    });
+
+    container.addEventListener('click', (e) => {
+      if (gameState === 'PLAYING') {
+        if (e.target.closest('.nav-arrow-btn') || e.target.closest('.icon-btn')) return;
+        sound.init();
         handlePointerMove(e.clientX);
       }
     });
 
     container.addEventListener('touchmove', (e) => {
       if (gameState === 'PLAYING' && e.touches.length > 0) {
+        if (e.target.closest('.nav-arrow-btn') || e.target.closest('.icon-btn')) return;
         handlePointerMove(e.touches[0].clientX);
       }
     }, { passive: true });
 
     container.addEventListener('touchstart', (e) => {
       if (gameState === 'PLAYING' && e.touches.length > 0) {
+        if (e.target.closest('.nav-arrow-btn') || e.target.closest('.icon-btn')) return;
         sound.init();
         handlePointerMove(e.touches[0].clientX);
       }
@@ -1452,6 +1591,10 @@
       startScreen.classList.add('hidden');
       gameOverScreen.classList.add('hidden');
       pauseScreen.classList.add('hidden');
+
+      startBtn.blur();
+      window.focus();
+      container.focus();
     }
 
     function togglePause() {
@@ -1461,6 +1604,8 @@
       } else if (gameState === 'PAUSED') {
         gameState = 'PLAYING';
         pauseScreen.classList.add('hidden');
+        window.focus();
+        container.focus();
       }
     }
 
@@ -1481,7 +1626,6 @@
       }
       bestScoreEl.textContent = highScore;
 
-      // Ranking title message
       if (score >= 60) {
         rankMessageEl.textContent = '🌟 Divine Modak Champion! Lord Ganesha blesses you abundantly!';
       } else if (score >= 30) {
@@ -1516,7 +1660,10 @@
 
     // --- Buttons Event Listeners ---
     startBtn.addEventListener('click', startGame);
-    restartBtn.addEventListener('click', startGame);
+    restartBtn.addEventListener('click', () => {
+      restartBtn.blur();
+      startGame();
+    });
     resumeBtn.addEventListener('click', togglePause);
 
     soundBtn.addEventListener('click', () => {
@@ -1568,7 +1715,7 @@
           player.targetX += player.speed;
         }
         player.targetX = Math.max(player.width / 2 + 18, Math.min(V_WIDTH - player.width / 2 - 18, player.targetX));
-        player.x += (player.targetX - player.x) * 0.25;
+        player.x += (player.targetX - player.x) * 0.35;
 
         // Player bounce decay
         if (player.bounceScale > 1) {
@@ -1579,11 +1726,10 @@
         if (timestamp - lastSpawnTime > spawnInterval) {
           spawnItem();
           lastSpawnTime = timestamp;
-          // Spawn interval decreases smoothly as score advances
           spawnInterval = Math.max(550, 1100 - (score * 12));
         }
 
-        // Mushak Spawns (rare playful obstacle)
+        // Mushak Spawns
         if (timestamp - lastMushakSpawnTime > 7500 && Math.random() < 0.35) {
           spawnMushak();
           lastMushakSpawnTime = timestamp;
@@ -1595,7 +1741,6 @@
           item.y += item.speed;
           item.rotation += item.rotSpeed;
 
-          // Draw item
           if (item.type === 'modak') {
             drawModak(item.x, item.y, item.radius, item.rotation);
           } else if (item.type === 'flower') {
@@ -1616,14 +1761,12 @@
             item.x >= basketLeft &&
             item.x <= basketRight
           ) {
-            // SUCCESSFUL CATCH!
             comboStreak++;
             totalItemsCaught++;
             const mult = getMultiplier();
             score += 1 * mult;
             scoreDisplay.textContent = score;
 
-            // Trigger bounce & sound
             player.bounceScale = 1.14;
             sound.playChime(item.type);
 
@@ -1634,7 +1777,6 @@
               addFloatText(`+${mult}`, item.x, basketTop - 15, '#ffd166', 18);
             }
 
-            // Burst Particles
             const colors = item.type === 'modak' 
               ? ['#ffd166', '#ffb703', '#ffffff', '#e65100']
               : item.type === 'flower'
@@ -1647,7 +1789,7 @@
             continue;
           }
 
-          // Miss Check (Offering reaches floor)
+          // Miss Check
           if (item.y - item.radius > V_HEIGHT - 15) {
             items.splice(i, 1);
             loseLife('miss');
@@ -1660,7 +1802,6 @@
           mushak.x += mushak.speed;
           drawMushak(mushak);
 
-          // Check if Player Bumps / Catches Mushak
           const basketTop = player.y - player.height * 0.5;
           const basketBottom = player.y + player.height * 0.7;
           const basketLeft = player.x - player.width * 0.46;
@@ -1672,7 +1813,6 @@
             mushak.x >= basketLeft &&
             mushak.x <= basketRight
           ) {
-            // Accidentally caught Mushak
             sound.playMushak();
             addFloatText('Oops! 🐭', mushak.x, mushak.y - 20, '#ff5400', 22);
             createCatchBurst(mushak.x, mushak.y, ['#8d99ae', '#ff758f', '#ffffff']);
@@ -1681,7 +1821,6 @@
             continue;
           }
 
-          // Remove Mushak when off screen
           if ((mushak.direction === 1 && mushak.x > V_WIDTH + 60) ||
               (mushak.direction === -1 && mushak.x < -60)) {
             mushakList.splice(j, 1);
@@ -1689,7 +1828,7 @@
         }
       }
 
-      // Draw Player Catcher (always drawn so idle look is nice)
+      // Draw Player Catcher
       drawPlayer();
 
       // --- 6. Update & Draw Particles ---
@@ -1697,7 +1836,7 @@
         const pt = particles[p];
         pt.x += pt.vx;
         pt.y += pt.vy;
-        pt.vy += 0.12; // gentle gravity
+        pt.vy += 0.12;
         pt.alpha -= pt.decay;
         if (pt.alpha <= 0) {
           particles.splice(p, 1);
