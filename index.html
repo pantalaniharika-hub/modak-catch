@@ -692,6 +692,10 @@
               <span>Gold Coin (+1)</span>
             </div>
             <div class="legend-item">
+              <span style="font-size: 18px;">🌹</span>
+              <span>Red Rose (+1)</span>
+            </div>
+            <div class="legend-item">
               <span style="font-size: 18px;">💣</span>
               <span style="color: #ff3300; font-weight: bold;">Bomb (-1 Life)</span>
             </div>
@@ -825,6 +829,15 @@
             gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
             osc.start(now);
             osc.stop(now + 0.4);
+          } else if (type === 'flower') {
+            // Sweet harmonic floral chime
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(783.99, now); // G5
+            osc.frequency.exponentialRampToValueAtTime(1174.66, now + 0.12); // D6
+            gain.gain.setValueAtTime(0.25, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+            osc.start(now);
+            osc.stop(now + 0.35);
           }
         } catch (e) {}
       }
@@ -1131,9 +1144,9 @@
 
     // --- Spawning Logic with Updated Sacred Offerings & Hazard Bomb ---
     function spawnItem() {
-      // Good items: coconut (half coconut), laddoo, modak, coin
-      // Hazard: explosive bomb (replaces chilli)
-      const goodTypes = ['coconut', 'laddoo', 'modak', 'coin'];
+      // Good items: coconut (half coconut), laddoo, modak, coin, flower (red rose)
+      // Hazard: explosive bomb
+      const goodTypes = ['coconut', 'laddoo', 'modak', 'coin', 'flower'];
       const isBomb = (score >= 2 && Math.random() < 0.22);
       const chosenType = isBomb ? 'bomb' : goodTypes[Math.floor(Math.random() * goodTypes.length)];
       
@@ -2198,6 +2211,162 @@
       ctx.restore();
     }
 
+    // Blooming Sacred Red Rose Flower Offering
+    function drawFlower(x, y, radius, angle, bob) {
+      ctx.save();
+      ctx.translate(x, y + bob);
+      ctx.rotate(angle);
+
+      // Warm romantic & sacred crimson glow
+      ctx.shadowColor = 'rgba(255, 77, 109, 0.65)';
+      ctx.shadowBlur = 18;
+
+      // 1. Two Fresh Rose Leaves in Background
+      // Left Leaf
+      ctx.fillStyle = '#2d6a4f';
+      ctx.beginPath();
+      ctx.moveTo(-radius * 0.3, radius * 0.2);
+      ctx.quadraticCurveTo(-radius * 1.1, radius * 0.3, -radius * 1.25, -radius * 0.25);
+      ctx.quadraticCurveTo(-radius * 0.75, -radius * 0.75, -radius * 0.2, -radius * 0.3);
+      ctx.closePath();
+      ctx.fill();
+
+      // Left Leaf Vein
+      ctx.strokeStyle = '#52b788';
+      ctx.lineWidth = 1.1;
+      ctx.beginPath();
+      ctx.moveTo(-radius * 0.2, -radius * 0.25);
+      ctx.lineTo(-radius * 1.1, -radius * 0.2);
+      ctx.stroke();
+
+      // Right Leaf
+      ctx.fillStyle = '#40916c';
+      ctx.beginPath();
+      ctx.moveTo(radius * 0.2, -radius * 0.2);
+      ctx.quadraticCurveTo(radius * 1.1, -radius * 0.3, radius * 1.25, radius * 0.25);
+      ctx.quadraticCurveTo(radius * 0.75, radius * 0.75, radius * 0.3, radius * 0.2);
+      ctx.closePath();
+      ctx.fill();
+
+      // Right Leaf Vein
+      ctx.strokeStyle = '#74c69d';
+      ctx.lineWidth = 1.1;
+      ctx.beginPath();
+      ctx.moveTo(radius * 0.25, 0);
+      ctx.lineTo(radius * 1.1, radius * 0.2);
+      ctx.stroke();
+
+      // 2. Outer Guard Petals (Layer 1 - Deep rich crimson base)
+      const outerPetals = 5;
+      for (let i = 0; i < outerPetals; i++) {
+        const pAngle = (i * Math.PI * 2) / outerPetals - Math.PI / 2;
+        ctx.save();
+        ctx.rotate(pAngle);
+
+        const petalGrad = ctx.createRadialGradient(0, -radius * 0.5, 2, 0, -radius * 0.5, radius * 0.6);
+        petalGrad.addColorStop(0, '#ff4d6d');
+        petalGrad.addColorStop(0.5, '#c9184a');
+        petalGrad.addColorStop(0.85, '#800f2f');
+        petalGrad.addColorStop(1, '#590d22');
+
+        ctx.fillStyle = petalGrad;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.bezierCurveTo(-radius * 0.55, -radius * 0.4, -radius * 0.65, -radius * 0.95, 0, -radius * 1.05);
+        ctx.bezierCurveTo(radius * 0.65, -radius * 0.95, radius * 0.55, -radius * 0.4, 0, 0);
+        ctx.closePath();
+        ctx.fill();
+
+        // Delicate curled petal rim highlight
+        ctx.strokeStyle = 'rgba(255, 180, 200, 0.45)';
+        ctx.lineWidth = 0.9;
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      ctx.shadowBlur = 0;
+
+      // 3. Middle Blooming Petals (Layer 2 - Interlocking velvety red petals)
+      const midPetals = 5;
+      for (let i = 0; i < midPetals; i++) {
+        const pAngle = (i * Math.PI * 2) / midPetals + Math.PI / 5 - Math.PI / 2;
+        ctx.save();
+        ctx.rotate(pAngle);
+
+        const midGrad = ctx.createRadialGradient(0, -radius * 0.35, 1, 0, -radius * 0.35, radius * 0.45);
+        midGrad.addColorStop(0, '#ff758f');
+        midGrad.addColorStop(0.45, '#e01e37');
+        midGrad.addColorStop(0.85, '#a71e34');
+        midGrad.addColorStop(1, '#640d14');
+
+        ctx.fillStyle = midGrad;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.bezierCurveTo(-radius * 0.45, -radius * 0.25, -radius * 0.5, -radius * 0.75, 0, -radius * 0.82);
+        ctx.bezierCurveTo(radius * 0.5, -radius * 0.75, radius * 0.45, -radius * 0.25, 0, 0);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.strokeStyle = 'rgba(255, 200, 215, 0.5)';
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      // 4. Inner Spiral Rosebud Center (Layer 3 - Tight elegant swirling rose core)
+      const coreGrad = ctx.createRadialGradient(0, 0, 1, 0, 0, radius * 0.4);
+      coreGrad.addColorStop(0, '#ff4d6d');
+      coreGrad.addColorStop(0.4, '#c9184a');
+      coreGrad.addColorStop(0.8, '#800f2f');
+      coreGrad.addColorStop(1, '#38040e');
+
+      ctx.fillStyle = coreGrad;
+      ctx.beginPath();
+      ctx.arc(0, 0, radius * 0.42, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Swirling Petal Arcs inside the Rosebud Core
+      ctx.strokeStyle = '#ffa8ba';
+      ctx.lineWidth = 1.3;
+      ctx.beginPath();
+      ctx.arc(0, -radius * 0.05, radius * 0.28, 0.2, Math.PI * 1.15);
+      ctx.stroke();
+
+      ctx.strokeStyle = '#ffd0dc';
+      ctx.lineWidth = 1.1;
+      ctx.beginPath();
+      ctx.arc(-radius * 0.04, radius * 0.04, radius * 0.18, Math.PI * 0.8, Math.PI * 1.95);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(radius * 0.02, -radius * 0.02, radius * 0.09, 0, Math.PI * 1.6);
+      ctx.stroke();
+
+      // 5. Glistening Crystal Dewdrop on Petal
+      const dropX = -radius * 0.42;
+      const dropY = -radius * 0.38;
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+      ctx.beginPath();
+      ctx.arc(dropX, dropY, 1.8, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Star glint sparkle
+      const glintX = radius * 0.5;
+      const glintY = -radius * 0.45;
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(glintX, glintY, 2.0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+      ctx.lineWidth = 1.1;
+      ctx.beginPath();
+      ctx.moveTo(glintX - 4.5, glintY); ctx.lineTo(glintX + 4.5, glintY);
+      ctx.moveTo(glintX, glintY - 4.5); ctx.lineTo(glintX + 4.5, glintY);
+      ctx.stroke();
+
+      ctx.restore();
+    }
+
     // Dangerous Explosive Bomb (Hazard Item to avoid!)
     function drawBomb(x, y, radius, angle, bob, age) {
       ctx.save();
@@ -2694,6 +2863,8 @@
             drawCoconut(item.x, item.y, item.radius, item.rotation, bob);
           } else if (item.type === 'coin') {
             drawCoin(item.x, item.y, item.radius, item.rotation, bob);
+          } else if (item.type === 'flower') {
+            drawFlower(item.x, item.y, item.radius, item.rotation, bob);
           } else if (item.type === 'bomb') {
             drawBomb(item.x, item.y, item.radius, item.rotation, bob, item.age);
           }
@@ -2753,6 +2924,7 @@
             else if (item.type === 'coconut') colors = ['#ffffff', '#fff8f0', '#5a3416', '#d90429', '#ffd166'];
             else if (item.type === 'coin') colors = ['#ffd700', '#ffe600', '#fff8cc', '#ff9e00'];
             else if (item.type === 'modak') colors = ['#ffd166', '#ffffff', '#ff9e00', '#d90429'];
+            else if (item.type === 'flower') colors = ['#ff4d6d', '#d00000', '#ff758f', '#2d6a4f', '#ffffff'];
 
             createCatchBurst(item.x, basketTop, colors);
             updateComboUI();
