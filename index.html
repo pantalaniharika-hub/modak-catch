@@ -693,7 +693,7 @@
             </div>
             <div class="legend-item">
               <span style="font-size: 18px;">🌹</span>
-              <span>Red Rose (+1)</span>
+              <span>Flower (+1)</span>
             </div>
             <div class="legend-item">
               <span style="font-size: 18px;">💣</span>
@@ -1142,13 +1142,26 @@
       }
     }
 
+    // Balanced item bag to guarantee all offerings (Flower, Modak, Laddu, Coconut, Coin) spawn frequently
+    let itemBag = [];
+    function getNextGoodType() {
+      if (itemBag.length === 0) {
+        itemBag = ['flower', 'modak', 'laddoo', 'coconut', 'coin'];
+        // Fisher-Yates shuffle
+        for (let i = itemBag.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [itemBag[i], itemBag[j]] = [itemBag[j], itemBag[i]];
+        }
+      }
+      return itemBag.pop();
+    }
+
     // --- Spawning Logic with Updated Sacred Offerings & Hazard Bomb ---
     function spawnItem() {
-      // Good items: coconut (half coconut), laddoo, modak, coin, flower (red rose)
+      // Good items: flower (red rose), modak, laddoo, coconut, coin
       // Hazard: explosive bomb
-      const goodTypes = ['coconut', 'laddoo', 'modak', 'coin', 'flower'];
-      const isBomb = (score >= 2 && Math.random() < 0.22);
-      const chosenType = isBomb ? 'bomb' : goodTypes[Math.floor(Math.random() * goodTypes.length)];
+      const isBomb = (score >= 2 && Math.random() < 0.20);
+      const chosenType = isBomb ? 'bomb' : getNextGoodType();
       
       const radius = 23; // Larger, clearer, and attractive item size
       const x = Math.random() * (V_WIDTH - radius * 4) + radius * 2;
@@ -2696,6 +2709,7 @@
       bestCombo = 1;
       totalItemsCaught = 0;
       items = [];
+      itemBag = ['coin', 'coconut', 'laddoo', 'modak', 'flower'];
       particles = [];
       floatTexts = [];
       lastSpawnTime = performance.now();
