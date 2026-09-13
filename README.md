@@ -1,7 +1,7 @@
 # 🥟 Modak Catch (मोदक कैच)
 > A vibrant, browser-based festive arcade game celebrating **Ganesh Chaturthi**!
 
-Built with **100% plain HTML5, CSS3, and JavaScript** in a single file — zero external libraries, zero build tools, zero external assets, and pure procedural Web Audio API sound synthesis.
+Built with **100% plain HTML5, CSS3, and JavaScript** in a single self-contained file — zero external libraries, zero build tools, zero external assets, and real-time procedural Web Audio API sound synthesis.
 
 ---
 
@@ -10,65 +10,60 @@ Built with **100% plain HTML5, CSS3, and JavaScript** in a single file — zero 
 
 ---
 
-## 🌟 Gameplay & Features
+## 🕹️ Controls
 
-- **Lord Ganesha's Puja Thali**: The player guides an ornate golden offering thali held by a joyful, adorable Ganesha avatar at the bottom of the screen.
-- **Festive Offerings**:
-  - 🥟 **Modak**: Sacred sweet dumplings (+1 base score).
-  - 🌺 **Hibiscus Flower**: Auspicious red floral offerings (+1 base score).
-  - 🪙 **Gold Coin**: Gleaming coins stamped with sacred motifs (+1 base score).
-- **Combo Multiplier System**:
-  - Catch consecutive items without missing to build up multipliers:
-    - 3+ in a row: **2x**
-    - 6+ in a row: **3x**
-    - 10+ in a row: **4x**
-    - 15+ in a row: **5x**
-  - High combos trigger celestial chime fanfares and golden particle explosions!
-- **Playful Obstacle — Mushak the Mouse 🐭**:
-  - Lord Ganesha's friendly mount occasionally dashes horizontally across the screen carrying his own modak.
-  - If the player accidentally intercepts Mushak, a life is lost (*"Oops! That was Mushak's modak! 🐭 -1 Life"*), played respectfully and lightly.
-- **3 Lives System**:
-  - Represented by 3 golden modak icons in the HUD.
-  - Dropping an offering or bumping into Mushak loses 1 life and resets the combo streak.
-  - Game ends when lives reach 0, leading to a celebratory festival wrap screen with rank titles and high score tracking!
-- **Dynamic Difficulty**:
-  - Fall speed and spawn frequency smoothly increase as your score rises.
+The basket directly and smoothly glides to follow your cursor's horizontal position in real time:
+
+- **Desktop**: Simply move your mouse pointer left and right across the game area. **No clicks or drags needed** — the basket glides with subtle lerp smoothing toward your cursor.
+- **Mobile & Tablet**: Touch anywhere on the screen — the basket follows your touch point with 1:1 responsive tracking.
+- **Pause & Audio**: Tap the 🔔 / 🔕 button to toggle sound, and ⏸ / ▶ to pause.
 
 ---
 
-## 🕹️ Controls
+## 🌟 Gameplay & Rules
 
-| Platform | Controls |
-| :--- | :--- |
-| **Desktop Keyboard** | `Left / Right Arrow` or `A / D` to move • `Esc / P` to Pause |
-| **Desktop Mouse** | Move or drag mouse across the game area |
-| **Mobile & Tablet** | 1:1 Smooth Touch Drag anywhere on the screen |
-| **Audio Controls** | Tap the 🔔 / 🔕 button on the top right to toggle sound |
+- **Offerings (Good Items)**:
+  - 🥟 **Modak**: Sacred pleated dumplings (+1 base score).
+  - 🌺 **Hibiscus Flower**: Auspicious floral offerings (+1 base score).
+  - 🪙 **Gold Coin**: Gleaming lucky coins stamped with sacred OM (+1 base score).
+- **Combo Multiplier**:
+  - Catch consecutive items to unlock combo tiers:
+    - 3+ catches: **Combo x2!**
+    - 6+ catches: **Combo x3!**
+    - 10+ catches: **Combo x4!**
+    - 15+ catches: **Combo x5!** (Maximum celestial bonus!)
+  - High combos trigger glowing text flashes, golden particle sparkles, and ascending fanfare chords!
+- **Playful Obstacle — Mushak the Mouse 🐭**:
+  - Lord Ganesha's devoted mount occasionally dashes horizontally across the screen carrying his own stolen modak.
+  - Intercepting Mushak costs **1 Life** and resets your combo (*"Oops! That was Mushak's modak! 🐭 -1 Life"*).
+- **3 Lives System**:
+  - 3 modak icons in the HUD.
+  - Letting an offering drop or catching Mushak deducts 1 life and resets your combo.
+  - When lives reach 0, the festival wrap summary displays your final score, best combo, high score, and rank blessings!
 
 ---
 
 ## 🎨 Visual & Audio Polish
 
-- **Devotional Color Palette**: Saffron orange, marigold yellow, royal crimson, and temple gold accents.
-- **Pandal Backdrop**: Hanging marigold floral torans, temple pillars, floor rangoli, and flickering oil diyas with animated warm flame glows.
-- **Web Audio API Sound Engine**: Real-time synthesized temple bells, gentle harp plucks, sparkling coin chimes, boings, and celebratory fanfares without needing any external audio files.
-- **Retina / High-DPI Support**: Automatically handles `window.devicePixelRatio` for sharp rendering on 4K monitors and high-resolution mobile devices.
+- **Rich Festive Palette**: Deep maroon and crimson background gradient, warm saffron and gold accents.
+- **Low-Contrast Backdrop**: Subtle pandal silhouettes, faint rangoli watermark, and drifting sacred diya motes that keep the focus on gameplay.
+- **Item Aesthetics**: Soft glowing drop-shadows, sinusoidal bobbing, and gentle rotation as items descend.
+- **Squash & Stretch**: The golden puja thali squashes and bounces dynamically when catching offerings.
+- **Web Audio API**: Real-time synthesized temple chimes, plucks, metallic coin rings, and fanfare chords.
 
 ---
 
-## 🛠️ Local Development & Running
+## 🛠️ Local Development
 
-Simply open `index.html` in any modern web browser:
+Simply open `index.html` in any browser:
 ```bash
 # In your browser:
 Double-click index.html
-# Or serve locally:
-npx serve .
-# or
+# Or serve with Python:
 python -m http.server 8080
 ```
 
 ---
 
 ## 📜 License
-Created with devotion for the Ganesh Chaturthi Game Design Contest. Free to play and share! Ganpati Bappa Morya! 🙏
+Created with devotion for the Ganesh Chaturthi Game Design Contest. Ganpati Bappa Morya! 🙏

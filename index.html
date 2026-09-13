@@ -6,15 +6,16 @@
   <title>Modak Catch - Ganesh Chaturthi Celebration</title>
   <style>
     :root {
-      --saffron-bright: #ff7700;
-      --saffron-deep: #e65100;
+      --saffron-glow: #ff7700;
       --marigold: #ffb703;
-      --gold: #ffd166;
-      --crimson: #9d0208;
-      --deep-maroon: #590d22;
-      --off-white: #fffdf7;
-      --card-bg: rgba(43, 10, 15, 0.88);
-      --font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      --gold-pure: #ffd166;
+      --gold-bright: #ffe600;
+      --deep-maroon: #2b0710;
+      --rich-crimson: #780016;
+      --text-cream: #fffdf7;
+      --hud-panel: rgba(35, 5, 12, 0.72);
+      --hud-border: rgba(255, 209, 102, 0.35);
+      --font-stack: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
     }
 
     * {
@@ -29,9 +30,9 @@
     html, body {
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle at 50% 30%, #370617 0%, #1a0309 65%, #0d0104 100%);
-      font-family: var(--font-family);
-      color: var(--off-white);
+      background: radial-gradient(circle at 50% 25%, #22030a 0%, #110105 70%, #080002 100%);
+      font-family: var(--font-stack);
+      color: var(--text-cream);
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -41,131 +42,138 @@
     #game-container {
       position: relative;
       width: 100%;
-      max-width: 520px;
+      max-width: 500px;
       height: 100%;
-      max-height: 900px;
-      background: linear-gradient(180deg, #590d22 0%, #370617 40%, #1f030a 100%);
-      box-shadow: 0 0 50px rgba(255, 119, 0, 0.25), 0 0 0 2px rgba(255, 183, 3, 0.3);
+      max-height: 880px;
+      background: linear-gradient(180deg, #3d0814 0%, #24040b 45%, #130105 100%);
+      box-shadow: 0 0 60px rgba(255, 119, 0, 0.22), 0 0 0 1.5px rgba(255, 209, 102, 0.25);
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      outline: none;
+      cursor: crosshair;
     }
 
-    @media (min-width: 600px) {
+    @media (min-width: 560px) {
       #game-container {
-        border-radius: 20px;
+        border-radius: 24px;
         height: 94vh;
       }
     }
 
-    /* Pandal Decoration Frame */
+    /* Elegant Hanging Floral Toran */
     .toran-garland {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      height: 42px;
+      height: 40px;
       pointer-events: none;
       z-index: 10;
       display: flex;
       justify-content: space-around;
       align-items: flex-start;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.4), transparent);
+      background: linear-gradient(to bottom, rgba(17, 1, 5, 0.6) 0%, transparent 100%);
     }
 
     .marigold-drop {
-      width: 22px;
-      height: 22px;
-      background: radial-gradient(circle, #ffe600 30%, #ff8800 70%, #d84a00 100%);
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle, #ffe600 25%, #ff8800 65%, #c13a00 100%);
       border-radius: 50%;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.4);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
       position: relative;
     }
 
     .marigold-drop::after {
       content: '';
       position: absolute;
-      bottom: -6px;
-      left: 7px;
-      width: 8px;
-      height: 8px;
-      background: radial-gradient(circle, #ff5400, #9d0208);
+      bottom: -5px;
+      left: 6.5px;
+      width: 7px;
+      height: 7px;
+      background: radial-gradient(circle, #ff5400, #780016);
       border-radius: 50%;
     }
 
     .leaf-accent {
-      width: 14px;
-      height: 22px;
-      background: linear-gradient(135deg, #55a630 0%, #2b7a0b 100%);
+      width: 13px;
+      height: 20px;
+      background: linear-gradient(135deg, #4f9629 0%, #205c06 100%);
       border-radius: 0 100% 0 100%;
       transform: rotate(45deg);
       margin-top: 2px;
+      opacity: 0.9;
     }
 
-    /* Top HUD */
+    /* Clean Festive HUD */
     #hud {
       position: absolute;
-      top: 36px;
+      top: 32px;
       left: 0;
       width: 100%;
       padding: 10px 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      z-index: 20;
+      z-index: 25;
       pointer-events: none;
     }
 
     .hud-box {
-      background: rgba(43, 10, 15, 0.75);
-      border: 1px solid rgba(255, 183, 3, 0.4);
-      border-radius: 12px;
-      padding: 6px 12px;
-      backdrop-filter: blur(4px);
+      background: var(--hud-panel);
+      border: 1px solid var(--hud-border);
+      border-radius: 14px;
+      padding: 6px 14px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       display: flex;
       flex-direction: column;
       align-items: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
       pointer-events: auto;
     }
 
     .hud-label {
       font-size: 10px;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--gold);
+      letter-spacing: 1.2px;
+      color: var(--gold-pure);
       font-weight: 700;
     }
 
     .hud-val {
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 800;
-      color: #fff;
-      text-shadow: 0 0 8px rgba(255, 183, 3, 0.6);
-      min-width: 48px;
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(255, 209, 102, 0.6);
+      min-width: 44px;
       text-align: center;
+      line-height: 1.1;
     }
 
-    #combo-badge {
-      font-size: 13px;
+    .center-hud {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+
+    #combo-pill {
+      font-size: 12px;
       font-weight: 800;
       color: #ffe600;
-      background: linear-gradient(90deg, #d00000, #ff7b00);
-      padding: 4px 10px;
+      background: linear-gradient(90deg, #9d0208, #e85d04);
+      padding: 4px 12px;
       border-radius: 20px;
-      border: 1px solid #ffd166;
-      box-shadow: 0 0 12px rgba(255, 123, 0, 0.8);
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      transform: scale(1);
-      transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid var(--gold-pure);
+      box-shadow: 0 0 14px rgba(255, 119, 0, 0.6);
+      letter-spacing: 0.5px;
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    #combo-badge.pulse {
-      transform: scale(1.22);
-      box-shadow: 0 0 20px #ffe600;
+    #combo-pill.boost {
+      transform: scale(1.2);
+      box-shadow: 0 0 22px #ffe600;
     }
 
     #lives-container {
@@ -175,16 +183,16 @@
     }
 
     .life-icon {
-      width: 26px;
-      height: 26px;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+      width: 25px;
+      height: 25px;
+      filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.5));
       transition: transform 0.25s, opacity 0.25s, filter 0.25s;
     }
 
     .life-icon.lost {
-      opacity: 0.25;
+      opacity: 0.2;
       filter: grayscale(100%);
-      transform: scale(0.8);
+      transform: scale(0.75);
     }
 
     .top-controls {
@@ -196,15 +204,15 @@
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background: rgba(43, 10, 15, 0.8);
-      border: 1px solid rgba(255, 183, 3, 0.5);
-      color: var(--gold);
+      background: var(--hud-panel);
+      border: 1px solid var(--hud-border);
+      color: var(--gold-pure);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 16px;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+      font-size: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
       transition: background 0.2s, transform 0.1s;
       pointer-events: auto;
     }
@@ -215,83 +223,24 @@
     }
 
     .icon-btn:active {
-      transform: scale(0.95);
+      transform: scale(0.94);
     }
 
-    /* Game Canvas */
+    /* Canvas */
     #gameCanvas {
       width: 100%;
       height: 100%;
       display: block;
       touch-action: none;
-      cursor: pointer;
     }
 
-    /* Prominent On-Screen Navigation Arrow Buttons */
-    .nav-arrow-btn {
-      position: absolute;
-      bottom: 22px;
-      width: 62px;
-      height: 62px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, rgba(157, 2, 8, 0.92) 0%, rgba(55, 6, 23, 0.95) 100%);
-      border: 2.5px solid var(--gold);
-      color: #ffe600;
-      font-size: 26px;
-      font-weight: 900;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7), 0 0 16px rgba(255, 183, 3, 0.5);
-      z-index: 40;
-      pointer-events: auto;
-      user-select: none;
-      -webkit-user-select: none;
-      touch-action: manipulation;
-      transition: transform 0.08s, background 0.15s, box-shadow 0.15s, border-color 0.15s;
-    }
-
-    .nav-arrow-btn:hover {
-      background: linear-gradient(135deg, #d00000 0%, #7d0c24 100%);
-      transform: scale(1.08);
-      box-shadow: 0 8px 25px rgba(255, 183, 3, 0.75);
-    }
-
-    .nav-arrow-btn:active, .nav-arrow-btn.pressed {
-      transform: scale(0.92);
-      background: linear-gradient(135deg, #ff7700 0%, #d00000 100%);
-      color: #fff;
-      border-color: #ffffff;
-      box-shadow: 0 2px 10px rgba(255, 119, 0, 0.9);
-    }
-
-    #left-arrow-btn {
-      left: 18px;
-    }
-
-    #right-arrow-btn {
-      right: 18px;
-    }
-
-    .arrow-label {
-      position: absolute;
-      bottom: -16px;
-      font-size: 9px;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: var(--gold);
-      font-weight: 700;
-      pointer-events: none;
-      white-space: nowrap;
-    }
-
-    /* Overlays & Modals */
+    /* Overlays */
     .overlay-screen {
       position: absolute;
       inset: 0;
-      background: rgba(18, 2, 7, 0.88);
-      backdrop-filter: blur(8px);
+      background: rgba(14, 2, 5, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       z-index: 100;
       display: flex;
       flex-direction: column;
@@ -309,96 +258,96 @@
     }
 
     .screen-card {
-      background: linear-gradient(180deg, rgba(89, 13, 34, 0.95) 0%, rgba(35, 4, 12, 0.95) 100%);
-      border: 2px solid var(--gold);
-      border-radius: 24px;
-      padding: 28px 24px;
+      background: linear-gradient(180deg, rgba(65, 8, 22, 0.96) 0%, rgba(26, 3, 8, 0.96) 100%);
+      border: 2px solid rgba(255, 209, 102, 0.8);
+      border-radius: 26px;
+      padding: 30px 24px;
       width: 100%;
-      max-width: 400px;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 183, 3, 0.3);
+      max-width: 390px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 183, 3, 0.25);
       position: relative;
     }
 
     .title-banner {
-      font-size: 32px;
+      font-size: 34px;
       font-weight: 900;
       letter-spacing: 1px;
-      background: linear-gradient(180deg, #ffe600 0%, #ff7b00 100%);
+      background: linear-gradient(180deg, #fff275 0%, #ffb703 50%, #e85d04 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 4px 15px rgba(255, 123, 0, 0.4);
-      margin-bottom: 6px;
+      text-shadow: 0 4px 18px rgba(255, 119, 0, 0.4);
+      margin-bottom: 4px;
     }
 
     .subtitle {
       font-size: 13px;
       color: #ffd166;
       font-weight: 600;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.8px;
       text-transform: uppercase;
       margin-bottom: 18px;
     }
 
     .hero-art-container {
-      width: 130px;
-      height: 130px;
+      width: 120px;
+      height: 120px;
       margin: 0 auto 16px auto;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: radial-gradient(circle, rgba(255, 183, 3, 0.25) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(255, 183, 3, 0.22) 0%, transparent 70%);
       border-radius: 50%;
       animation: pulseGlow 3s infinite alternate ease-in-out;
     }
 
     @keyframes pulseGlow {
-      0% { transform: scale(0.96); filter: drop-shadow(0 0 10px rgba(255, 183, 3, 0.4)); }
-      100% { transform: scale(1.04); filter: drop-shadow(0 0 25px rgba(255, 119, 0, 0.8)); }
+      0% { transform: scale(0.96); filter: drop-shadow(0 0 10px rgba(255, 183, 3, 0.3)); }
+      100% { transform: scale(1.04); filter: drop-shadow(0 0 24px rgba(255, 119, 0, 0.7)); }
     }
 
     .instruction-box {
-      background: rgba(0, 0, 0, 0.35);
-      border-radius: 14px;
-      padding: 14px;
-      margin-bottom: 20px;
-      border: 1px solid rgba(255, 183, 3, 0.2);
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 16px;
+      padding: 16px 14px;
+      margin-bottom: 22px;
+      border: 1px solid rgba(255, 209, 102, 0.2);
     }
 
     .instruction-text {
       font-size: 14px;
-      line-height: 1.45;
-      color: #ffeedd;
-      margin-bottom: 12px;
+      line-height: 1.5;
+      color: #fff2e0;
+      margin-bottom: 14px;
     }
 
     .legend-row {
       display: flex;
       justify-content: space-around;
       align-items: center;
-      padding-top: 8px;
-      border-top: 1px dashed rgba(255, 183, 3, 0.25);
+      padding-top: 10px;
+      border-top: 1px dashed rgba(255, 209, 102, 0.25);
     }
 
     .legend-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
+      gap: 3px;
       font-size: 11px;
       color: #ffd166;
     }
 
     .btn-primary {
-      background: linear-gradient(180deg, #ff9e00 0%, #e85d04 50%, #d00000 100%);
-      color: #fff;
-      font-size: 18px;
+      background: linear-gradient(180deg, #ff9e00 0%, #e85d04 50%, #b7094c 100%);
+      color: #ffffff;
+      font-size: 17px;
       font-weight: 800;
       letter-spacing: 1px;
-      padding: 14px 34px;
+      padding: 14px 36px;
       border: 2px solid #ffe600;
-      border-radius: 30px;
+      border-radius: 32px;
       cursor: pointer;
-      box-shadow: 0 6px 20px rgba(232, 93, 4, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.4);
+      box-shadow: 0 6px 22px rgba(232, 93, 4, 0.55), inset 0 2px 4px rgba(255, 255, 255, 0.4);
       transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
       display: inline-flex;
       align-items: center;
@@ -408,12 +357,20 @@
 
     .btn-primary:hover {
       transform: translateY(-2px) scale(1.03);
-      box-shadow: 0 8px 25px rgba(255, 158, 0, 0.7);
+      box-shadow: 0 8px 28px rgba(255, 158, 0, 0.7);
       filter: brightness(1.1);
     }
 
     .btn-primary:active {
-      transform: translateY(2px) scale(0.98);
+      transform: translateY(2px) scale(0.97);
+    }
+
+    .controls-hint {
+      margin-top: 16px;
+      font-size: 12px;
+      color: #ffd166;
+      opacity: 0.9;
+      letter-spacing: 0.4px;
     }
 
     .stats-grid {
@@ -424,9 +381,9 @@
     }
 
     .stat-pill {
-      background: rgba(0, 0, 0, 0.35);
-      border: 1px solid rgba(255, 183, 3, 0.25);
-      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 209, 102, 0.25);
+      border-radius: 14px;
       padding: 10px;
     }
 
@@ -440,12 +397,12 @@
       font-size: 11px;
       color: #ffeedd;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.6px;
     }
 
     .new-high-badge {
       background: #ffb703;
-      color: #590d22;
+      color: #370617;
       font-size: 11px;
       font-weight: 800;
       padding: 3px 8px;
@@ -460,28 +417,20 @@
       to { transform: translateY(-4px); }
     }
 
-    .controls-hint {
-      margin-top: 14px;
-      font-size: 12px;
-      color: #ffd166;
-      letter-spacing: 0.5px;
-      line-height: 1.5;
-    }
-
     /* OOPS popup notification */
     #notification-toast {
       position: absolute;
-      top: 105px;
+      top: 98px;
       left: 50%;
       transform: translateX(-50%) translateY(-20px);
-      background: linear-gradient(90deg, #d00000, #9d0208);
-      border: 1px solid #ffb703;
+      background: linear-gradient(90deg, #b7094c, #780016);
+      border: 1.5px solid #ffd166;
       color: #fff;
       font-size: 13px;
       font-weight: 700;
-      padding: 8px 16px;
+      padding: 8px 18px;
       border-radius: 20px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
       opacity: 0;
       pointer-events: none;
       transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -497,7 +446,7 @@
 </head>
 <body>
 
-  <div id="game-container" tabindex="0">
+  <div id="game-container">
     <!-- Pandal Floral Toran -->
     <div class="toran-garland">
       <div class="marigold-drop"></div>
@@ -513,17 +462,16 @@
 
     <!-- HUD Overlay -->
     <div id="hud">
-      <!-- Score & Best -->
+      <!-- Score -->
       <div class="hud-box">
         <span class="hud-label">Score</span>
         <span id="score-display" class="hud-val">0</span>
       </div>
 
-      <!-- Combo Indicator -->
-      <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
-        <div id="combo-badge">COMBO 1x</div>
+      <!-- Combo & Lives -->
+      <div class="center-hud">
+        <div id="combo-pill">COMBO 1x</div>
         <div id="lives-container">
-          <!-- 3 Modak Life Icons -->
           <svg class="life-icon" id="life-1" viewBox="0 0 32 32">
             <path d="M16 3 C13 8 8 16 8 22 C8 27 11.5 29 16 29 C20.5 29 24 27 24 22 C24 16 19 8 16 3 Z" fill="#ffd166" stroke="#ff8800" stroke-width="1.5"/>
             <path d="M16 3 C15 11 12 18 10 24" stroke="#e65100" stroke-width="1.2" fill="none"/>
@@ -545,7 +493,7 @@
         </div>
       </div>
 
-      <!-- Controls (Mute / Pause) -->
+      <!-- Audio & Pause Controls -->
       <div class="top-controls">
         <button id="sound-btn" class="icon-btn" aria-label="Toggle Sound" title="Sound Mute/Unmute">🔔</button>
         <button id="pause-btn" class="icon-btn" aria-label="Pause Game" title="Pause">⏸</button>
@@ -558,46 +506,28 @@
     <!-- Canvas -->
     <canvas id="gameCanvas"></canvas>
 
-    <!-- On-Screen Arrow Click/Touch Buttons -->
-    <button id="left-arrow-btn" class="nav-arrow-btn" aria-label="Move Left" title="Click to Move Left">
-      ◀
-      <span class="arrow-label">Left</span>
-    </button>
-    <button id="right-arrow-btn" class="nav-arrow-btn" aria-label="Move Right" title="Click to Move Right">
-      ▶
-      <span class="arrow-label">Right</span>
-    </button>
-
     <!-- START SCREEN -->
     <div id="start-screen" class="overlay-screen">
       <div class="screen-card">
         <div class="hero-art-container">
           <!-- Ganesha & Modak Illustration -->
           <svg viewBox="0 0 100 100" width="95" height="95">
-            <!-- Crown Mukut -->
             <polygon points="50,6 62,22 38,22" fill="#ffd166" stroke="#e65100" stroke-width="1.5"/>
             <circle cx="50" cy="5" r="3" fill="#d00000"/>
             <circle cx="50" cy="15" r="3" fill="#e65100"/>
-            <!-- Big Ears -->
             <ellipse cx="28" cy="38" rx="15" ry="17" fill="#ffb703" stroke="#e65100" stroke-width="1.5"/>
             <ellipse cx="28" cy="38" rx="9" ry="11" fill="#ffa200"/>
             <ellipse cx="72" cy="38" rx="15" ry="17" fill="#ffb703" stroke="#e65100" stroke-width="1.5"/>
             <ellipse cx="72" cy="38" rx="9" ry="11" fill="#ffa200"/>
-            <!-- Head -->
             <ellipse cx="50" cy="40" rx="19" ry="21" fill="#ffb703" stroke="#e65100" stroke-width="1.5"/>
-            <!-- Tilak -->
             <path d="M47 25 Q50 32 53 25" stroke="#d00000" stroke-width="2.5" fill="none"/>
             <circle cx="50" cy="27" r="1.5" fill="#ffe600"/>
-            <!-- Gentle Eyes -->
             <ellipse cx="43" cy="34" rx="2" ry="3" fill="#370617"/>
             <ellipse cx="57" cy="34" rx="2" ry="3" fill="#370617"/>
             <circle cx="42" cy="33" r="0.8" fill="#fff"/>
             <circle cx="56" cy="33" r="0.8" fill="#fff"/>
-            <!-- Trunk curving happily with modak -->
             <path d="M50 42 C51 52 57 56 61 54 C64 52 64 48 58 48" stroke="#e65100" stroke-width="5" stroke-linecap="round" fill="none"/>
-            <!-- Modak near trunk -->
             <path d="M60 44 C58 46 56 49 56 52 C56 55 58 56 60 56 C62 56 64 55 64 52 Z" fill="#ffd166"/>
-            <!-- Golden Thali below -->
             <ellipse cx="50" cy="80" rx="42" ry="12" fill="#ffb703" stroke="#ffd166" stroke-width="2"/>
             <ellipse cx="50" cy="78" rx="36" ry="9" fill="#e65100"/>
             <circle cx="42" cy="77" r="5" fill="#ffd166"/>
@@ -607,12 +537,12 @@
         </div>
 
         <h1 class="title-banner">MODAK CATCH</h1>
-        <div class="subtitle">A Ganesh Chaturthi Celebration</div>
+        <div class="subtitle">Ganesh Chaturthi Celebration</div>
 
         <div class="instruction-box">
           <p class="instruction-text">
-            Catch sacred <strong>Modaks</strong>, <strong>Flowers</strong>, and <strong>Coins</strong> in the golden thali. 
-            Keep your streak going to multiply your score!
+            Glide your cursor or finger to move the golden thali.<br>
+            Catch sacred offerings to multiply your score, and avoid Mushak!
           </p>
           <div class="legend-row">
             <div class="legend-item">
@@ -629,18 +559,17 @@
             </div>
             <div class="legend-item">
               <span style="font-size: 18px;">🐭</span>
-              <span style="color: #ff7b00;">Dodge Mushak!</span>
+              <span style="color: #ff8800;">Dodge Mushak!</span>
             </div>
           </div>
         </div>
 
         <button id="start-btn" class="btn-primary">
-          <span>✨ Start Celebration ✨</span>
+          <span>✨ Start Game ✨</span>
         </button>
 
         <div class="controls-hint">
-          🔘 Click/Tap On-Screen <strong>◀ ▶ Buttons</strong><br>
-          ⌨️ <strong>Arrow Keys / A & D</strong> &nbsp;•&nbsp; 🖱️ <strong>Mouse Drag/Click</strong> &nbsp;•&nbsp; 📱 <strong>Touch Drag</strong>
+          🖱️ <strong>Mouse Pointer</strong> or 📱 <strong>Touch</strong> &nbsp;—&nbsp; The basket smoothly glides to follow you
         </div>
       </div>
     </div>
@@ -683,9 +612,9 @@
 
     <!-- PAUSE SCREEN -->
     <div id="pause-screen" class="overlay-screen hidden">
-      <div class="screen-card" style="max-width: 320px;">
+      <div class="screen-card" style="max-width: 300px;">
         <h2 class="title-banner" style="font-size: 26px;">PAUSED</h2>
-        <p style="color: #ffd166; margin: 16px 0 24px;">Enjoy the devotional moment!</p>
+        <p style="color: #ffd166; margin: 16px 0 24px;">Enjoy the festive moment!</p>
         <button id="resume-btn" class="btn-primary">
           <span>▶ Resume</span>
         </button>
@@ -695,10 +624,10 @@
 
   <script>
     /* ==========================================================================
-       MODAK CATCH - Pure Vanilla HTML5/Canvas/WebAudio Game
+       MODAK CATCH - Pure Cursor / Touch Tracking Game
        ========================================================================== */
 
-    // --- Audio Synthesizer (Zero External Dependencies) ---
+    // --- Procedural Sound Engine ---
     class SoundEngine {
       constructor() {
         this.ctx = null;
@@ -708,9 +637,7 @@
       init() {
         if (!this.ctx) {
           const AudioCtx = window.AudioContext || window.webkitAudioContext;
-          if (AudioCtx) {
-            this.ctx = new AudioCtx();
-          }
+          if (AudioCtx) this.ctx = new AudioCtx();
         }
         if (this.ctx && this.ctx.state === 'suspended') {
           this.ctx.resume();
@@ -722,7 +649,7 @@
         return this.muted;
       }
 
-      playChime(type) {
+      playCatch(type) {
         if (this.muted || !this.ctx) return;
         try {
           const now = this.ctx.currentTime;
@@ -734,16 +661,16 @@
           if (type === 'modak') {
             osc.type = 'sine';
             osc.frequency.setValueAtTime(587.33, now); // D5
-            osc.frequency.exponentialRampToValueAtTime(880, now + 0.12); // A5
-            gain.gain.setValueAtTime(0.3, now);
+            osc.frequency.exponentialRampToValueAtTime(880, now + 0.12);
+            gain.gain.setValueAtTime(0.28, now);
             gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
             osc.start(now);
             osc.stop(now + 0.35);
           } else if (type === 'flower') {
             osc.type = 'triangle';
             osc.frequency.setValueAtTime(659.25, now); // E5
-            osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.15); // G5
-            gain.gain.setValueAtTime(0.25, now);
+            osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.14);
+            gain.gain.setValueAtTime(0.22, now);
             gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
             osc.start(now);
             osc.stop(now + 0.3);
@@ -751,7 +678,7 @@
             osc.type = 'sine';
             osc.frequency.setValueAtTime(987.77, now); // B5
             osc.frequency.setValueAtTime(1318.51, now + 0.08); // E6
-            gain.gain.setValueAtTime(0.28, now);
+            gain.gain.setValueAtTime(0.25, now);
             gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
             osc.start(now);
             osc.stop(now + 0.4);
@@ -770,12 +697,12 @@
             osc.connect(gain);
             gain.connect(this.ctx.destination);
             osc.type = 'sine';
-            const startTime = now + (i * 0.07);
+            const startTime = now + (i * 0.06);
             osc.frequency.setValueAtTime(freq * (1 + (tier * 0.08)), startTime);
-            gain.gain.setValueAtTime(0.25, startTime);
-            gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.3);
+            gain.gain.setValueAtTime(0.22, startTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.28);
             osc.start(startTime);
-            osc.stop(startTime + 0.3);
+            osc.stop(startTime + 0.28);
           });
         } catch (e) {}
       }
@@ -790,11 +717,11 @@
           gain.connect(this.ctx.destination);
           osc.type = 'sawtooth';
           osc.frequency.setValueAtTime(220, now);
-          osc.frequency.exponentialRampToValueAtTime(110, now + 0.25);
-          gain.gain.setValueAtTime(0.2, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+          osc.frequency.exponentialRampToValueAtTime(110, now + 0.22);
+          gain.gain.setValueAtTime(0.18, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
           osc.start(now);
-          osc.stop(now + 0.25);
+          osc.stop(now + 0.22);
         } catch (e) {}
       }
 
@@ -809,8 +736,8 @@
           osc.type = 'sine';
           osc.frequency.setValueAtTime(1400, now);
           osc.frequency.linearRampToValueAtTime(1900, now + 0.08);
-          osc.frequency.linearRampToValueAtTime(1200, now + 0.18);
-          gain.gain.setValueAtTime(0.3, now);
+          osc.frequency.linearRampToValueAtTime(1100, now + 0.18);
+          gain.gain.setValueAtTime(0.28, now);
           gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
           osc.start(now);
           osc.stop(now + 0.25);
@@ -821,15 +748,14 @@
         if (this.muted || !this.ctx) return;
         try {
           const now = this.ctx.currentTime;
-          const chord = [392, 493.88, 587.33];
-          chord.forEach(f => {
+          [392, 493.88, 587.33].forEach(f => {
             const osc = this.ctx.createOscillator();
             const gain = this.ctx.createGain();
             osc.connect(gain);
             gain.connect(this.ctx.destination);
             osc.type = 'triangle';
             osc.frequency.setValueAtTime(f, now);
-            gain.gain.setValueAtTime(0.25, now);
+            gain.gain.setValueAtTime(0.22, now);
             gain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
             osc.start(now);
             osc.stop(now + 0.8);
@@ -838,14 +764,13 @@
       }
     }
 
-    // --- Main Game System ---
     const sound = new SoundEngine();
 
+    // DOM References
     const container = document.getElementById('game-container');
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
 
-    // UI Elements
     const startScreen = document.getElementById('start-screen');
     const gameOverScreen = document.getElementById('game-over-screen');
     const pauseScreen = document.getElementById('pause-screen');
@@ -854,11 +779,9 @@
     const resumeBtn = document.getElementById('resume-btn');
     const soundBtn = document.getElementById('sound-btn');
     const pauseBtn = document.getElementById('pause-btn');
-    const leftArrowBtn = document.getElementById('left-arrow-btn');
-    const rightArrowBtn = document.getElementById('right-arrow-btn');
 
     const scoreDisplay = document.getElementById('score-display');
-    const comboBadge = document.getElementById('combo-badge');
+    const comboPill = document.getElementById('combo-pill');
     const notificationToast = document.getElementById('notification-toast');
     const finalScoreEl = document.getElementById('final-score');
     const bestScoreEl = document.getElementById('best-score');
@@ -867,13 +790,12 @@
     const newHighIndicator = document.getElementById('new-high-indicator');
     const rankMessageEl = document.getElementById('rank-message');
 
-    // Virtual resolution for consistent physics across screen sizes
+    // Virtual resolution
     const V_WIDTH = 480;
     const V_HEIGHT = 720;
-    let scaleRatio = 1;
 
     // Game State
-    let gameState = 'START'; // START, PLAYING, PAUSED, GAMEOVER
+    let gameState = 'START';
     let score = 0;
     let highScore = parseInt(localStorage.getItem('modak_catch_high') || '0', 10);
     let lives = 3;
@@ -894,29 +816,28 @@
     let screenShake = 0;
     let toastTimeout = null;
 
-    // Basket & Character (Ganesha)
+    // Basket & Player (Pure Cursor Gliding with Squash/Stretch)
     const player = {
       x: V_WIDTH / 2,
       y: V_HEIGHT - 65,
       width: 110,
       height: 28,
       targetX: V_WIDTH / 2,
-      speed: 16,
-      bounceScale: 1,
-      keys: { left: false, right: false }
+      scaleX: 1,
+      scaleY: 1
     };
 
-    // Ambient floating diya sparks
+    // Soft Ambient Sacred Sparkles
     const ambientSparks = [];
-    for (let i = 0; i < 24; i++) {
+    for (let i = 0; i < 28; i++) {
       ambientSparks.push({
         x: Math.random() * V_WIDTH,
         y: Math.random() * V_HEIGHT,
-        radius: Math.random() * 2 + 1,
-        speedY: Math.random() * 0.4 + 0.2,
-        speedX: (Math.random() - 0.5) * 0.3,
-        alpha: Math.random() * 0.6 + 0.2,
-        pulseSpeed: Math.random() * 0.03 + 0.01
+        radius: Math.random() * 2 + 0.8,
+        speedY: Math.random() * 0.35 + 0.15,
+        speedX: (Math.random() - 0.5) * 0.25,
+        alpha: Math.random() * 0.5 + 0.15,
+        pulseSpeed: Math.random() * 0.03 + 0.015
       });
     }
 
@@ -926,41 +847,79 @@
       const dpr = window.devicePixelRatio || 1;
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
-      scaleRatio = Math.min(rect.width / V_WIDTH, rect.height / V_HEIGHT);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
+    // --- Pure Real-Time Horizontal Cursor & Touch Tracker ---
+    function updateCursorTracking(clientX) {
+      const rect = container.getBoundingClientRect();
+      const relativeX = clientX - rect.left;
+      const normalizedX = (relativeX / rect.width) * V_WIDTH;
+      // Clamp inside playable area
+      player.targetX = Math.max(player.width / 2 + 16, Math.min(V_WIDTH - player.width / 2 - 16, normalizedX));
+    }
+
+    // Desktop Mouse: Moves in real time wherever pointer is — NO click or drag required!
+    container.addEventListener('pointermove', (e) => {
+      if (gameState === 'PLAYING') {
+        updateCursorTracking(e.clientX);
+      }
+    });
+
+    container.addEventListener('pointerenter', (e) => {
+      if (gameState === 'PLAYING') {
+        updateCursorTracking(e.clientX);
+      }
+    });
+
+    // Mobile Touch: Smoothly tracks touch point across screen
+    container.addEventListener('touchmove', (e) => {
+      if (gameState === 'PLAYING' && e.touches.length > 0) {
+        updateCursorTracking(e.touches[0].clientX);
+      }
+    }, { passive: true });
+
+    container.addEventListener('touchstart', (e) => {
+      if (gameState === 'PLAYING' && e.touches.length > 0) {
+        sound.init();
+        updateCursorTracking(e.touches[0].clientX);
+      }
+    }, { passive: true });
+
     // --- Particle and Float Text Systems ---
     function createCatchBurst(x, y, colorTheme) {
-      const count = 14;
+      const count = 15;
       for (let i = 0; i < count; i++) {
         const angle = Math.random() * Math.PI * 2;
-        const speed = Math.random() * 4 + 2;
+        const speed = Math.random() * 4.5 + 2;
         particles.push({
           x,
           y,
           vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed - 1.5,
+          vy: Math.sin(angle) * speed - 1.8,
           color: colorTheme[Math.floor(Math.random() * colorTheme.length)],
-          size: Math.random() * 4 + 2.5,
+          size: Math.random() * 3.5 + 2,
           alpha: 1,
-          decay: Math.random() * 0.03 + 0.02
+          decay: Math.random() * 0.025 + 0.018
         });
       }
     }
 
-    function addFloatText(text, x, y, color = '#ffd166', size = 20) {
+    function addFloatText(text, x, y, color = '#ffd166', size = 20, isComboBanner = false) {
       floatTexts.push({
         text,
         x,
         y,
-        vy: -1.8,
+        vy: isComboBanner ? -1.2 : -1.8,
         color,
         size,
-        alpha: 1
+        scale: isComboBanner ? 0.7 : 1,
+        targetScale: isComboBanner ? 1.25 : 1,
+        alpha: 1,
+        isComboBanner
       });
     }
 
@@ -973,7 +932,6 @@
       }, 2200);
     }
 
-    // --- Lives Display Update ---
     function updateLivesUI() {
       for (let i = 1; i <= 3; i++) {
         const icon = document.getElementById(`life-${i}`);
@@ -985,7 +943,6 @@
       }
     }
 
-    // --- Combo Multiplier Calculation ---
     function getMultiplier() {
       if (comboStreak >= 15) return 5;
       if (comboStreak >= 10) return 4;
@@ -996,37 +953,40 @@
 
     function updateComboUI() {
       const mult = getMultiplier();
-      comboBadge.textContent = `COMBO ${mult}x`;
+      comboPill.textContent = `COMBO ${mult}x`;
       if (mult > bestCombo) bestCombo = mult;
 
       if (mult > 1) {
-        comboBadge.classList.add('pulse');
-        setTimeout(() => comboBadge.classList.remove('pulse'), 200);
+        comboPill.classList.add('boost');
+        setTimeout(() => comboPill.classList.remove('boost'), 220);
       }
     }
 
-    // --- Item Spawning ---
+    // --- Spawning Logic ---
     function spawnItem() {
       const types = ['modak', 'modak', 'modak', 'flower', 'coin'];
       const chosenType = types[Math.floor(Math.random() * types.length)];
-      const radius = 18;
+      const radius = 19;
       const x = Math.random() * (V_WIDTH - radius * 4) + radius * 2;
-      const speed = baseFallSpeed + Math.min(score * 0.05, 4.5);
+      const speed = baseFallSpeed + Math.min(score * 0.05, 4.2);
 
       items.push({
         type: chosenType,
         x,
-        y: -30,
+        y: -32,
         radius,
         speed,
         rotation: 0,
-        rotSpeed: (Math.random() - 0.5) * 0.04
+        rotSpeed: (Math.random() - 0.5) * 0.03,
+        bobbleOffset: Math.random() * Math.PI * 2,
+        age: 0
       });
     }
 
     function spawnMushak() {
+      // Mushak occasionally darts across carrying a stolen modak
       const direction = Math.random() > 0.5 ? 1 : -1;
-      const x = direction === 1 ? -45 : V_WIDTH + 45;
+      const x = direction === 1 ? -50 : V_WIDTH + 50;
       const y = Math.random() * (V_HEIGHT * 0.35) + (V_HEIGHT * 0.42);
       const speed = (Math.random() * 1.5 + 3.2) * direction;
 
@@ -1041,58 +1001,54 @@
       });
     }
 
-    // --- Drawing Routines ---
-    function drawPandalBackground() {
-      const pillarW = 28;
-      
-      // Left Pillar
-      const gradL = ctx.createLinearGradient(0, 0, pillarW, 0);
-      gradL.addColorStop(0, '#590d22');
-      gradL.addColorStop(0.5, '#ffd166');
-      gradL.addColorStop(1, '#370617');
-      ctx.fillStyle = gradL;
-      ctx.fillRect(0, 0, pillarW, V_HEIGHT);
-      
-      // Right Pillar
-      const gradR = ctx.createLinearGradient(V_WIDTH - pillarW, 0, V_WIDTH, 0);
-      gradR.addColorStop(0, '#370617');
-      gradR.addColorStop(0.5, '#ffd166');
-      gradR.addColorStop(1, '#590d22');
-      ctx.fillStyle = gradR;
-      ctx.fillRect(V_WIDTH - pillarW, 0, pillarW, V_HEIGHT);
-
-      // Floor Rangoli Accent
+    // --- Low-Contrast Subtle Background Artwork ---
+    function drawBackgroundDecorations() {
+      // Faint Pandal Arch Silhouette at top
       ctx.save();
-      ctx.strokeStyle = 'rgba(255, 183, 3, 0.35)';
-      ctx.lineWidth = 2;
+      ctx.strokeStyle = 'rgba(255, 209, 102, 0.07)';
+      ctx.lineWidth = 2.5;
       ctx.beginPath();
-      ctx.arc(V_WIDTH / 2, V_HEIGHT, 140, Math.PI, 0);
+      ctx.arc(V_WIDTH / 2, 0, V_WIDTH * 0.45, 0, Math.PI);
       ctx.stroke();
 
       ctx.beginPath();
-      ctx.arc(V_WIDTH / 2, V_HEIGHT, 90, Math.PI, 0);
+      ctx.arc(V_WIDTH / 2, 0, V_WIDTH * 0.49, 0, Math.PI);
+      ctx.stroke();
+
+      // Subtle temple pillar accents on sides
+      ctx.fillStyle = 'rgba(255, 209, 102, 0.04)';
+      ctx.fillRect(0, 0, 16, V_HEIGHT);
+      ctx.fillRect(V_WIDTH - 16, 0, 16, V_HEIGHT);
+
+      // Faint Floor Rangoli Watermark
+      ctx.strokeStyle = 'rgba(255, 209, 102, 0.06)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.arc(V_WIDTH / 2, V_HEIGHT, 130, Math.PI, 0);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(V_WIDTH / 2, V_HEIGHT, 85, Math.PI, 0);
       ctx.stroke();
       ctx.restore();
 
-      // Lit Brass Diyas on both pillars
-      drawDiya(14, V_HEIGHT * 0.45);
-      drawDiya(14, V_HEIGHT * 0.72);
-      drawDiya(V_WIDTH - 14, V_HEIGHT * 0.45);
-      drawDiya(V_WIDTH - 14, V_HEIGHT * 0.72);
+      // Faint Lit Diyas on pillars
+      drawDiya(10, V_HEIGHT * 0.48);
+      drawDiya(10, V_HEIGHT * 0.72);
+      drawDiya(V_WIDTH - 10, V_HEIGHT * 0.48);
+      drawDiya(V_WIDTH - 10, V_HEIGHT * 0.72);
     }
 
     function drawDiya(x, y) {
       ctx.save();
       ctx.fillStyle = '#ffb703';
       ctx.beginPath();
-      ctx.ellipse(x, y, 10, 5, 0, 0, Math.PI);
+      ctx.ellipse(x, y, 9, 4.5, 0, 0, Math.PI);
       ctx.fill();
-      ctx.strokeStyle = '#e65100';
-      ctx.lineWidth = 1;
-      ctx.stroke();
 
+      // Flickering Flame with soft drop glow
       const flicker = Math.sin(Date.now() * 0.015 + x) * 2;
-      const flameGrad = ctx.createRadialGradient(x, y - 6, 1, x, y - 6, 8);
+      const flameGrad = ctx.createRadialGradient(x, y - 5, 1, x, y - 5, 7);
       flameGrad.addColorStop(0, '#ffffff');
       flameGrad.addColorStop(0.3, '#ffe600');
       flameGrad.addColorStop(0.8, '#ff5400');
@@ -1100,9 +1056,9 @@
 
       ctx.fillStyle = flameGrad;
       ctx.beginPath();
-      ctx.moveTo(x - 4, y - 2);
-      ctx.quadraticCurveTo(x, y - 14 + flicker, x, y - 16 + flicker);
-      ctx.quadraticCurveTo(x, y - 14 + flicker, x + 4, y - 2);
+      ctx.moveTo(x - 3.5, y - 2);
+      ctx.quadraticCurveTo(x, y - 13 + flicker, x, y - 15 + flicker);
+      ctx.quadraticCurveTo(x, y - 13 + flicker, x + 3.5, y - 2);
       ctx.closePath();
       ctx.fill();
       ctx.restore();
@@ -1113,12 +1069,12 @@
       for (const spark of ambientSparks) {
         spark.y -= spark.speedY;
         spark.x += spark.speedX;
-        spark.alpha += Math.sin(Date.now() * spark.pulseSpeed) * 0.02;
+        spark.alpha += Math.sin(Date.now() * spark.pulseSpeed) * 0.015;
         if (spark.y < 0) spark.y = V_HEIGHT;
         if (spark.x < 0) spark.x = V_WIDTH;
         if (spark.x > V_WIDTH) spark.x = 0;
 
-        ctx.fillStyle = `rgba(255, 209, 102, ${Math.max(0.1, Math.min(0.7, spark.alpha))})`;
+        ctx.fillStyle = `rgba(255, 209, 102, ${Math.max(0.08, Math.min(0.55, spark.alpha))})`;
         ctx.beginPath();
         ctx.arc(spark.x, spark.y, spark.radius, 0, Math.PI * 2);
         ctx.fill();
@@ -1126,16 +1082,20 @@
       ctx.restore();
     }
 
-    // --- Draw Modak ---
-    function drawModak(x, y, radius, angle) {
+    // --- Item Rendering with Glow & Drop Shadows ---
+    function drawModak(x, y, radius, angle, bob) {
       ctx.save();
-      ctx.translate(x, y);
+      ctx.translate(x, y + bob);
       ctx.rotate(angle);
 
+      // Soft Warm Drop Shadow & Glow
+      ctx.shadowColor = 'rgba(255, 209, 102, 0.55)';
+      ctx.shadowBlur = 14;
+
       const grad = ctx.createRadialGradient(-3, -3, 2, 0, 4, radius);
-      grad.addColorStop(0, '#fffbe6');
-      grad.addColorStop(0.4, '#ffd166');
-      grad.addColorStop(0.9, '#e69500');
+      grad.addColorStop(0, '#fffdf0');
+      grad.addColorStop(0.35, '#ffd166');
+      grad.addColorStop(0.85, '#e69500');
       grad.addColorStop(1, '#b36200');
 
       ctx.fillStyle = grad;
@@ -1147,6 +1107,8 @@
       ctx.closePath();
       ctx.fill();
 
+      // Pleat creases
+      ctx.shadowBlur = 0;
       ctx.strokeStyle = '#c67d0a';
       ctx.lineWidth = 1.3;
       ctx.beginPath();
@@ -1156,6 +1118,7 @@
       ctx.quadraticCurveTo(radius * 0.3, 0, radius * 0.35, radius * 0.9);
       ctx.stroke();
 
+      // Saffron pinnacle
       ctx.fillStyle = '#d00000';
       ctx.beginPath();
       ctx.arc(0, -radius * 1.15, 2.5, 0, Math.PI * 2);
@@ -1164,11 +1127,13 @@
       ctx.restore();
     }
 
-    // --- Draw Hibiscus Flower ---
-    function drawFlower(x, y, radius, angle) {
+    function drawFlower(x, y, radius, angle, bob) {
       ctx.save();
-      ctx.translate(x, y);
+      ctx.translate(x, y + bob);
       ctx.rotate(angle);
+
+      ctx.shadowColor = 'rgba(255, 77, 109, 0.55)';
+      ctx.shadowBlur = 14;
 
       const petals = 5;
       for (let i = 0; i < petals; i++) {
@@ -1176,7 +1141,7 @@
         ctx.rotate((i * Math.PI * 2) / petals);
         const grad = ctx.createRadialGradient(0, -radius * 0.5, 2, 0, -radius * 0.5, radius * 0.7);
         grad.addColorStop(0, '#ff4d6d');
-        grad.addColorStop(0.6, '#d00000');
+        grad.addColorStop(0.65, '#d00000');
         grad.addColorStop(1, '#590d22');
         ctx.fillStyle = grad;
         ctx.beginPath();
@@ -1185,6 +1150,7 @@
         ctx.restore();
       }
 
+      ctx.shadowBlur = 0;
       ctx.fillStyle = '#ffb703';
       ctx.beginPath();
       ctx.arc(0, 0, radius * 0.28, 0, Math.PI * 2);
@@ -1205,14 +1171,16 @@
       ctx.restore();
     }
 
-    // --- Draw Gold Coin ---
-    function drawCoin(x, y, radius, angle) {
+    function drawCoin(x, y, radius, angle, bob) {
       ctx.save();
-      ctx.translate(x, y);
+      ctx.translate(x, y + bob);
       ctx.rotate(angle);
 
+      ctx.shadowColor = 'rgba(255, 230, 0, 0.65)';
+      ctx.shadowBlur = 16;
+
       const grad = ctx.createRadialGradient(-3, -3, 2, 0, 0, radius);
-      grad.addColorStop(0, '#fff3b0');
+      grad.addColorStop(0, '#fffbe6');
       grad.addColorStop(0.4, '#ffd166');
       grad.addColorStop(0.85, '#ff9e00');
       grad.addColorStop(1, '#b06000');
@@ -1221,17 +1189,19 @@
       ctx.beginPath();
       ctx.arc(0, 0, radius, 0, Math.PI * 2);
       ctx.fill();
-      ctx.strokeStyle = '#fff3b0';
+
+      ctx.strokeStyle = '#fff7c2';
       ctx.lineWidth = 1.8;
       ctx.stroke();
 
-      ctx.strokeStyle = 'rgba(176, 96, 0, 0.7)';
+      ctx.shadowBlur = 0;
+      ctx.strokeStyle = 'rgba(176, 96, 0, 0.75)';
       ctx.lineWidth = 1.2;
       ctx.beginPath();
       ctx.arc(0, 0, radius * 0.7, 0, Math.PI * 2);
       ctx.stroke();
 
-      ctx.fillStyle = '#9d0208';
+      ctx.fillStyle = '#780016';
       ctx.font = 'bold 13px sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
@@ -1240,7 +1210,6 @@
       ctx.restore();
     }
 
-    // --- Draw Mushak the Mouse ---
     function drawMushak(mushak) {
       ctx.save();
       ctx.translate(mushak.x, mushak.y);
@@ -1248,24 +1217,31 @@
         ctx.scale(-1, 1);
       }
 
+      ctx.shadowColor = 'rgba(255, 119, 0, 0.4)';
+      ctx.shadowBlur = 12;
+
       mushak.bobble += 0.2;
       const bobY = Math.sin(mushak.bobble) * 2;
 
+      // Mouse Body
       ctx.fillStyle = '#8d99ae';
       ctx.beginPath();
       ctx.ellipse(0, bobY, 18, 11, 0, 0, Math.PI * 2);
       ctx.fill();
 
+      // Head
       ctx.fillStyle = '#adb5bd';
       ctx.beginPath();
       ctx.ellipse(14, bobY - 2, 10, 8, 0.2, 0, Math.PI * 2);
       ctx.fill();
 
+      // Nose
       ctx.fillStyle = '#ff758f';
       ctx.beginPath();
       ctx.arc(23, bobY - 1, 2.5, 0, Math.PI * 2);
       ctx.fill();
 
+      // Ears
       ctx.fillStyle = '#adb5bd';
       ctx.beginPath();
       ctx.arc(10, bobY - 10, 5, 0, Math.PI * 2);
@@ -1275,11 +1251,14 @@
       ctx.arc(10, bobY - 10, 3, 0, Math.PI * 2);
       ctx.fill();
 
+      // Eye
       ctx.fillStyle = '#212529';
       ctx.beginPath();
       ctx.arc(17, bobY - 4, 1.8, 0, Math.PI * 2);
       ctx.fill();
 
+      // Tail
+      ctx.shadowBlur = 0;
       ctx.strokeStyle = '#8d99ae';
       ctx.lineWidth = 2.5;
       ctx.beginPath();
@@ -1287,20 +1266,32 @@
       ctx.quadraticCurveTo(-26, bobY - 8, -22, bobY - 16);
       ctx.stroke();
 
+      // Stolen Modak in paws
       ctx.save();
       ctx.translate(19, bobY + 5);
-      drawModak(0, 0, 8, 0.2);
+      drawModak(0, 0, 8, 0.2, 0);
       ctx.restore();
 
       ctx.restore();
     }
 
-    // --- Draw Ganesha & Catch Basket (Thali) ---
+    // --- Basket & Ganesha with Squash/Stretch Animation ---
     function drawPlayer() {
       ctx.save();
       ctx.translate(player.x, player.y);
-      ctx.scale(player.bounceScale, player.bounceScale);
+      ctx.scale(player.scaleX, player.scaleY);
 
+      // Subtle Radiant Highlight Beneath Basket
+      const underGlow = ctx.createRadialGradient(0, 10, 10, 0, 10, player.width * 0.7);
+      underGlow.addColorStop(0, 'rgba(255, 183, 3, 0.45)');
+      underGlow.addColorStop(0.6, 'rgba(232, 93, 4, 0.2)');
+      underGlow.addColorStop(1, 'transparent');
+      ctx.fillStyle = underGlow;
+      ctx.beginPath();
+      ctx.ellipse(0, 10, player.width * 0.75, 26, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Ganesha Character Avatar Seated Behind Thali
       const gY = -28;
 
       // Ears
@@ -1323,7 +1314,7 @@
       ctx.fill();
       ctx.stroke();
 
-      // Crown (Mukut)
+      // Mukut (Crown)
       ctx.fillStyle = '#ffd166';
       ctx.beginPath();
       ctx.moveTo(0, gY - 32);
@@ -1353,7 +1344,7 @@
       ctx.arc(6, gY - 6, 2.5, 0.2, Math.PI - 0.2);
       ctx.stroke();
 
-      // Happy Trunk
+      // Trunk
       ctx.strokeStyle = '#e65100';
       ctx.lineWidth = 4;
       ctx.lineCap = 'round';
@@ -1362,7 +1353,7 @@
       ctx.quadraticCurveTo(2, gY + 12, 8, gY + 10);
       ctx.stroke();
 
-      // Hands holding Thali
+      // Hands
       ctx.fillStyle = '#ffb703';
       ctx.beginPath();
       ctx.ellipse(-player.width * 0.42, 4, 7, 7, 0, 0, Math.PI * 2);
@@ -1373,19 +1364,12 @@
       ctx.fill();
       ctx.stroke();
 
-      // Thali Outer Glow
+      // --- Golden Puja Thali ---
       const thaliW = player.width;
       const thaliH = player.height;
-      const glowGrad = ctx.createRadialGradient(0, 0, thaliW * 0.2, 0, 0, thaliW * 0.6);
-      glowGrad.addColorStop(0, 'rgba(255, 209, 102, 0.4)');
-      glowGrad.addColorStop(1, 'transparent');
-      ctx.fillStyle = glowGrad;
-      ctx.beginPath();
-      ctx.ellipse(0, 0, thaliW * 0.65, thaliH * 1.2, 0, 0, Math.PI * 2);
-      ctx.fill();
 
-      // Rim Rim Shadow
-      ctx.fillStyle = '#803c00';
+      // Rim Shadow
+      ctx.fillStyle = '#662200';
       ctx.beginPath();
       ctx.ellipse(0, 4, thaliW * 0.52, thaliH * 0.6, 0, 0, Math.PI * 2);
       ctx.fill();
@@ -1394,7 +1378,7 @@
       const thaliGrad = ctx.createLinearGradient(-thaliW/2, 0, thaliW/2, 0);
       thaliGrad.addColorStop(0, '#ffd166');
       thaliGrad.addColorStop(0.25, '#ffe600');
-      thaliGrad.addColorStop(0.5, '#fff7c2');
+      thaliGrad.addColorStop(0.5, '#fff9db');
       thaliGrad.addColorStop(0.75, '#ffb703');
       thaliGrad.addColorStop(1, '#d47a00');
 
@@ -1402,18 +1386,18 @@
       ctx.beginPath();
       ctx.ellipse(0, 0, thaliW * 0.5, thaliH * 0.55, 0, 0, Math.PI * 2);
       ctx.fill();
-      ctx.strokeStyle = '#fff';
-      ctx.lineWidth = 1.5;
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 1.6;
       ctx.stroke();
 
-      // Inner Platter Basin
-      ctx.fillStyle = '#b32600';
+      // Basin
+      ctx.fillStyle = '#991b00';
       ctx.beginPath();
       ctx.ellipse(0, -1, thaliW * 0.42, thaliH * 0.38, 0, 0, Math.PI * 2);
       ctx.fill();
 
-      // Rim Garland
-      ctx.fillStyle = '#ff8800';
+      // Decorative Floral Garland on Rim
+      ctx.fillStyle = '#ff9900';
       for (let i = -4; i <= 4; i++) {
         const xOffset = (i / 4.5) * (thaliW * 0.44);
         const yOffset = Math.sin(Math.acos(xOffset / (thaliW * 0.48))) * 4;
@@ -1425,148 +1409,7 @@
       ctx.restore();
     }
 
-    // --- Movement Helpers ---
-    function movePlayerRelative(deltaX) {
-      player.targetX += deltaX;
-      player.targetX = Math.max(player.width / 2 + 18, Math.min(V_WIDTH - player.width / 2 - 18, player.targetX));
-    }
-
-    function movePlayerToNormalized(targetX) {
-      player.targetX = Math.max(player.width / 2 + 18, Math.min(V_WIDTH - player.width / 2 - 18, targetX));
-    }
-
-    // Pointer & Touch Controls (Desktop Mouse & Mobile Touch)
-    function handlePointerMove(clientX) {
-      const rect = container.getBoundingClientRect();
-      const relativeX = clientX - rect.left;
-      const normalizedX = (relativeX / rect.width) * V_WIDTH;
-      movePlayerToNormalized(normalizedX);
-    }
-
-    // --- Input Handlers (Keyboard, Mouse, Touch, and Buttons) ---
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
-        e.preventDefault();
-        if (!player.keys.left) {
-          movePlayerRelative(-55); // Immediate responsive nudge on tap
-        }
-        player.keys.left = true;
-      }
-      if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
-        e.preventDefault();
-        if (!player.keys.right) {
-          movePlayerRelative(55); // Immediate responsive nudge on tap
-        }
-        player.keys.right = true;
-      }
-      if (e.key === 'Escape' || e.key === 'p' || e.key === 'P') {
-        e.preventDefault();
-        togglePause();
-      }
-    });
-
-    window.addEventListener('keyup', (e) => {
-      if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
-        e.preventDefault();
-        player.keys.left = false;
-      }
-      if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
-        e.preventDefault();
-        player.keys.right = false;
-      }
-    });
-
-    // On-Screen Arrow Buttons (Click + Hold support)
-    function setupArrowButton(btn, direction) {
-      let holdTimer = null;
-      let holdInterval = null;
-
-      function startAction(e) {
-        if (e) {
-          e.preventDefault();
-          e.stopPropagation();
-        }
-        sound.init();
-        btn.classList.add('pressed');
-        movePlayerRelative(direction * 55);
-
-        clearTimers();
-        holdTimer = setTimeout(() => {
-          holdInterval = setInterval(() => {
-            movePlayerRelative(direction * 22);
-          }, 35);
-        }, 180);
-      }
-
-      function stopAction(e) {
-        if (e) {
-          e.preventDefault();
-          e.stopPropagation();
-        }
-        btn.classList.remove('pressed');
-        clearTimers();
-      }
-
-      function clearTimers() {
-        if (holdTimer) clearTimeout(holdTimer);
-        if (holdInterval) clearInterval(holdInterval);
-        holdTimer = null;
-        holdInterval = null;
-      }
-
-      // Pointer & Touch Events
-      btn.addEventListener('pointerdown', startAction);
-      btn.addEventListener('pointerup', stopAction);
-      btn.addEventListener('pointercancel', stopAction);
-      btn.addEventListener('mouseleave', stopAction);
-
-      btn.addEventListener('touchstart', startAction, { passive: false });
-      btn.addEventListener('touchend', stopAction, { passive: false });
-
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        sound.init();
-        movePlayerRelative(direction * 55);
-      });
-    }
-
-    setupArrowButton(leftArrowBtn, -1);
-    setupArrowButton(rightArrowBtn, 1);
-
-    // Canvas / Container Mouse & Touch Move
-    container.addEventListener('mousemove', (e) => {
-      if (gameState === 'PLAYING') {
-        // Only track mouse drag/move if not on navigation buttons
-        if (e.target.closest('.nav-arrow-btn') || e.target.closest('.icon-btn')) return;
-        handlePointerMove(e.clientX);
-      }
-    });
-
-    container.addEventListener('click', (e) => {
-      if (gameState === 'PLAYING') {
-        if (e.target.closest('.nav-arrow-btn') || e.target.closest('.icon-btn')) return;
-        sound.init();
-        handlePointerMove(e.clientX);
-      }
-    });
-
-    container.addEventListener('touchmove', (e) => {
-      if (gameState === 'PLAYING' && e.touches.length > 0) {
-        if (e.target.closest('.nav-arrow-btn') || e.target.closest('.icon-btn')) return;
-        handlePointerMove(e.touches[0].clientX);
-      }
-    }, { passive: true });
-
-    container.addEventListener('touchstart', (e) => {
-      if (gameState === 'PLAYING' && e.touches.length > 0) {
-        if (e.target.closest('.nav-arrow-btn') || e.target.closest('.icon-btn')) return;
-        sound.init();
-        handlePointerMove(e.touches[0].clientX);
-      }
-    }, { passive: true });
-
-    // --- Game Cycle Functions ---
+    // --- Game Cycles ---
     function startGame() {
       sound.init();
       gameState = 'PLAYING';
@@ -1591,10 +1434,6 @@
       startScreen.classList.add('hidden');
       gameOverScreen.classList.add('hidden');
       pauseScreen.classList.add('hidden');
-
-      startBtn.blur();
-      window.focus();
-      container.focus();
     }
 
     function togglePause() {
@@ -1604,8 +1443,6 @@
       } else if (gameState === 'PAUSED') {
         gameState = 'PLAYING';
         pauseScreen.classList.add('hidden');
-        window.focus();
-        container.focus();
       }
     }
 
@@ -1626,11 +1463,11 @@
       }
       bestScoreEl.textContent = highScore;
 
-      if (score >= 60) {
+      if (score >= 50) {
         rankMessageEl.textContent = '🌟 Divine Modak Champion! Lord Ganesha blesses you abundantly!';
-      } else if (score >= 30) {
-        rankMessageEl.textContent = '✨ Festive Grand Master! Joyful celebration!';
-      } else if (score >= 15) {
+      } else if (score >= 25) {
+        rankMessageEl.textContent = '✨ Festive Grand Master! Wonderful celebration!';
+      } else if (score >= 10) {
         rankMessageEl.textContent = '🎉 Devoted Offering Master! Great score!';
       } else {
         rankMessageEl.textContent = '🙏 Blessed offering! Play again to beat your high score!';
@@ -1645,7 +1482,7 @@
       comboStreak = 0;
       updateComboUI();
       sound.playMiss();
-      screenShake = 12;
+      screenShake = 10;
 
       if (reason === 'mushak') {
         showToast("Oops! That was Mushak's modak! 🐭 -1 Life");
@@ -1658,12 +1495,9 @@
       }
     }
 
-    // --- Buttons Event Listeners ---
+    // Button Listeners
     startBtn.addEventListener('click', startGame);
-    restartBtn.addEventListener('click', () => {
-      restartBtn.blur();
-      startGame();
-    });
+    restartBtn.addEventListener('click', startGame);
     resumeBtn.addEventListener('click', togglePause);
 
     soundBtn.addEventListener('click', () => {
@@ -1678,23 +1512,23 @@
       }
     });
 
-    // --- Main Game Loop ---
+    // --- Main 60FPS Game Loop with Lerp Smoothing ---
     let lastFrameTime = performance.now();
 
     function gameLoop(timestamp) {
       const dt = Math.min((timestamp - lastFrameTime) / 1000, 0.1);
       lastFrameTime = timestamp;
 
-      // Clear & Screen Shake
+      // Clear Canvas
       ctx.save();
       const dpr = window.devicePixelRatio || 1;
       const rect = container.getBoundingClientRect();
       ctx.clearRect(0, 0, rect.width * dpr, rect.height * dpr);
 
-      // Scale context to fit virtual width/height
       const currentScale = rect.width / V_WIDTH;
       ctx.scale(currentScale * dpr, (rect.height / V_HEIGHT) * dpr);
 
+      // Screen Shake
       if (screenShake > 0) {
         const shakeX = (Math.random() - 0.5) * screenShake;
         const shakeY = (Math.random() - 0.5) * screenShake;
@@ -1702,55 +1536,51 @@
         screenShake = Math.max(0, screenShake - 0.8);
       }
 
-      // 1. Draw Pandal Environment
-      drawPandalBackground();
+      // Draw Backdrop
+      drawBackgroundDecorations();
       drawAmbientSparks();
 
       if (gameState === 'PLAYING') {
-        // --- 2. Update Player Position ---
-        if (player.keys.left) {
-          player.targetX -= player.speed;
-        }
-        if (player.keys.right) {
-          player.targetX += player.speed;
-        }
-        player.targetX = Math.max(player.width / 2 + 18, Math.min(V_WIDTH - player.width / 2 - 18, player.targetX));
-        player.x += (player.targetX - player.x) * 0.35;
+        // --- Basket Lerp Smoothing ---
+        // Smoothly glides toward cursor's horizontal position
+        player.x += (player.targetX - player.x) * 0.20;
 
-        // Player bounce decay
-        if (player.bounceScale > 1) {
-          player.bounceScale = Math.max(1, player.bounceScale - 0.02);
-        }
+        // Squash & Stretch Spring Recovery
+        player.scaleX += (1.0 - player.scaleX) * 0.16;
+        player.scaleY += (1.0 - player.scaleY) * 0.16;
 
-        // --- 3. Item Spawning Logic ---
+        // --- Spawning Logic ---
         if (timestamp - lastSpawnTime > spawnInterval) {
           spawnItem();
           lastSpawnTime = timestamp;
-          spawnInterval = Math.max(550, 1100 - (score * 12));
+          spawnInterval = Math.max(520, 1100 - (score * 14));
         }
 
         // Mushak Spawns
-        if (timestamp - lastMushakSpawnTime > 7500 && Math.random() < 0.35) {
+        if (timestamp - lastMushakSpawnTime > 7000 && Math.random() < 0.38) {
           spawnMushak();
           lastMushakSpawnTime = timestamp;
         }
 
-        // --- 4. Update & Draw Items ---
+        // --- Update & Draw Items ---
         for (let i = items.length - 1; i >= 0; i--) {
           const item = items[i];
+          item.age += 1;
           item.y += item.speed;
           item.rotation += item.rotSpeed;
+          const bob = Math.sin(item.age * 0.06 + item.bobbleOffset) * 3;
 
+          // Render item
           if (item.type === 'modak') {
-            drawModak(item.x, item.y, item.radius, item.rotation);
+            drawModak(item.x, item.y, item.radius, item.rotation, bob);
           } else if (item.type === 'flower') {
-            drawFlower(item.x, item.y, item.radius, item.rotation);
+            drawFlower(item.x, item.y, item.radius, item.rotation, bob);
           } else if (item.type === 'coin') {
-            drawCoin(item.x, item.y, item.radius, item.rotation);
+            drawCoin(item.x, item.y, item.radius, item.rotation, bob);
           }
 
-          // Catch Collision Check with Player Thali
-          const basketTop = player.y - player.height * 0.4;
+          // Catch Collision Check
+          const basketTop = player.y - player.height * 0.42;
           const basketBottom = player.y + player.height * 0.6;
           const basketLeft = player.x - player.width * 0.48;
           const basketRight = player.x + player.width * 0.48;
@@ -1761,23 +1591,29 @@
             item.x >= basketLeft &&
             item.x <= basketRight
           ) {
+            // SUCCESSFUL CATCH!
             comboStreak++;
             totalItemsCaught++;
             const mult = getMultiplier();
             score += 1 * mult;
             scoreDisplay.textContent = score;
 
-            player.bounceScale = 1.14;
-            sound.playChime(item.type);
+            // Basket Squash & Stretch Pop
+            player.scaleX = 1.18;
+            player.scaleY = 0.82;
 
+            sound.playCatch(item.type);
+
+            // Combo Flash or Score Popup
             if (comboStreak === 3 || comboStreak === 6 || comboStreak === 10 || comboStreak === 15) {
               sound.playComboFanfare(mult);
-              addFloatText(`${mult}x COMBO!`, player.x, basketTop - 35, '#ffe600', 24);
+              addFloatText(`Combo x${mult}!`, player.x, basketTop - 40, '#ffe600', 26, true);
             } else {
-              addFloatText(`+${mult}`, item.x, basketTop - 15, '#ffd166', 18);
+              addFloatText(`+${mult}`, item.x, basketTop - 18, '#ffd166', 18, false);
             }
 
-            const colors = item.type === 'modak' 
+            // Particle sparkles
+            const colors = item.type === 'modak'
               ? ['#ffd166', '#ffb703', '#ffffff', '#e65100']
               : item.type === 'flower'
               ? ['#ff4d6d', '#d00000', '#ffe600', '#ff758f']
@@ -1789,14 +1625,14 @@
             continue;
           }
 
-          // Miss Check
-          if (item.y - item.radius > V_HEIGHT - 15) {
+          // Missed item reaches floor
+          if (item.y - item.radius > V_HEIGHT - 12) {
             items.splice(i, 1);
             loseLife('miss');
           }
         }
 
-        // --- 5. Update & Draw Mushak the Mouse ---
+        // --- Update & Draw Mushak the Mouse ---
         for (let j = mushakList.length - 1; j >= 0; j--) {
           const mushak = mushakList[j];
           mushak.x += mushak.speed;
@@ -1814,7 +1650,7 @@
             mushak.x <= basketRight
           ) {
             sound.playMushak();
-            addFloatText('Oops! 🐭', mushak.x, mushak.y - 20, '#ff5400', 22);
+            addFloatText('Oops! 🐭', mushak.x, mushak.y - 20, '#ff7700', 24);
             createCatchBurst(mushak.x, mushak.y, ['#8d99ae', '#ff758f', '#ffffff']);
             mushakList.splice(j, 1);
             loseLife('mushak');
@@ -1828,10 +1664,10 @@
         }
       }
 
-      // Draw Player Catcher
+      // Draw Basket & Player
       drawPlayer();
 
-      // --- 6. Update & Draw Particles ---
+      // --- Update & Draw Particles ---
       for (let p = particles.length - 1; p >= 0; p--) {
         const pt = particles[p];
         pt.x += pt.vx;
@@ -1845,29 +1681,56 @@
         ctx.save();
         ctx.globalAlpha = pt.alpha;
         ctx.fillStyle = pt.color;
+        ctx.shadowColor = pt.color;
+        ctx.shadowBlur = 6;
         ctx.beginPath();
         ctx.arc(pt.x, pt.y, pt.size, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
       }
 
-      // --- 7. Update & Draw Floating Texts ---
+      // --- Update & Draw Floating Combo & Score Texts ---
       for (let f = floatTexts.length - 1; f >= 0; f--) {
         const ft = floatTexts[f];
         ft.y += ft.vy;
-        ft.alpha -= 0.024;
+        if (ft.isComboBanner) {
+          ft.scale += (ft.targetScale - ft.scale) * 0.12;
+          ft.alpha -= 0.018;
+        } else {
+          ft.alpha -= 0.024;
+        }
+
         if (ft.alpha <= 0) {
           floatTexts.splice(f, 1);
           continue;
         }
+
         ctx.save();
         ctx.globalAlpha = ft.alpha;
-        ctx.fillStyle = ft.color;
-        ctx.font = `bold ${ft.size}px ${getComputedStyle(document.body).fontFamily}`;
+        ctx.translate(ft.x, ft.y);
+        if (ft.isComboBanner) {
+          ctx.scale(ft.scale, ft.scale);
+        }
+
+        ctx.font = `800 ${ft.size}px ${getComputedStyle(document.body).fontFamily}`;
         ctx.textAlign = 'center';
-        ctx.shadowColor = 'rgba(0,0,0,0.8)';
-        ctx.shadowBlur = 4;
-        ctx.fillText(ft.text, ft.x, ft.y);
+        ctx.textBaseline = 'middle';
+
+        if (ft.isComboBanner) {
+          ctx.shadowColor = '#ffe600';
+          ctx.shadowBlur = 15;
+          ctx.fillStyle = '#ffffff';
+          ctx.fillText(ft.text, 0, 0);
+          ctx.shadowBlur = 0;
+          ctx.strokeStyle = '#e85d04';
+          ctx.lineWidth = 2;
+          ctx.strokeText(ft.text, 0, 0);
+        } else {
+          ctx.shadowColor = 'rgba(0,0,0,0.8)';
+          ctx.shadowBlur = 5;
+          ctx.fillStyle = ft.color;
+          ctx.fillText(ft.text, 0, 0);
+        }
         ctx.restore();
       }
 
