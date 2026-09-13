@@ -13,7 +13,7 @@
       --deep-maroon: #2b0710;
       --rich-crimson: #780016;
       --text-cream: #fffdf7;
-      --hud-panel: rgba(35, 5, 12, 0.72);
+      --hud-panel: rgba(35, 5, 12, 0.75);
       --hud-border: rgba(255, 209, 102, 0.35);
       --font-stack: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
     }
@@ -60,7 +60,7 @@
       }
     }
 
-    /* Elegant Hanging Floral Toran */
+    /* Hanging Floral Toran */
     .toran-garland {
       position: absolute;
       top: 0;
@@ -263,7 +263,7 @@
       border-radius: 26px;
       padding: 30px 24px;
       width: 100%;
-      max-width: 390px;
+      max-width: 400px;
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 183, 3, 0.25);
       position: relative;
     }
@@ -289,8 +289,8 @@
     }
 
     .hero-art-container {
-      width: 120px;
-      height: 120px;
+      width: 130px;
+      height: 130px;
       margin: 0 auto 16px auto;
       display: flex;
       align-items: center;
@@ -320,10 +320,10 @@
       margin-bottom: 14px;
     }
 
-    .legend-row {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
+    .legend-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
       padding-top: 10px;
       border-top: 1px dashed rgba(255, 209, 102, 0.25);
     }
@@ -333,7 +333,7 @@
       flex-direction: column;
       align-items: center;
       gap: 3px;
-      font-size: 11px;
+      font-size: 10px;
       color: #ffd166;
     }
 
@@ -501,7 +501,7 @@
     </div>
 
     <!-- Alert / Toast -->
-    <div id="notification-toast">Oops! That was Mushak's modak! 🐭 -1 Life</div>
+    <div id="notification-toast">Oops! Modaks only, no spicy chillies! 🌶️ -1 Life</div>
 
     <!-- Canvas -->
     <canvas id="gameCanvas"></canvas>
@@ -510,66 +510,80 @@
     <div id="start-screen" class="overlay-screen">
       <div class="screen-card">
         <div class="hero-art-container">
-          <!-- Ganesha & Modak Illustration -->
-          <svg viewBox="0 0 100 100" width="95" height="95">
-            <polygon points="50,6 62,22 38,22" fill="#ffd166" stroke="#e65100" stroke-width="1.5"/>
-            <circle cx="50" cy="5" r="3" fill="#d00000"/>
-            <circle cx="50" cy="15" r="3" fill="#e65100"/>
-            <ellipse cx="28" cy="38" rx="15" ry="17" fill="#ffb703" stroke="#e65100" stroke-width="1.5"/>
-            <ellipse cx="28" cy="38" rx="9" ry="11" fill="#ffa200"/>
-            <ellipse cx="72" cy="38" rx="15" ry="17" fill="#ffb703" stroke="#e65100" stroke-width="1.5"/>
-            <ellipse cx="72" cy="38" rx="9" ry="11" fill="#ffa200"/>
-            <ellipse cx="50" cy="40" rx="19" ry="21" fill="#ffb703" stroke="#e65100" stroke-width="1.5"/>
-            <path d="M47 25 Q50 32 53 25" stroke="#d00000" stroke-width="2.5" fill="none"/>
-            <circle cx="50" cy="27" r="1.5" fill="#ffe600"/>
-            <ellipse cx="43" cy="34" rx="2" ry="3" fill="#370617"/>
-            <ellipse cx="57" cy="34" rx="2" ry="3" fill="#370617"/>
-            <circle cx="42" cy="33" r="0.8" fill="#fff"/>
-            <circle cx="56" cy="33" r="0.8" fill="#fff"/>
-            <path d="M50 42 C51 52 57 56 61 54 C64 52 64 48 58 48" stroke="#e65100" stroke-width="5" stroke-linecap="round" fill="none"/>
-            <path d="M60 44 C58 46 56 49 56 52 C56 55 58 56 60 56 C62 56 64 55 64 52 Z" fill="#ffd166"/>
-            <ellipse cx="50" cy="80" rx="42" ry="12" fill="#ffb703" stroke="#ffd166" stroke-width="2"/>
-            <ellipse cx="50" cy="78" rx="36" ry="9" fill="#e65100"/>
-            <circle cx="42" cy="77" r="5" fill="#ffd166"/>
-            <circle cx="50" cy="75" r="6" fill="#ffd166"/>
-            <circle cx="58" cy="77" r="5" fill="#ffd166"/>
+          <!-- Mushak & Ganesha Blessing Illustration -->
+          <svg viewBox="0 0 100 100" width="100" height="100">
+            <!-- Lord Ganesha Above -->
+            <polygon points="50,6 59,19 41,19" fill="#ffd166" stroke="#e65100" stroke-width="1.2"/>
+            <circle cx="50" cy="5" r="2.5" fill="#d00000"/>
+            <ellipse cx="32" cy="30" rx="11" ry="13" fill="#ffb703" stroke="#e65100" stroke-width="1.2"/>
+            <ellipse cx="68" cy="30" rx="11" ry="13" fill="#ffb703" stroke="#e65100" stroke-width="1.2"/>
+            <ellipse cx="50" cy="31" rx="14" ry="15" fill="#ffb703" stroke="#e65100" stroke-width="1.2"/>
+            <path d="M47 21 Q50 26 53 21" stroke="#d00000" stroke-width="2" fill="none"/>
+            <circle cx="50" cy="22" r="1" fill="#ffe600"/>
+            <ellipse cx="45" cy="27" rx="1.5" ry="2" fill="#370617"/>
+            <ellipse cx="55" cy="27" rx="1.5" ry="2" fill="#370617"/>
+            <path d="M50 33 C51 40 55 43 58 41 C60 39 59 36 55 36" stroke="#e65100" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+            <circle cx="57" cy="38" r="2" fill="#ffd166"/>
+
+            <!-- Mushak holding Thali below -->
+            <ellipse cx="36" cy="65" rx="7" ry="7" fill="#9aa5b1"/>
+            <ellipse cx="36" cy="65" rx="4" ry="4" fill="#ffb8b8"/>
+            <ellipse cx="64" cy="65" rx="7" ry="7" fill="#9aa5b1"/>
+            <ellipse cx="64" cy="65" rx="4" ry="4" fill="#ffb8b8"/>
+            <ellipse cx="50" cy="69" rx="14" ry="12" fill="#9aa5b1"/>
+            <polygon points="50,56 44,63 56,63" fill="#ff7700"/>
+            <circle cx="50" cy="56" r="2" fill="#ffd166"/>
+            <circle cx="45" cy="68" r="2.2" fill="#222f3e"/>
+            <circle cx="55" cy="68" r="2.2" fill="#222f3e"/>
+            <circle cx="50" cy="73" r="2.5" fill="#f8a5c2"/>
+            
+            <!-- Thali -->
+            <ellipse cx="50" cy="85" rx="42" ry="10" fill="#ffd166" stroke="#e65100" stroke-width="1.5"/>
+            <ellipse cx="50" cy="83" rx="36" ry="7" fill="#991b00"/>
+            <circle cx="43" cy="82" r="4.5" fill="#ffd166"/>
+            <circle cx="50" cy="80" r="5" fill="#ffb703"/>
+            <circle cx="57" cy="82" r="4.5" fill="#ffd166"/>
           </svg>
         </div>
 
         <h1 class="title-banner">MODAK CATCH</h1>
-        <div class="subtitle">Ganesh Chaturthi Celebration</div>
+        <div class="subtitle">Mushak's Divine Offering</div>
 
         <div class="instruction-box">
           <p class="instruction-text">
-            Glide your cursor or finger to move the golden thali.<br>
-            Catch sacred offerings to multiply your score, and avoid Mushak!
+            Guide <strong>Mushak the mouse</strong> to catch sacred offerings for Lord Ganesha!
+            Avoid fiery chillies to protect his offerings.
           </p>
-          <div class="legend-row">
+          <div class="legend-grid">
             <div class="legend-item">
               <span style="font-size: 18px;">🥟</span>
-              <span>Modak (+1)</span>
+              <span>Modak</span>
+            </div>
+            <div class="legend-item">
+              <span style="font-size: 18px;">🟡</span>
+              <span>Laddoo</span>
+            </div>
+            <div class="legend-item">
+              <span style="font-size: 18px;">🥥</span>
+              <span>Coconut</span>
             </div>
             <div class="legend-item">
               <span style="font-size: 18px;">🌺</span>
-              <span>Flower (+1)</span>
+              <span>Flower</span>
             </div>
             <div class="legend-item">
-              <span style="font-size: 18px;">🪙</span>
-              <span>Coin (+1)</span>
-            </div>
-            <div class="legend-item">
-              <span style="font-size: 18px;">🐭</span>
-              <span style="color: #ff8800;">Dodge Mushak!</span>
+              <span style="font-size: 18px;">🌶️</span>
+              <span style="color: #ff5400; font-weight: bold;">Chilli!</span>
             </div>
           </div>
         </div>
 
         <button id="start-btn" class="btn-primary">
-          <span>✨ Start Game ✨</span>
+          <span>✨ Start Offering ✨</span>
         </button>
 
         <div class="controls-hint">
-          🖱️ <strong>Mouse Pointer</strong> or 📱 <strong>Touch</strong> &nbsp;—&nbsp; The basket smoothly glides to follow you
+          🖱️ <strong>Move Mouse</strong> or 📱 <strong>Touch</strong> &nbsp;—&nbsp; Mushak glides smoothly to follow your cursor
         </div>
       </div>
     </div>
@@ -577,7 +591,7 @@
     <!-- GAME OVER SCREEN -->
     <div id="game-over-screen" class="overlay-screen hidden">
       <div class="screen-card">
-        <h2 class="title-banner" style="font-size: 28px;">FESTIVAL WRAP!</h2>
+        <h2 class="title-banner" style="font-size: 28px;">OFFERING COMPLETE!</h2>
         <div class="subtitle" id="game-over-sub">Ganpati Bappa Morya! 🙏</div>
 
         <div class="stats-grid">
@@ -596,12 +610,12 @@
           </div>
           <div class="stat-pill">
             <div class="num" id="total-caught">0</div>
-            <div class="lbl">Items Offered</div>
+            <div class="lbl">Offerings Given</div>
           </div>
         </div>
 
         <p id="rank-message" style="font-size: 14px; color: #ffd166; margin-bottom: 20px; font-weight: 600;">
-          May Lord Ganesha shower prosperity and joy on you!
+          Lord Ganesha blesses Mushak and you with joy & wisdom!
         </p>
 
         <button id="restart-btn" class="btn-primary">
@@ -614,7 +628,7 @@
     <div id="pause-screen" class="overlay-screen hidden">
       <div class="screen-card" style="max-width: 300px;">
         <h2 class="title-banner" style="font-size: 26px;">PAUSED</h2>
-        <p style="color: #ffd166; margin: 16px 0 24px;">Enjoy the festive moment!</p>
+        <p style="color: #ffd166; margin: 16px 0 24px;">Enjoy the devotional moment!</p>
         <button id="resume-btn" class="btn-primary">
           <span>▶ Resume</span>
         </button>
@@ -624,7 +638,7 @@
 
   <script>
     /* ==========================================================================
-       MODAK CATCH - Pure Cursor / Touch Tracking Game
+       MODAK CATCH - Mushak the Mouse & Ganesha Shrine Edition
        ========================================================================== */
 
     // --- Procedural Sound Engine ---
@@ -666,22 +680,30 @@
             gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
             osc.start(now);
             osc.stop(now + 0.35);
-          } else if (type === 'flower') {
+          } else if (type === 'laddoo') {
             osc.type = 'triangle';
             osc.frequency.setValueAtTime(659.25, now); // E5
-            osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.14);
+            osc.frequency.exponentialRampToValueAtTime(987.77, now + 0.12); // B5
+            gain.gain.setValueAtTime(0.26, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.32);
+            osc.start(now);
+            osc.stop(now + 0.32);
+          } else if (type === 'coconut') {
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(440, now); // A4
+            osc.frequency.exponentialRampToValueAtTime(880, now + 0.15); // A5
+            gain.gain.setValueAtTime(0.28, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.38);
+            osc.start(now);
+            osc.stop(now + 0.38);
+          } else if (type === 'flower') {
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(783.99, now); // G5
+            osc.frequency.exponentialRampToValueAtTime(1046.50, now + 0.12);
             gain.gain.setValueAtTime(0.22, now);
             gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
             osc.start(now);
             osc.stop(now + 0.3);
-          } else if (type === 'coin') {
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(987.77, now); // B5
-            osc.frequency.setValueAtTime(1318.51, now + 0.08); // E6
-            gain.gain.setValueAtTime(0.25, now);
-            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
-            osc.start(now);
-            osc.stop(now + 0.4);
           }
         } catch (e) {}
       }
@@ -725,22 +747,23 @@
         } catch (e) {}
       }
 
-      playMushak() {
+      playChilliSizzle() {
         if (this.muted || !this.ctx) return;
         try {
+          // Playful hot sizzle + squeak
           const now = this.ctx.currentTime;
           const osc = this.ctx.createOscillator();
           const gain = this.ctx.createGain();
           osc.connect(gain);
           gain.connect(this.ctx.destination);
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(1400, now);
-          osc.frequency.linearRampToValueAtTime(1900, now + 0.08);
-          osc.frequency.linearRampToValueAtTime(1100, now + 0.18);
-          gain.gain.setValueAtTime(0.28, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(900, now);
+          osc.frequency.linearRampToValueAtTime(1600, now + 0.1);
+          osc.frequency.linearRampToValueAtTime(400, now + 0.25);
+          gain.gain.setValueAtTime(0.3, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
           osc.start(now);
-          osc.stop(now + 0.25);
+          osc.stop(now + 0.3);
         } catch (e) {}
       }
 
@@ -806,21 +829,19 @@
     let items = [];
     let particles = [];
     let floatTexts = [];
-    let mushakList = [];
 
     let lastSpawnTime = 0;
-    let lastMushakSpawnTime = 0;
     let spawnInterval = 1100;
     let baseFallSpeed = 3.2;
 
     let screenShake = 0;
     let toastTimeout = null;
 
-    // Basket & Player (Pure Cursor Gliding with Squash/Stretch)
+    // Player: Mushak the Mouse holding the Thali (Pure Cursor Gliding with Squash/Stretch)
     const player = {
       x: V_WIDTH / 2,
       y: V_HEIGHT - 65,
-      width: 110,
+      width: 112,
       height: 28,
       targetX: V_WIDTH / 2,
       scaleX: 1,
@@ -858,11 +879,9 @@
       const rect = container.getBoundingClientRect();
       const relativeX = clientX - rect.left;
       const normalizedX = (relativeX / rect.width) * V_WIDTH;
-      // Clamp inside playable area
       player.targetX = Math.max(player.width / 2 + 16, Math.min(V_WIDTH - player.width / 2 - 16, normalizedX));
     }
 
-    // Desktop Mouse: Moves in real time wherever pointer is — NO click or drag required!
     container.addEventListener('pointermove', (e) => {
       if (gameState === 'PLAYING') {
         updateCursorTracking(e.clientX);
@@ -875,7 +894,6 @@
       }
     });
 
-    // Mobile Touch: Smoothly tracks touch point across screen
     container.addEventListener('touchmove', (e) => {
       if (gameState === 'PLAYING' && e.touches.length > 0) {
         updateCursorTracking(e.touches[0].clientX);
@@ -962,10 +980,14 @@
       }
     }
 
-    // --- Spawning Logic ---
+    // --- Spawning Logic with Updated Items ---
     function spawnItem() {
-      const types = ['modak', 'modak', 'modak', 'flower', 'coin'];
-      const chosenType = types[Math.floor(Math.random() * types.length)];
+      // Good items vs Chilli hazard
+      // 80% Good Offerings, 20% Fiery Chilli
+      const goodTypes = ['modak', 'modak', 'laddoo', 'coconut', 'flower'];
+      const isChilli = (score >= 3 && Math.random() < 0.22);
+      const chosenType = isChilli ? 'chilli' : goodTypes[Math.floor(Math.random() * goodTypes.length)];
+      
       const radius = 19;
       const x = Math.random() * (V_WIDTH - radius * 4) + radius * 2;
       const speed = baseFallSpeed + Math.min(score * 0.05, 4.2);
@@ -975,33 +997,15 @@
         x,
         y: -32,
         radius,
-        speed,
+        speed: isChilli ? speed * 1.12 : speed,
         rotation: 0,
-        rotSpeed: (Math.random() - 0.5) * 0.03,
+        rotSpeed: (Math.random() - 0.5) * 0.035,
         bobbleOffset: Math.random() * Math.PI * 2,
         age: 0
       });
     }
 
-    function spawnMushak() {
-      // Mushak occasionally darts across carrying a stolen modak
-      const direction = Math.random() > 0.5 ? 1 : -1;
-      const x = direction === 1 ? -50 : V_WIDTH + 50;
-      const y = Math.random() * (V_HEIGHT * 0.35) + (V_HEIGHT * 0.42);
-      const speed = (Math.random() * 1.5 + 3.2) * direction;
-
-      mushakList.push({
-        x,
-        y,
-        speed,
-        direction,
-        width: 44,
-        height: 26,
-        bobble: 0
-      });
-    }
-
-    // --- Low-Contrast Subtle Background Artwork ---
+    // --- Backdrop Artwork: Lord Ganesha in Place of Diyas ---
     function drawBackgroundDecorations() {
       // Faint Pandal Arch Silhouette at top
       ctx.save();
@@ -1017,10 +1021,10 @@
 
       // Subtle temple pillar accents on sides
       ctx.fillStyle = 'rgba(255, 209, 102, 0.04)';
-      ctx.fillRect(0, 0, 16, V_HEIGHT);
-      ctx.fillRect(V_WIDTH - 16, 0, 16, V_HEIGHT);
+      ctx.fillRect(0, 0, 20, V_HEIGHT);
+      ctx.fillRect(V_WIDTH - 20, 0, 20, V_HEIGHT);
 
-      // Faint Floor Rangoli Watermark
+      // Floor Rangoli Watermark
       ctx.strokeStyle = 'rgba(255, 209, 102, 0.06)';
       ctx.lineWidth = 1.5;
       ctx.beginPath();
@@ -1032,35 +1036,98 @@
       ctx.stroke();
       ctx.restore();
 
-      // Faint Lit Diyas on pillars
-      drawDiya(10, V_HEIGHT * 0.48);
-      drawDiya(10, V_HEIGHT * 0.72);
-      drawDiya(V_WIDTH - 10, V_HEIGHT * 0.48);
-      drawDiya(V_WIDTH - 10, V_HEIGHT * 0.72);
+      // IN THE PLACE OF DIYAS: Lord Ganesha Shrines on the pillars!
+      drawGaneshaShrine(12, V_HEIGHT * 0.35);
+      drawGaneshaShrine(12, V_HEIGHT * 0.65);
+      drawGaneshaShrine(V_WIDTH - 12, V_HEIGHT * 0.35);
+      drawGaneshaShrine(V_WIDTH - 12, V_HEIGHT * 0.65);
     }
 
-    function drawDiya(x, y) {
+    // Divine Lord Ganesha Shrine Medallion (Replaces the old wall diyas)
+    function drawGaneshaShrine(x, y) {
       ctx.save();
-      ctx.fillStyle = '#ffb703';
+      ctx.translate(x, y);
+
+      // Soft Radiating Divine Halo Glow
+      const glow = ctx.createRadialGradient(0, 0, 4, 0, 0, 28);
+      glow.addColorStop(0, 'rgba(255, 215, 0, 0.5)');
+      glow.addColorStop(0.5, 'rgba(255, 140, 0, 0.22)');
+      glow.addColorStop(1, 'transparent');
+      ctx.fillStyle = glow;
       ctx.beginPath();
-      ctx.ellipse(x, y, 9, 4.5, 0, 0, Math.PI);
+      ctx.arc(0, 0, 28, 0, Math.PI * 2);
       ctx.fill();
 
-      // Flickering Flame with soft drop glow
-      const flicker = Math.sin(Date.now() * 0.015 + x) * 2;
-      const flameGrad = ctx.createRadialGradient(x, y - 5, 1, x, y - 5, 7);
-      flameGrad.addColorStop(0, '#ffffff');
-      flameGrad.addColorStop(0.3, '#ffe600');
-      flameGrad.addColorStop(0.8, '#ff5400');
-      flameGrad.addColorStop(1, 'transparent');
-
-      ctx.fillStyle = flameGrad;
+      // Ornate Shrine Medallion Rim
+      ctx.fillStyle = 'rgba(43, 6, 17, 0.9)';
       ctx.beginPath();
-      ctx.moveTo(x - 3.5, y - 2);
-      ctx.quadraticCurveTo(x, y - 13 + flicker, x, y - 15 + flicker);
-      ctx.quadraticCurveTo(x, y - 13 + flicker, x + 3.5, y - 2);
+      ctx.arc(0, 0, 18, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#ffd166';
+      ctx.lineWidth = 1.6;
+      ctx.stroke();
+
+      // Lotus Base at bottom of shrine
+      ctx.fillStyle = '#ff4d6d';
+      ctx.beginPath();
+      ctx.ellipse(0, 12, 10, 4, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Lord Ganesha Deity Silhouette
+      // Crown (Mukut)
+      ctx.fillStyle = '#ffd166';
+      ctx.beginPath();
+      ctx.moveTo(0, -15);
+      ctx.lineTo(5, -7);
+      ctx.lineTo(-5, -7);
       ctx.closePath();
       ctx.fill();
+      ctx.fillStyle = '#d00000';
+      ctx.beginPath();
+      ctx.arc(0, -15, 1.3, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Ears
+      ctx.fillStyle = '#ffb703';
+      ctx.beginPath();
+      ctx.ellipse(-8, -2, 5, 6, -0.15, 0, Math.PI * 2);
+      ctx.ellipse(8, -2, 5, 6, 0.15, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Head
+      ctx.beginPath();
+      ctx.arc(0, -2, 7.5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Red Tilak
+      ctx.fillStyle = '#d00000';
+      ctx.beginPath();
+      ctx.arc(0, -5, 1.2, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Eyes
+      ctx.strokeStyle = '#370617';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.arc(-2.5, -3, 1.2, 0.2, Math.PI - 0.2);
+      ctx.arc(2.5, -3, 1.2, 0.2, Math.PI - 0.2);
+      ctx.stroke();
+
+      // Sacred Curved Trunk
+      ctx.strokeStyle = '#e65100';
+      ctx.lineWidth = 2.2;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.quadraticCurveTo(1, 6, 4, 5);
+      ctx.stroke();
+
+      // Modak on trunk tip
+      ctx.fillStyle = '#ffe600';
+      ctx.beginPath();
+      ctx.arc(4, 4, 1.4, 0, Math.PI * 2);
+      ctx.fill();
+
       ctx.restore();
     }
 
@@ -1082,13 +1149,12 @@
       ctx.restore();
     }
 
-    // --- Item Rendering with Glow & Drop Shadows ---
+    // --- Item Rendering: Modak, Laddoo, Coconut, Flower & Fiery Chilli ---
     function drawModak(x, y, radius, angle, bob) {
       ctx.save();
       ctx.translate(x, y + bob);
       ctx.rotate(angle);
 
-      // Soft Warm Drop Shadow & Glow
       ctx.shadowColor = 'rgba(255, 209, 102, 0.55)';
       ctx.shadowBlur = 14;
 
@@ -1107,7 +1173,6 @@
       ctx.closePath();
       ctx.fill();
 
-      // Pleat creases
       ctx.shadowBlur = 0;
       ctx.strokeStyle = '#c67d0a';
       ctx.lineWidth = 1.3;
@@ -1118,10 +1183,92 @@
       ctx.quadraticCurveTo(radius * 0.3, 0, radius * 0.35, radius * 0.9);
       ctx.stroke();
 
-      // Saffron pinnacle
       ctx.fillStyle = '#d00000';
       ctx.beginPath();
       ctx.arc(0, -radius * 1.15, 2.5, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
+    }
+
+    function drawLaddoo(x, y, radius, angle, bob) {
+      ctx.save();
+      ctx.translate(x, y + bob);
+      ctx.rotate(angle);
+
+      ctx.shadowColor = 'rgba(255, 183, 3, 0.65)';
+      ctx.shadowBlur = 16;
+
+      // Golden-Orange Motichoor Laddoo
+      const grad = ctx.createRadialGradient(-3, -3, 2, 0, 0, radius);
+      grad.addColorStop(0, '#ffe882');
+      grad.addColorStop(0.4, '#ffb703');
+      grad.addColorStop(0.85, '#e85d04');
+      grad.addColorStop(1, '#9d0208');
+
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(0, 0, radius, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.shadowBlur = 0;
+      // Sweet boondi texture spots
+      ctx.fillStyle = '#ff7b00';
+      for (let i = 0; i < 7; i++) {
+        const ox = Math.cos(i * 0.9) * (radius * 0.5);
+        const oy = Math.sin(i * 0.9) * (radius * 0.5);
+        ctx.beginPath();
+        ctx.arc(ox, oy, 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Silver Vark (Edible leaf shimmer)
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(-2, -3, 2.5, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
+    }
+
+    function drawCoconut(x, y, radius, angle, bob) {
+      ctx.save();
+      ctx.translate(x, y + bob);
+      ctx.rotate(angle);
+
+      ctx.shadowColor = 'rgba(139, 69, 19, 0.6)';
+      ctx.shadowBlur = 14;
+
+      // Green Mango Leaves on top
+      ctx.fillStyle = '#38b000';
+      ctx.beginPath();
+      ctx.moveTo(0, -radius * 0.7);
+      ctx.lineTo(-7, -radius * 1.35);
+      ctx.lineTo(0, -radius * 1.1);
+      ctx.lineTo(7, -radius * 1.35);
+      ctx.closePath();
+      ctx.fill();
+
+      // Brown Coconut Shell
+      const grad = ctx.createRadialGradient(-3, -3, 2, 0, 2, radius);
+      grad.addColorStop(0, '#b07d62');
+      grad.addColorStop(0.6, '#6f4518');
+      grad.addColorStop(1, '#382108');
+
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(0, 2, radius * 0.95, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.shadowBlur = 0;
+      // Red Tilak Mark
+      ctx.fillStyle = '#d00000';
+      ctx.beginPath();
+      ctx.arc(0, 1, 3.5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#ffd166';
+      ctx.beginPath();
+      ctx.arc(0, 1, 1.2, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.restore();
@@ -1171,210 +1318,174 @@
       ctx.restore();
     }
 
-    function drawCoin(x, y, radius, angle, bob) {
+    // Fiery Red Chilli (Hazard Item to avoid!)
+    function drawChilli(x, y, radius, angle, bob) {
       ctx.save();
       ctx.translate(x, y + bob);
       ctx.rotate(angle);
 
-      ctx.shadowColor = 'rgba(255, 230, 0, 0.65)';
-      ctx.shadowBlur = 16;
+      // Warning fiery glow
+      ctx.shadowColor = '#ff3300';
+      ctx.shadowBlur = 18;
 
-      const grad = ctx.createRadialGradient(-3, -3, 2, 0, 0, radius);
-      grad.addColorStop(0, '#fffbe6');
-      grad.addColorStop(0.4, '#ffd166');
-      grad.addColorStop(0.85, '#ff9e00');
-      grad.addColorStop(1, '#b06000');
+      // Curved Red Chilli Body
+      const grad = ctx.createLinearGradient(-10, -radius, 10, radius);
+      grad.addColorStop(0, '#ff1a1a');
+      grad.addColorStop(0.5, '#cc0000');
+      grad.addColorStop(1, '#7a0000');
 
       ctx.fillStyle = grad;
       ctx.beginPath();
-      ctx.arc(0, 0, radius, 0, Math.PI * 2);
+      ctx.moveTo(-4, -radius * 0.8);
+      ctx.quadraticCurveTo(-10, 0, -2, radius * 0.95);
+      ctx.quadraticCurveTo(0, radius * 1.1, 3, radius * 0.85);
+      ctx.quadraticCurveTo(8, 0, 4, -radius * 0.8);
+      ctx.closePath();
       ctx.fill();
 
-      ctx.strokeStyle = '#fff7c2';
-      ctx.lineWidth = 1.8;
-      ctx.stroke();
-
       ctx.shadowBlur = 0;
-      ctx.strokeStyle = 'rgba(176, 96, 0, 0.75)';
-      ctx.lineWidth = 1.2;
+      // Green Stem / Calyx
+      ctx.fillStyle = '#38b000';
       ctx.beginPath();
-      ctx.arc(0, 0, radius * 0.7, 0, Math.PI * 2);
+      ctx.arc(0, -radius * 0.8, 4.5, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.strokeStyle = '#2b9348';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(0, -radius * 0.8);
+      ctx.quadraticCurveTo(3, -radius * 1.2, 6, -radius * 1.25);
       ctx.stroke();
 
-      ctx.fillStyle = '#780016';
-      ctx.font = 'bold 13px sans-serif';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText('ॐ', 0, 1);
+      // Sizzle Smoke puff
+      ctx.fillStyle = 'rgba(255, 200, 150, 0.4)';
+      ctx.beginPath();
+      ctx.arc(0, -radius * 1.35, 3, 0, Math.PI * 2);
+      ctx.fill();
 
       ctx.restore();
     }
 
-    function drawMushak(mushak) {
-      ctx.save();
-      ctx.translate(mushak.x, mushak.y);
-      if (mushak.direction === -1) {
-        ctx.scale(-1, 1);
-      }
-
-      ctx.shadowColor = 'rgba(255, 119, 0, 0.4)';
-      ctx.shadowBlur = 12;
-
-      mushak.bobble += 0.2;
-      const bobY = Math.sin(mushak.bobble) * 2;
-
-      // Mouse Body
-      ctx.fillStyle = '#8d99ae';
-      ctx.beginPath();
-      ctx.ellipse(0, bobY, 18, 11, 0, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Head
-      ctx.fillStyle = '#adb5bd';
-      ctx.beginPath();
-      ctx.ellipse(14, bobY - 2, 10, 8, 0.2, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Nose
-      ctx.fillStyle = '#ff758f';
-      ctx.beginPath();
-      ctx.arc(23, bobY - 1, 2.5, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Ears
-      ctx.fillStyle = '#adb5bd';
-      ctx.beginPath();
-      ctx.arc(10, bobY - 10, 5, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = '#ffb3c1';
-      ctx.beginPath();
-      ctx.arc(10, bobY - 10, 3, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Eye
-      ctx.fillStyle = '#212529';
-      ctx.beginPath();
-      ctx.arc(17, bobY - 4, 1.8, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Tail
-      ctx.shadowBlur = 0;
-      ctx.strokeStyle = '#8d99ae';
-      ctx.lineWidth = 2.5;
-      ctx.beginPath();
-      ctx.moveTo(-16, bobY + 2);
-      ctx.quadraticCurveTo(-26, bobY - 8, -22, bobY - 16);
-      ctx.stroke();
-
-      // Stolen Modak in paws
-      ctx.save();
-      ctx.translate(19, bobY + 5);
-      drawModak(0, 0, 8, 0.2, 0);
-      ctx.restore();
-
-      ctx.restore();
-    }
-
-    // --- Basket & Ganesha with Squash/Stretch Animation ---
+    // --- The Player: Mushak the Mouse holding the Golden Thali ---
     function drawPlayer() {
       ctx.save();
       ctx.translate(player.x, player.y);
       ctx.scale(player.scaleX, player.scaleY);
 
-      // Subtle Radiant Highlight Beneath Basket
-      const underGlow = ctx.createRadialGradient(0, 10, 10, 0, 10, player.width * 0.7);
+      // Soft Radiant Highlight Beneath Basket
+      const underGlow = ctx.createRadialGradient(0, 12, 10, 0, 12, player.width * 0.7);
       underGlow.addColorStop(0, 'rgba(255, 183, 3, 0.45)');
-      underGlow.addColorStop(0.6, 'rgba(232, 93, 4, 0.2)');
+      underGlow.addColorStop(0.7, 'rgba(232, 93, 4, 0.15)');
       underGlow.addColorStop(1, 'transparent');
       ctx.fillStyle = underGlow;
       ctx.beginPath();
-      ctx.ellipse(0, 10, player.width * 0.75, 26, 0, 0, Math.PI * 2);
+      ctx.ellipse(0, 12, player.width * 0.75, 26, 0, 0, Math.PI * 2);
       ctx.fill();
 
-      // Ganesha Character Avatar Seated Behind Thali
-      const gY = -28;
+      // Mushak the Mouse seated behind the Thali
+      const mY = -26;
 
-      // Ears
-      ctx.fillStyle = '#ffb703';
-      ctx.strokeStyle = '#e65100';
-      ctx.lineWidth = 1.2;
-      ctx.beginPath();
-      ctx.ellipse(-24, gY - 4, 11, 13, -0.15, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.ellipse(24, gY - 4, 11, 13, 0.15, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.stroke();
-
-      // Head
-      ctx.fillStyle = '#ffb703';
-      ctx.beginPath();
-      ctx.arc(0, gY - 4, 18, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.stroke();
-
-      // Mukut (Crown)
-      ctx.fillStyle = '#ffd166';
-      ctx.beginPath();
-      ctx.moveTo(0, gY - 32);
-      ctx.lineTo(10, gY - 18);
-      ctx.lineTo(-10, gY - 18);
-      ctx.closePath();
-      ctx.fill();
-      ctx.stroke();
-      ctx.fillStyle = '#d00000';
-      ctx.beginPath();
-      ctx.arc(0, gY - 32, 2.5, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Tilak
-      ctx.fillStyle = '#d00000';
-      ctx.beginPath();
-      ctx.arc(0, gY - 12, 2, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Smiling Eyes
-      ctx.strokeStyle = '#370617';
-      ctx.lineWidth = 1.5;
-      ctx.beginPath();
-      ctx.arc(-6, gY - 6, 2.5, 0.2, Math.PI - 0.2);
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.arc(6, gY - 6, 2.5, 0.2, Math.PI - 0.2);
-      ctx.stroke();
-
-      // Trunk
-      ctx.strokeStyle = '#e65100';
-      ctx.lineWidth = 4;
+      // Tail curling playfully behind to the left
+      ctx.strokeStyle = '#9aa5b1';
+      ctx.lineWidth = 3.5;
       ctx.lineCap = 'round';
       ctx.beginPath();
-      ctx.moveTo(0, gY);
-      ctx.quadraticCurveTo(2, gY + 12, 8, gY + 10);
+      ctx.moveTo(-16, mY + 12);
+      ctx.quadraticCurveTo(-38, mY + 4, -30, mY - 14);
+      ctx.quadraticCurveTo(-24, mY - 24, -32, mY - 30);
       ctx.stroke();
 
-      // Hands
-      ctx.fillStyle = '#ffb703';
+      // Mouse Body
+      ctx.fillStyle = '#8395a7';
       ctx.beginPath();
-      ctx.ellipse(-player.width * 0.42, 4, 7, 7, 0, 0, Math.PI * 2);
+      ctx.ellipse(0, mY + 6, 20, 17, 0, 0, Math.PI * 2);
       ctx.fill();
-      ctx.stroke();
+
+      // Mouse Ears (Left & Right)
+      ctx.fillStyle = '#8395a7';
       ctx.beginPath();
-      ctx.ellipse(player.width * 0.42, 4, 7, 7, 0, 0, Math.PI * 2);
+      ctx.arc(-16, mY - 16, 11, 0, Math.PI * 2);
       ctx.fill();
+      ctx.fillStyle = '#ffb8b8';
+      ctx.beginPath();
+      ctx.arc(-16, mY - 16, 6.5, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#8395a7';
+      ctx.beginPath();
+      ctx.arc(16, mY - 16, 11, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#ffb8b8';
+      ctx.beginPath();
+      ctx.arc(16, mY - 16, 6.5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Head
+      ctx.fillStyle = '#9aa5b1';
+      ctx.beginPath();
+      ctx.ellipse(0, mY - 8, 16, 14, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Festive Tiny Saffron Pagri / Crown
+      ctx.fillStyle = '#ff7700';
+      ctx.beginPath();
+      ctx.moveTo(-10, mY - 18);
+      ctx.lineTo(0, mY - 28);
+      ctx.lineTo(10, mY - 18);
+      ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle = '#ffd166';
+      ctx.lineWidth = 1.5;
       ctx.stroke();
+      ctx.fillStyle = '#ffd166';
+      ctx.beginPath();
+      ctx.arc(0, mY - 28, 2.5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Cute Snout & Nose
+      ctx.fillStyle = '#f8a5c2';
+      ctx.beginPath();
+      ctx.arc(0, mY - 3, 3.5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Whiskers
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(-3, mY - 3); ctx.lineTo(-14, mY - 5);
+      ctx.moveTo(-3, mY - 2); ctx.lineTo(-14, mY);
+      ctx.moveTo(3, mY - 3); ctx.lineTo(14, mY - 5);
+      ctx.moveTo(3, mY - 2); ctx.lineTo(14, mY);
+      ctx.stroke();
+
+      // Big Happy Eyes
+      ctx.fillStyle = '#222f3e';
+      ctx.beginPath();
+      ctx.arc(-6, mY - 10, 3.5, 0, Math.PI * 2);
+      ctx.arc(6, mY - 10, 3.5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(-7, mY - 11, 1.3, 0, Math.PI * 2);
+      ctx.arc(5, mY - 11, 1.3, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Paws holding the Thali
+      ctx.fillStyle = '#f8a5c2';
+      ctx.beginPath();
+      ctx.ellipse(-player.width * 0.38, 2, 7, 5, 0.2, 0, Math.PI * 2);
+      ctx.ellipse(player.width * 0.38, 2, 7, 5, -0.2, 0, Math.PI * 2);
+      ctx.fill();
 
       // --- Golden Puja Thali ---
       const thaliW = player.width;
       const thaliH = player.height;
 
-      // Rim Shadow
       ctx.fillStyle = '#662200';
       ctx.beginPath();
       ctx.ellipse(0, 4, thaliW * 0.52, thaliH * 0.6, 0, 0, Math.PI * 2);
       ctx.fill();
 
-      // Golden Rim Body
       const thaliGrad = ctx.createLinearGradient(-thaliW/2, 0, thaliW/2, 0);
       thaliGrad.addColorStop(0, '#ffd166');
       thaliGrad.addColorStop(0.25, '#ffe600');
@@ -1390,13 +1501,12 @@
       ctx.lineWidth = 1.6;
       ctx.stroke();
 
-      // Basin
       ctx.fillStyle = '#991b00';
       ctx.beginPath();
       ctx.ellipse(0, -1, thaliW * 0.42, thaliH * 0.38, 0, 0, Math.PI * 2);
       ctx.fill();
 
-      // Decorative Floral Garland on Rim
+      // Rim Garland
       ctx.fillStyle = '#ff9900';
       for (let i = -4; i <= 4; i++) {
         const xOffset = (i / 4.5) * (thaliW * 0.44);
@@ -1421,9 +1531,7 @@
       items = [];
       particles = [];
       floatTexts = [];
-      mushakList = [];
       lastSpawnTime = performance.now();
-      lastMushakSpawnTime = performance.now() + 2000;
       spawnInterval = 1100;
       baseFallSpeed = 3.2;
 
@@ -1464,9 +1572,9 @@
       bestScoreEl.textContent = highScore;
 
       if (score >= 50) {
-        rankMessageEl.textContent = '🌟 Divine Modak Champion! Lord Ganesha blesses you abundantly!';
+        rankMessageEl.textContent = '🌟 Divine Modak Champion! Lord Ganesha showers eternal blessings!';
       } else if (score >= 25) {
-        rankMessageEl.textContent = '✨ Festive Grand Master! Wonderful celebration!';
+        rankMessageEl.textContent = '✨ Festive Grand Master! Mushak delivered wonderful sweets!';
       } else if (score >= 10) {
         rankMessageEl.textContent = '🎉 Devoted Offering Master! Great score!';
       } else {
@@ -1481,12 +1589,13 @@
       updateLivesUI();
       comboStreak = 0;
       updateComboUI();
-      sound.playMiss();
-      screenShake = 10;
+      screenShake = 12;
 
-      if (reason === 'mushak') {
-        showToast("Oops! That was Mushak's modak! 🐭 -1 Life");
+      if (reason === 'chilli') {
+        sound.playChilliSizzle();
+        showToast("Oops! Modaks only, no spicy chillies! 🌶️ -1 Life");
       } else {
+        sound.playMiss();
         showToast("Missed an offering! -1 Life");
       }
 
@@ -1519,7 +1628,6 @@
       const dt = Math.min((timestamp - lastFrameTime) / 1000, 0.1);
       lastFrameTime = timestamp;
 
-      // Clear Canvas
       ctx.save();
       const dpr = window.devicePixelRatio || 1;
       const rect = container.getBoundingClientRect();
@@ -1528,7 +1636,6 @@
       const currentScale = rect.width / V_WIDTH;
       ctx.scale(currentScale * dpr, (rect.height / V_HEIGHT) * dpr);
 
-      // Screen Shake
       if (screenShake > 0) {
         const shakeX = (Math.random() - 0.5) * screenShake;
         const shakeY = (Math.random() - 0.5) * screenShake;
@@ -1536,33 +1643,26 @@
         screenShake = Math.max(0, screenShake - 0.8);
       }
 
-      // Draw Backdrop
+      // Draw Backdrop (Ganesha Shrines in place of Diyas)
       drawBackgroundDecorations();
       drawAmbientSparks();
 
       if (gameState === 'PLAYING') {
-        // --- Basket Lerp Smoothing ---
-        // Smoothly glides toward cursor's horizontal position
+        // Basket Lerp Smoothing: glides towards cursor horizontal position
         player.x += (player.targetX - player.x) * 0.20;
 
         // Squash & Stretch Spring Recovery
         player.scaleX += (1.0 - player.scaleX) * 0.16;
         player.scaleY += (1.0 - player.scaleY) * 0.16;
 
-        // --- Spawning Logic ---
+        // Spawning Logic
         if (timestamp - lastSpawnTime > spawnInterval) {
           spawnItem();
           lastSpawnTime = timestamp;
           spawnInterval = Math.max(520, 1100 - (score * 14));
         }
 
-        // Mushak Spawns
-        if (timestamp - lastMushakSpawnTime > 7000 && Math.random() < 0.38) {
-          spawnMushak();
-          lastMushakSpawnTime = timestamp;
-        }
-
-        // --- Update & Draw Items ---
+        // Update & Draw Items
         for (let i = items.length - 1; i >= 0; i--) {
           const item = items[i];
           item.age += 1;
@@ -1570,16 +1670,20 @@
           item.rotation += item.rotSpeed;
           const bob = Math.sin(item.age * 0.06 + item.bobbleOffset) * 3;
 
-          // Render item
+          // Render item by type
           if (item.type === 'modak') {
             drawModak(item.x, item.y, item.radius, item.rotation, bob);
+          } else if (item.type === 'laddoo') {
+            drawLaddoo(item.x, item.y, item.radius, item.rotation, bob);
+          } else if (item.type === 'coconut') {
+            drawCoconut(item.x, item.y, item.radius, item.rotation, bob);
           } else if (item.type === 'flower') {
             drawFlower(item.x, item.y, item.radius, item.rotation, bob);
-          } else if (item.type === 'coin') {
-            drawCoin(item.x, item.y, item.radius, item.rotation, bob);
+          } else if (item.type === 'chilli') {
+            drawChilli(item.x, item.y, item.radius, item.rotation, bob);
           }
 
-          // Catch Collision Check
+          // Catch Collision Check with Player's Thali
           const basketTop = player.y - player.height * 0.42;
           const basketBottom = player.y + player.height * 0.6;
           const basketLeft = player.x - player.width * 0.48;
@@ -1591,20 +1695,28 @@
             item.x >= basketLeft &&
             item.x <= basketRight
           ) {
-            // SUCCESSFUL CATCH!
+            // Check if it's the Fiery Chilli (Hazard!)
+            if (item.type === 'chilli') {
+              addFloatText('Ouch! 🌶️', item.x, basketTop - 25, '#ff3300', 24);
+              createCatchBurst(item.x, basketTop, ['#ff3300', '#ff7700', '#ffffff']);
+              items.splice(i, 1);
+              loseLife('chilli');
+              continue;
+            }
+
+            // SUCCESSFUL GOOD OFFERING CATCH!
             comboStreak++;
             totalItemsCaught++;
             const mult = getMultiplier();
             score += 1 * mult;
             scoreDisplay.textContent = score;
 
-            // Basket Squash & Stretch Pop
+            // Basket Squash & Stretch Bounce
             player.scaleX = 1.18;
             player.scaleY = 0.82;
 
             sound.playCatch(item.type);
 
-            // Combo Flash or Score Popup
             if (comboStreak === 3 || comboStreak === 6 || comboStreak === 10 || comboStreak === 15) {
               sound.playComboFanfare(mult);
               addFloatText(`Combo x${mult}!`, player.x, basketTop - 40, '#ffe600', 26, true);
@@ -1612,59 +1724,31 @@
               addFloatText(`+${mult}`, item.x, basketTop - 18, '#ffd166', 18, false);
             }
 
-            // Particle sparkles
-            const colors = item.type === 'modak'
-              ? ['#ffd166', '#ffb703', '#ffffff', '#e65100']
-              : item.type === 'flower'
-              ? ['#ff4d6d', '#d00000', '#ffe600', '#ff758f']
-              : ['#ffe600', '#ffd166', '#ffffff', '#ff9e00'];
-            createCatchBurst(item.x, basketTop, colors);
+            // Burst particles
+            let colors = ['#ffd166', '#ffb703', '#ffffff'];
+            if (item.type === 'laddoo') colors = ['#ffb703', '#e85d04', '#ffffff', '#ffd166'];
+            else if (item.type === 'coconut') colors = ['#b07d62', '#38b000', '#ffffff', '#ffd166'];
+            else if (item.type === 'flower') colors = ['#ff4d6d', '#d00000', '#ffe600', '#ff758f'];
 
+            createCatchBurst(item.x, basketTop, colors);
             updateComboUI();
             items.splice(i, 1);
             continue;
           }
 
-          // Missed item reaches floor
+          // Item reaches floor
           if (item.y - item.radius > V_HEIGHT - 12) {
+            const missedType = item.type;
             items.splice(i, 1);
-            loseLife('miss');
-          }
-        }
-
-        // --- Update & Draw Mushak the Mouse ---
-        for (let j = mushakList.length - 1; j >= 0; j--) {
-          const mushak = mushakList[j];
-          mushak.x += mushak.speed;
-          drawMushak(mushak);
-
-          const basketTop = player.y - player.height * 0.5;
-          const basketBottom = player.y + player.height * 0.7;
-          const basketLeft = player.x - player.width * 0.46;
-          const basketRight = player.x + player.width * 0.46;
-
-          if (
-            mushak.y >= basketTop &&
-            mushak.y <= basketBottom &&
-            mushak.x >= basketLeft &&
-            mushak.x <= basketRight
-          ) {
-            sound.playMushak();
-            addFloatText('Oops! 🐭', mushak.x, mushak.y - 20, '#ff7700', 24);
-            createCatchBurst(mushak.x, mushak.y, ['#8d99ae', '#ff758f', '#ffffff']);
-            mushakList.splice(j, 1);
-            loseLife('mushak');
-            continue;
-          }
-
-          if ((mushak.direction === 1 && mushak.x > V_WIDTH + 60) ||
-              (mushak.direction === -1 && mushak.x < -60)) {
-            mushakList.splice(j, 1);
+            // Missing a good item loses a life; letting a chilli fall is good!
+            if (missedType !== 'chilli') {
+              loseLife('miss');
+            }
           }
         }
       }
 
-      // Draw Basket & Player
+      // Draw Mushak holding Thali
       drawPlayer();
 
       // --- Update & Draw Particles ---
