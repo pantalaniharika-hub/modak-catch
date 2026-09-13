@@ -527,6 +527,272 @@
         font-size: 14px;
       }
     }
+
+    /* Devotee Login & Profile Styles */
+    .login-card {
+      max-width: 380px;
+      padding: 16px 18px 18px 18px;
+    }
+
+    .login-field-group {
+      margin-bottom: 12px;
+      text-align: left;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      color: var(--gold-pure);
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 12px;
+      font-size: 15px;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .player-input {
+      width: 100%;
+      background: rgba(18, 2, 6, 0.88);
+      border: 1.5px solid rgba(255, 209, 102, 0.45);
+      border-radius: 12px;
+      padding: 9px 12px 9px 36px;
+      color: #fffdf7;
+      font-size: 14.5px;
+      font-weight: 700;
+      font-family: inherit;
+      outline: none;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6);
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    .player-input::placeholder {
+      color: rgba(255, 253, 247, 0.4);
+      font-weight: 500;
+      font-size: 13px;
+    }
+
+    .player-input:focus {
+      border-color: #ffd166;
+      background: rgba(30, 4, 10, 0.95);
+      box-shadow: 0 0 16px rgba(255, 183, 3, 0.45), inset 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Avatar Picker */
+    .avatar-picker {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .avatar-btn {
+      background: rgba(0, 0, 0, 0.45);
+      border: 1.5px solid rgba(255, 209, 102, 0.25);
+      border-radius: 12px;
+      padding: 6px 2px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      color: #fffdf7;
+    }
+
+    .avatar-btn:hover {
+      border-color: rgba(255, 209, 102, 0.6);
+      transform: translateY(-2px);
+      background: rgba(255, 183, 3, 0.1);
+    }
+
+    .avatar-btn.selected {
+      border-color: #ffe600;
+      background: linear-gradient(180deg, rgba(232, 93, 4, 0.5) 0%, rgba(157, 2, 8, 0.7) 100%);
+      box-shadow: 0 0 14px rgba(255, 230, 0, 0.5);
+      transform: scale(1.06);
+    }
+
+    .avatar-btn .avatar-emoji {
+      font-size: 22px;
+      line-height: 1.1;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+    }
+
+    .avatar-btn .avatar-name {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--gold-pure);
+      margin-top: 2px;
+      letter-spacing: 0.3px;
+    }
+
+    .login-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .btn-guest {
+      background: transparent;
+      border: 1px dashed rgba(255, 209, 102, 0.5);
+      color: #ffd166;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-guest:hover {
+      background: rgba(255, 209, 102, 0.15);
+      border-color: #ffd166;
+      color: #ffffff;
+    }
+
+    /* Active Player Badges */
+    .active-player-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 209, 102, 0.35);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 11.5px;
+      margin-bottom: 10px;
+    }
+
+    .badge-label {
+      color: #ffb703;
+      font-weight: 600;
+    }
+
+    .badge-player {
+      color: #ffffff;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+    }
+
+    .btn-text {
+      background: none;
+      border: none;
+      color: #ffd166;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 1px 4px;
+      border-radius: 6px;
+      transition: all 0.15s;
+    }
+
+    .btn-text:hover {
+      background: rgba(255, 209, 102, 0.2);
+      color: #ffffff;
+    }
+
+    /* Top HUD Devotee Pill */
+    .hud-left-group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      pointer-events: auto;
+    }
+
+    .hud-devotee-pill {
+      background: var(--hud-panel);
+      border: 1px solid var(--hud-border);
+      border-radius: 12px;
+      padding: 3px 8px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold-pure);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      max-width: 115px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .hud-devotee-pill:hover {
+      border-color: #ffd166;
+      background: rgba(55, 8, 20, 0.85);
+    }
+
+    .hud-devotee-pill span.name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 72px;
+    }
+
+    /* Game Over Actions */
+    .gameover-actions {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+
+    .btn-secondary {
+      background: rgba(0, 0, 0, 0.5);
+      border: 1.5px solid var(--gold-pure);
+      color: var(--gold-pure);
+      font-weight: 700;
+      font-size: 13px;
+      padding: 10px 16px;
+      border-radius: 28px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 209, 102, 0.2);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 400px) {
+      .avatar-btn .avatar-emoji {
+        font-size: 18px;
+      }
+      .avatar-btn .avatar-name {
+        font-size: 8px;
+      }
+      .login-card {
+        padding: 12px 14px;
+      }
+      .btn-secondary {
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -547,10 +813,16 @@
 
     <!-- HUD Overlay -->
     <div id="hud">
-      <!-- Score -->
-      <div class="hud-box">
-        <span class="hud-label">Score</span>
-        <span id="score-display" class="hud-val">0</span>
+      <!-- Score & Devotee -->
+      <div class="hud-left-group">
+        <div class="hud-box">
+          <span class="hud-label">Score</span>
+          <span id="score-display" class="hud-val">0</span>
+        </div>
+        <div class="hud-devotee-pill" id="hud-devotee" title="Click to switch devotee profile">
+          <span id="hud-devotee-avatar">🐭</span>
+          <span class="name" id="hud-devotee-name">Devotee</span>
+        </div>
       </div>
 
       <!-- Combo & Lives -->
@@ -596,6 +868,71 @@
     <!-- Canvas -->
     <canvas id="gameCanvas"></canvas>
 
+    <!-- DEVOTEE LOGIN SCREEN -->
+    <div id="login-screen" class="overlay-screen">
+      <div class="screen-card login-card">
+        <div class="hero-art-container" style="margin-bottom: 6px;">
+          <img id="login-ganesh-img" src="" alt="Lord Ganesha" />
+        </div>
+
+        <h1 class="title-banner">DEVOTEE LOGIN</h1>
+        <div class="subtitle">Enter Lord Ganesha's Sanctum 🙏</div>
+
+        <form id="login-form" onsubmit="return false;">
+          <div class="login-field-group">
+            <label for="player-name-input" class="field-label">DEVOTEE NAME</label>
+            <div class="input-wrapper">
+              <span class="input-icon">✨</span>
+              <input
+                type="text"
+                id="player-name-input"
+                class="player-input"
+                maxlength="15"
+                placeholder="Enter your name (e.g. Niharika)..."
+                autocomplete="off"
+                spellcheck="false"
+              />
+            </div>
+          </div>
+
+          <div class="login-field-group">
+            <div class="field-label">CHOOSE YOUR AVATAR</div>
+            <div class="avatar-picker" id="avatar-picker">
+              <button type="button" class="avatar-btn selected" data-avatar="🐭" title="Mushak the Faithful">
+                <span class="avatar-emoji">🐭</span>
+                <span class="avatar-name">Mushak</span>
+              </button>
+              <button type="button" class="avatar-btn" data-avatar="🥟" title="Sacred Modak">
+                <span class="avatar-emoji">🥟</span>
+                <span class="avatar-name">Modak</span>
+              </button>
+              <button type="button" class="avatar-btn" data-avatar="🪷" title="Divine Lotus">
+                <span class="avatar-emoji">🪷</span>
+                <span class="avatar-name">Lotus</span>
+              </button>
+              <button type="button" class="avatar-btn" data-avatar="🪔" title="Holy Diya">
+                <span class="avatar-emoji">🪔</span>
+                <span class="avatar-name">Diya</span>
+              </button>
+              <button type="button" class="avatar-btn" data-avatar="👑" title="Golden Mukut">
+                <span class="avatar-emoji">👑</span>
+                <span class="avatar-name">Mukut</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="login-actions">
+            <button id="login-submit-btn" type="submit" class="btn-primary">
+              <span>✨ Enter Sanctum ✨</span>
+            </button>
+            <button id="guest-login-btn" type="button" class="btn-guest">
+              Play as Guest ➔
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <!-- START SCREEN -->
     <div id="start-screen" class="overlay-screen">
       <div class="screen-card">
@@ -605,6 +942,11 @@
 
         <h1 class="title-banner">MODAK CATCH</h1>
         <div class="subtitle">Mushak's Festive Basket</div>
+        <div class="active-player-badge" id="start-player-badge">
+          <span class="badge-label">Devotee:</span>
+          <span class="badge-player" id="start-player-display">🐭 Devotee</span>
+          <button id="start-switch-btn" class="btn-text" type="button" title="Switch Devotee Profile">Change 🔄</button>
+        </div>
 
         <div class="instruction-box">
           <p class="instruction-text">
@@ -657,6 +999,10 @@
         </div>
         <h2 class="title-banner" style="font-size: 28px;">OFFERING COMPLETE!</h2>
         <div class="subtitle" id="game-over-sub">Ganpati Bappa Morya! 🙏</div>
+        <div class="active-player-badge" id="gameover-player-badge">
+          <span class="badge-label">Devotee:</span>
+          <span class="badge-player" id="gameover-player-display">🐭 Devotee</span>
+        </div>
 
         <div class="stats-grid">
           <div class="stat-pill">
@@ -682,9 +1028,14 @@
           Lord Ganesha blesses Mushak and you with joy & wisdom!
         </p>
 
-        <button id="restart-btn" class="btn-primary">
-          <span>🔄 Play Again</span>
-        </button>
+        <div class="gameover-actions">
+          <button id="restart-btn" class="btn-primary">
+            <span>🔄 Play Again</span>
+          </button>
+          <button id="gameover-switch-btn" class="btn-secondary" type="button">
+            <span>👤 Switch Devotee</span>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -882,6 +1233,20 @@
     const container = document.getElementById('game-container');
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
+
+    const loginScreen = document.getElementById('login-screen');
+    const loginForm = document.getElementById('login-form');
+    const playerNameInput = document.getElementById('player-name-input');
+    const loginSubmitBtn = document.getElementById('login-submit-btn');
+    const guestLoginBtn = document.getElementById('guest-login-btn');
+    const startSwitchBtn = document.getElementById('start-switch-btn');
+    const gameoverSwitchBtn = document.getElementById('gameover-switch-btn');
+    const hudDevotee = document.getElementById('hud-devotee');
+    const hudDevoteeAvatar = document.getElementById('hud-devotee-avatar');
+    const hudDevoteeName = document.getElementById('hud-devotee-name');
+    const startPlayerDisplay = document.getElementById('start-player-display');
+    const gameoverPlayerDisplay = document.getElementById('gameover-player-display');
+    const loginGaneshImg = document.getElementById('login-ganesh-img');
 
     const startScreen = document.getElementById('start-screen');
     const gameOverScreen = document.getElementById('game-over-screen');
@@ -2188,6 +2553,102 @@
       ctx.restore();
     }
 
+
+    // --- Devotee Profile Management ---
+    let currentDevotee = {
+      name: 'Devotee',
+      avatar: '🐭'
+    };
+    let selectedAvatar = '🐭';
+
+    function loadPlayerProfile() {
+      try {
+        const saved = localStorage.getItem('modak_catch_player');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed && typeof parsed.name === 'string' && parsed.name.trim()) {
+            currentDevotee.name = parsed.name.trim().slice(0, 15);
+            currentDevotee.avatar = parsed.avatar || '🐭';
+            selectedAvatar = currentDevotee.avatar;
+            updateDevoteeUI();
+            return true;
+          }
+        }
+      } catch (e) {
+        console.warn('Could not load devotee profile:', e);
+      }
+      return false;
+    }
+
+    function savePlayerProfile(name, avatar) {
+      const cleanName = (name && name.trim()) ? name.trim().slice(0, 15) : 'Devotee';
+      const cleanAvatar = avatar || '🐭';
+      currentDevotee = { name: cleanName, avatar: cleanAvatar };
+      try {
+        localStorage.setItem('modak_catch_player', JSON.stringify(currentDevotee));
+      } catch (e) {
+        console.warn('Could not save devotee profile:', e);
+      }
+      updateDevoteeUI();
+    }
+
+    function updateDevoteeUI() {
+      if (hudDevoteeAvatar) hudDevoteeAvatar.textContent = currentDevotee.avatar;
+      if (hudDevoteeName) hudDevoteeName.textContent = currentDevotee.name;
+      if (startPlayerDisplay) startPlayerDisplay.textContent = `${currentDevotee.avatar} ${currentDevotee.name}`;
+      if (gameoverPlayerDisplay) gameoverPlayerDisplay.textContent = `${currentDevotee.avatar} ${currentDevotee.name}`;
+    }
+
+    function selectAvatar(avatarEmoji) {
+      selectedAvatar = avatarEmoji;
+      const btns = document.querySelectorAll('#avatar-picker .avatar-btn');
+      btns.forEach(btn => {
+        if (btn.getAttribute('data-avatar') === avatarEmoji) {
+          btn.classList.add('selected');
+        } else {
+          btn.classList.remove('selected');
+        }
+      });
+    }
+
+    function showLoginScreen() {
+      if (playerNameInput) {
+        playerNameInput.value = (currentDevotee.name !== 'Devotee' && currentDevotee.name !== 'Guest Devotee') ? currentDevotee.name : '';
+      }
+      selectAvatar(currentDevotee.avatar || '🐭');
+      if (loginGaneshImg && !loginGaneshImg.src) {
+        loginGaneshImg.src = ganeshCircleImg.src;
+      }
+      loginScreen.classList.remove('hidden');
+      startScreen.classList.add('hidden');
+      gameOverScreen.classList.add('hidden');
+      if (playerNameInput) {
+        setTimeout(() => playerNameInput.focus(), 150);
+      }
+    }
+
+    function hideLoginScreen() {
+      loginScreen.classList.add('hidden');
+    }
+
+    function handleLoginSubmit() {
+      const enteredName = playerNameInput ? playerNameInput.value.trim() : '';
+      const finalName = enteredName.length > 0 ? enteredName : 'Devotee';
+      savePlayerProfile(finalName, selectedAvatar);
+      hideLoginScreen();
+      startScreen.classList.remove('hidden');
+      sound.init();
+      sound.playCatch();
+    }
+
+    function handleGuestLogin() {
+      savePlayerProfile('Guest Devotee', '🐭');
+      hideLoginScreen();
+      startScreen.classList.remove('hidden');
+      sound.init();
+      sound.playCatch();
+    }
+
     // --- Game Cycles ---
     function startGame() {
       sound.init();
@@ -2209,6 +2670,7 @@
       updateComboUI();
       updateLivesUI();
 
+      if (loginScreen) loginScreen.classList.add('hidden');
       startScreen.classList.add('hidden');
       gameOverScreen.classList.add('hidden');
       pauseScreen.classList.add('hidden');
@@ -2238,23 +2700,37 @@
       finalComboEl.textContent = `${bestCombo}x`;
       totalCaughtEl.textContent = totalItemsCaught;
 
+      const devoteeKey = 'modak_catch_high_' + currentDevotee.name.toLowerCase().replace(/\s+/g, '_');
+      let personalBest = parseInt(localStorage.getItem(devoteeKey) || '0', 10);
+      let isPersonalBest = false;
+      if (score > personalBest) {
+        personalBest = score;
+        localStorage.setItem(devoteeKey, personalBest.toString());
+        isPersonalBest = true;
+      }
+
       if (score > highScore) {
         highScore = score;
         localStorage.setItem('modak_catch_high', highScore.toString());
+        newHighIndicator.textContent = 'NEW BEST!';
+        newHighIndicator.style.display = 'inline-block';
+      } else if (isPersonalBest && score > 0) {
+        newHighIndicator.textContent = 'DEVOTEE BEST!';
         newHighIndicator.style.display = 'inline-block';
       } else {
+        newHighIndicator.textContent = 'NEW BEST!';
         newHighIndicator.style.display = 'none';
       }
       bestScoreEl.textContent = highScore;
 
       if (score >= 50) {
-        rankMessageEl.textContent = '🌟 Divine Modak Champion! Lord Ganesha showers eternal blessings!';
+        rankMessageEl.textContent = `🌟 Divine Modak Champion, ${currentDevotee.name}! Lord Ganesha showers eternal blessings upon you!`;
       } else if (score >= 25) {
-        rankMessageEl.textContent = '✨ Festive Grand Master! Mushak delivered wonderful sweets!';
+        rankMessageEl.textContent = `✨ Festive Grand Master, ${currentDevotee.name}! Mushak delivered wonderful sweets!`;
       } else if (score >= 10) {
-        rankMessageEl.textContent = '🎉 Devoted Offering Master! Great score!';
+        rankMessageEl.textContent = `🎉 Devoted Offering Master, ${currentDevotee.name}! Bappa is delighted with your devotion!`;
       } else {
-        rankMessageEl.textContent = '🙏 Blessed offering! Play again to beat your high score!';
+        rankMessageEl.textContent = `🙏 Blessed offering, ${currentDevotee.name}! Play again to beat your high score!`;
       }
 
       gameOverScreen.classList.remove('hidden');
@@ -2283,6 +2759,35 @@
     // Button Listeners
     startBtn.addEventListener('click', startGame);
     restartBtn.addEventListener('click', startGame);
+
+    // Login & Profile Listeners
+    if (loginSubmitBtn) loginSubmitBtn.addEventListener('click', handleLoginSubmit);
+    if (loginForm) loginForm.addEventListener('submit', (e) => { e.preventDefault(); handleLoginSubmit(); });
+    if (guestLoginBtn) guestLoginBtn.addEventListener('click', handleGuestLogin);
+    if (startSwitchBtn) startSwitchBtn.addEventListener('click', showLoginScreen);
+    if (gameoverSwitchBtn) gameoverSwitchBtn.addEventListener('click', showLoginScreen);
+    if (hudDevotee) hudDevotee.addEventListener('click', showLoginScreen);
+
+    document.querySelectorAll('#avatar-picker .avatar-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const av = btn.getAttribute('data-avatar');
+        if (av) selectAvatar(av);
+      });
+    });
+
+    // Ensure login ganesh image source is loaded
+    if (loginGaneshImg) {
+      loginGaneshImg.src = ganeshCircleImg.src;
+    }
+
+    // Initial Profile & Screen Routing
+    const profileExists = loadPlayerProfile();
+    if (!profileExists) {
+      showLoginScreen();
+    } else {
+      if (loginScreen) loginScreen.classList.add('hidden');
+      startScreen.classList.remove('hidden');
+    }
     resumeBtn.addEventListener('click', togglePause);
 
     soundBtn.addEventListener('click', () => {
