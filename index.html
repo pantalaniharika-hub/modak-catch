@@ -537,7 +537,7 @@
     </div>
 
     <!-- Alert / Toast -->
-    <div id="notification-toast">Oops! Modaks only, no spicy chillies! 🌶️ -1 Life</div>
+    <div id="notification-toast">💥 BOOM! Bomb exploded! 💣 -1 Life</div>
 
     <!-- In-Game Guidance Tooltip above basket -->
     <div id="guide-banner" class="hidden">
@@ -672,28 +672,28 @@
         <div class="instruction-box">
           <p class="instruction-text">
             Steer <strong>Mushak's festive woven basket</strong> at the bottom to catch sacred offerings falling from above for Lord Ganesha!<br>
-            Catch consecutive offerings for combo multipliers (up to 5x)! Avoid fiery red chillies! 🌶️
+            Catch consecutive offerings for combo multipliers (up to 5x)! Avoid explosive falling bombs! 💣
           </p>
           <div class="legend-grid">
+            <div class="legend-item">
+              <span style="font-size: 18px;">🥥</span>
+              <span>Half Coconut (+1)</span>
+            </div>
+            <div class="legend-item">
+              <span style="font-size: 18px;">🟡</span>
+              <span>Laddu (+1)</span>
+            </div>
             <div class="legend-item">
               <span style="font-size: 18px;">🥟</span>
               <span>Modak (+1)</span>
             </div>
             <div class="legend-item">
-              <span style="font-size: 18px;">🟡</span>
-              <span>Laddoo (+1)</span>
+              <span style="font-size: 18px;">🪙</span>
+              <span>Gold Coin (+1)</span>
             </div>
             <div class="legend-item">
-              <span style="font-size: 18px;">🥥</span>
-              <span>Coconut (+1)</span>
-            </div>
-            <div class="legend-item">
-              <span style="font-size: 18px;">🌺</span>
-              <span>Flower (+1)</span>
-            </div>
-            <div class="legend-item">
-              <span style="font-size: 18px;">🌶️</span>
-              <span style="color: #ff5400; font-weight: bold;">Chilli (-1 Life)</span>
+              <span style="font-size: 18px;">💣</span>
+              <span style="color: #ff3300; font-weight: bold;">Bomb (-1 Life)</span>
             </div>
           </div>
         </div>
@@ -816,14 +816,15 @@
             gain.gain.exponentialRampToValueAtTime(0.001, now + 0.38);
             osc.start(now);
             osc.stop(now + 0.38);
-          } else if (type === 'flower') {
-            osc.type = 'triangle';
-            osc.frequency.setValueAtTime(783.99, now); // G5
-            osc.frequency.exponentialRampToValueAtTime(1046.50, now + 0.12);
-            gain.gain.setValueAtTime(0.22, now);
-            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+          } else if (type === 'coin') {
+            // Bright sparkling crystalline coin chime
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(987.77, now); // B5
+            osc.frequency.exponentialRampToValueAtTime(1567.98, now + 0.1); // G6
+            gain.gain.setValueAtTime(0.32, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
             osc.start(now);
-            osc.stop(now + 0.3);
+            osc.stop(now + 0.4);
           }
         } catch (e) {}
       }
@@ -867,23 +868,38 @@
         } catch (e) {}
       }
 
-      playChilliSizzle() {
+      playBombExplosion() {
         if (this.muted || !this.ctx) return;
         try {
-          // Playful hot sizzle + squeak
           const now = this.ctx.currentTime;
+          // Deep booming low-frequency explosion
           const osc = this.ctx.createOscillator();
           const gain = this.ctx.createGain();
           osc.connect(gain);
           gain.connect(this.ctx.destination);
           osc.type = 'sawtooth';
-          osc.frequency.setValueAtTime(900, now);
-          osc.frequency.linearRampToValueAtTime(1600, now + 0.1);
-          osc.frequency.linearRampToValueAtTime(400, now + 0.25);
-          gain.gain.setValueAtTime(0.3, now);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+          osc.frequency.setValueAtTime(180, now);
+          osc.frequency.exponentialRampToValueAtTime(32, now + 0.38);
+          gain.gain.setValueAtTime(0.45, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.42);
           osc.start(now);
-          osc.stop(now + 0.3);
+          osc.stop(now + 0.42);
+
+          // Sizzle / blast noise burst
+          const bufferSize = Math.floor(this.ctx.sampleRate * 0.25);
+          const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+          const data = buffer.getChannelData(0);
+          for (let i = 0; i < bufferSize; i++) {
+            data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.2));
+          }
+          const noise = this.ctx.createBufferSource();
+          noise.buffer = buffer;
+          const noiseGain = this.ctx.createGain();
+          noiseGain.gain.setValueAtTime(0.35, now);
+          noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+          noise.connect(noiseGain);
+          noiseGain.connect(this.ctx.destination);
+          noise.start(now);
         } catch (e) {}
       }
 
@@ -1113,24 +1129,24 @@
       }
     }
 
-    // --- Spawning Logic with Updated Items ---
+    // --- Spawning Logic with Updated Sacred Offerings & Hazard Bomb ---
     function spawnItem() {
-      // Good items vs Chilli hazard
-      // 80% Good Offerings, 20% Fiery Chilli
-      const goodTypes = ['modak', 'modak', 'laddoo', 'coconut', 'flower'];
-      const isChilli = (score >= 3 && Math.random() < 0.22);
-      const chosenType = isChilli ? 'chilli' : goodTypes[Math.floor(Math.random() * goodTypes.length)];
+      // Good items: coconut (half coconut), laddoo, modak, coin
+      // Hazard: explosive bomb (replaces chilli)
+      const goodTypes = ['coconut', 'laddoo', 'modak', 'coin'];
+      const isBomb = (score >= 2 && Math.random() < 0.22);
+      const chosenType = isBomb ? 'bomb' : goodTypes[Math.floor(Math.random() * goodTypes.length)];
       
-      const radius = 19;
+      const radius = 23; // Larger, clearer, and attractive item size
       const x = Math.random() * (V_WIDTH - radius * 4) + radius * 2;
       const speed = baseFallSpeed + Math.min(score * 0.05, 4.2);
 
       items.push({
         type: chosenType,
         x,
-        y: -32,
+        y: -36,
         radius,
-        speed: isChilli ? speed * 1.12 : speed,
+        speed: isBomb ? speed * 1.1 : speed,
         rotation: 0,
         rotSpeed: (Math.random() - 0.5) * 0.035,
         bobbleOffset: Math.random() * Math.PI * 2,
@@ -1777,44 +1793,83 @@
       ctx.restore();
     }
 
-    // --- Item Rendering: Modak, Laddoo, Coconut, Flower & Fiery Chilli ---
+    // --- Item Rendering: Coconut (Half Coconut), Laddoo, Modak, Coin & Bomb ---
     function drawModak(x, y, radius, angle, bob) {
       ctx.save();
       ctx.translate(x, y + bob);
       ctx.rotate(angle);
 
-      ctx.shadowColor = 'rgba(255, 209, 102, 0.55)';
-      ctx.shadowBlur = 14;
+      // Divine warm golden glow
+      ctx.shadowColor = 'rgba(255, 215, 0, 0.7)';
+      ctx.shadowBlur = 18;
 
-      const grad = ctx.createRadialGradient(-3, -3, 2, 0, 4, radius);
-      grad.addColorStop(0, '#fffdf0');
-      grad.addColorStop(0.35, '#ffd166');
-      grad.addColorStop(0.85, '#e69500');
-      grad.addColorStop(1, '#b36200');
+      // Volumetric pearl-white to warm saffron-gold gradient
+      const grad = ctx.createRadialGradient(-radius * 0.25, -radius * 0.2, 3, 0, radius * 0.2, radius * 1.1);
+      grad.addColorStop(0, '#ffffff');
+      grad.addColorStop(0.25, '#fff9e6');
+      grad.addColorStop(0.65, '#ffd166');
+      grad.addColorStop(0.9, '#e69500');
+      grad.addColorStop(1, '#b35900');
 
       ctx.fillStyle = grad;
       ctx.beginPath();
-      ctx.moveTo(0, -radius * 1.15);
-      ctx.bezierCurveTo(-radius * 0.8, -radius * 0.3, -radius * 1.05, radius * 0.5, -radius * 0.8, radius * 0.85);
-      ctx.quadraticCurveTo(0, radius * 1.05, radius * 0.8, radius * 0.85);
-      ctx.bezierCurveTo(radius * 1.05, radius * 0.5, radius * 0.8, -radius * 0.3, 0, -radius * 1.15);
+      ctx.moveTo(0, -radius * 1.25); // Sharp elegant apex peak
+      ctx.bezierCurveTo(-radius * 0.85, -radius * 0.35, -radius * 1.1, radius * 0.55, -radius * 0.85, radius * 0.95);
+      ctx.quadraticCurveTo(0, radius * 1.15, radius * 0.85, radius * 0.95);
+      ctx.bezierCurveTo(radius * 1.1, radius * 0.55, radius * 0.85, -radius * 0.35, 0, -radius * 1.25);
       ctx.closePath();
       ctx.fill();
 
       ctx.shadowBlur = 0;
+
+      // Clear sculpted pleats (Kaliyan)
       ctx.strokeStyle = '#c67d0a';
-      ctx.lineWidth = 1.3;
+      ctx.lineWidth = 1.4;
+
+      // Left Outer Pleat
       ctx.beginPath();
-      ctx.moveTo(0, -radius * 1.15);
-      ctx.quadraticCurveTo(-radius * 0.3, 0, -radius * 0.35, radius * 0.9);
-      ctx.moveTo(0, -radius * 1.15);
-      ctx.quadraticCurveTo(radius * 0.3, 0, radius * 0.35, radius * 0.9);
+      ctx.moveTo(0, -radius * 1.25);
+      ctx.quadraticCurveTo(-radius * 0.65, 0, -radius * 0.55, radius * 0.95);
       ctx.stroke();
 
-      ctx.fillStyle = '#d00000';
+      // Left Inner Pleat
       ctx.beginPath();
-      ctx.arc(0, -radius * 1.15, 2.5, 0, Math.PI * 2);
+      ctx.moveTo(0, -radius * 1.25);
+      ctx.quadraticCurveTo(-radius * 0.25, 0, -radius * 0.2, radius * 1.05);
+      ctx.stroke();
+
+      // Right Inner Pleat
+      ctx.beginPath();
+      ctx.moveTo(0, -radius * 1.25);
+      ctx.quadraticCurveTo(radius * 0.25, 0, radius * 0.2, radius * 1.05);
+      ctx.stroke();
+
+      // Right Outer Pleat
+      ctx.beginPath();
+      ctx.moveTo(0, -radius * 1.25);
+      ctx.quadraticCurveTo(radius * 0.65, 0, radius * 0.55, radius * 0.95);
+      ctx.stroke();
+
+      // Pleat Highlights (White cream sheen on pleat ridges)
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.75)';
+      ctx.lineWidth = 1.1;
+      ctx.beginPath();
+      ctx.moveTo(0, -radius * 1.25);
+      ctx.quadraticCurveTo(-radius * 0.45, -radius * 0.1, -radius * 0.38, radius * 0.8);
+      ctx.stroke();
+
+      // Sacred Saffron Kesar Strand & Kumkum Mark at apex
+      ctx.fillStyle = '#d90429';
+      ctx.beginPath();
+      ctx.arc(0, -radius * 1.22, 2.6, 0, Math.PI * 2);
       ctx.fill();
+
+      ctx.strokeStyle = '#ff7b00';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(0, -radius * 1.22);
+      ctx.lineTo(2.5, -radius * 1.45);
+      ctx.stroke();
 
       ctx.restore();
     }
@@ -1824,15 +1879,16 @@
       ctx.translate(x, y + bob);
       ctx.rotate(angle);
 
-      ctx.shadowColor = 'rgba(255, 183, 3, 0.65)';
-      ctx.shadowBlur = 16;
+      // Warm golden amber aura
+      ctx.shadowColor = 'rgba(255, 183, 3, 0.75)';
+      ctx.shadowBlur = 18;
 
-      // Golden-Orange Motichoor Laddoo
-      const grad = ctx.createRadialGradient(-3, -3, 2, 0, 0, radius);
-      grad.addColorStop(0, '#ffe882');
-      grad.addColorStop(0.4, '#ffb703');
-      grad.addColorStop(0.85, '#e85d04');
-      grad.addColorStop(1, '#9d0208');
+      // Base golden-saffron sphere
+      const grad = ctx.createRadialGradient(-radius * 0.28, -radius * 0.28, 2, 0, 0, radius);
+      grad.addColorStop(0, '#fff494');
+      grad.addColorStop(0.35, '#ffb703');
+      grad.addColorStop(0.75, '#fb8500');
+      grad.addColorStop(1, '#b53800');
 
       ctx.fillStyle = grad;
       ctx.beginPath();
@@ -1840,155 +1896,338 @@
       ctx.fill();
 
       ctx.shadowBlur = 0;
-      // Sweet boondi texture spots
-      ctx.fillStyle = '#ff7b00';
-      for (let i = 0; i < 7; i++) {
-        const ox = Math.cos(i * 0.9) * (radius * 0.5);
-        const oy = Math.sin(i * 0.9) * (radius * 0.5);
+
+      // Individual plump boondi pearls for motichoor texture
+      const pearls = [
+        { x: -0.3, y: -0.3, r: 0.22, c: '#fff6a8' },
+        { x: 0.25, y: -0.35, r: 0.20, c: '#ffd166' },
+        { x: -0.4, y: 0.15, r: 0.22, c: '#ff9e00' },
+        { x: 0.35, y: 0.2, r: 0.24, c: '#e85d04' },
+        { x: -0.1, y: 0.42, r: 0.21, c: '#d9480f' },
+        { x: 0.1, y: -0.05, r: 0.26, c: '#ffb703' },
+        { x: 0.45, y: -0.15, r: 0.18, c: '#fb8500' },
+        { x: -0.25, y: -0.52, r: 0.16, c: '#ffe066' }
+      ];
+      for (const p of pearls) {
+        ctx.fillStyle = p.c;
         ctx.beginPath();
-        ctx.arc(ox, oy, 2, 0, Math.PI * 2);
+        ctx.arc(p.x * radius, p.y * radius, p.r * radius, 0, Math.PI * 2);
         ctx.fill();
+        ctx.strokeStyle = 'rgba(180, 50, 0, 0.25)';
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
       }
 
-      // Silver Vark (Edible leaf shimmer)
-      ctx.fillStyle = '#ffffff';
+      // Emerald Pistachio / Pista Specks
+      ctx.fillStyle = '#2ec4b6';
       ctx.beginPath();
-      ctx.arc(-2, -3, 2.5, 0, Math.PI * 2);
+      ctx.ellipse(-radius * 0.35, -radius * 0.1, 2.4, 1.4, 0.4, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.ellipse(radius * 0.2, radius * 0.3, 2.2, 1.3, -0.5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Creamy Cashew / Kaju Fleck
+      ctx.fillStyle = '#fffdf0';
+      ctx.beginPath();
+      ctx.ellipse(radius * 0.15, -radius * 0.38, 2.8, 1.6, -0.3, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Silver Vark (Edible leaf shimmer)
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+      ctx.beginPath();
+      ctx.moveTo(-radius * 0.2, -radius * 0.4);
+      ctx.lineTo(-radius * 0.05, -radius * 0.55);
+      ctx.lineTo(-radius * 0.12, -radius * 0.25);
+      ctx.closePath();
       ctx.fill();
 
       ctx.restore();
     }
 
+    // Clear Half Coconut (Authentic cracked shell with white meat and coconut water)
     function drawCoconut(x, y, radius, angle, bob) {
       ctx.save();
       ctx.translate(x, y + bob);
       ctx.rotate(angle);
 
-      ctx.shadowColor = 'rgba(139, 69, 19, 0.6)';
-      ctx.shadowBlur = 14;
+      // Warm fresh natural glow
+      ctx.shadowColor = 'rgba(255, 255, 255, 0.5)';
+      ctx.shadowBlur = 16;
 
-      // Green Mango Leaves on top
-      ctx.fillStyle = '#38b000';
+      // 1. Fresh green decorative leaves behind the coconut
+      ctx.fillStyle = '#2d6a4f';
       ctx.beginPath();
-      ctx.moveTo(0, -radius * 0.7);
-      ctx.lineTo(-7, -radius * 1.35);
-      ctx.lineTo(0, -radius * 1.1);
-      ctx.lineTo(7, -radius * 1.35);
+      ctx.moveTo(-radius * 0.3, -radius * 0.4);
+      ctx.quadraticCurveTo(-radius * 0.9, -radius * 1.3, -radius * 1.25, -radius * 0.9);
+      ctx.quadraticCurveTo(-radius * 0.95, -radius * 0.4, -radius * 0.2, -radius * 0.2);
+      ctx.fill();
+
+      ctx.fillStyle = '#40916c';
+      ctx.beginPath();
+      ctx.moveTo(radius * 0.2, -radius * 0.4);
+      ctx.quadraticCurveTo(radius * 0.85, -radius * 1.25, radius * 1.2, -radius * 0.8);
+      ctx.quadraticCurveTo(radius * 0.85, -radius * 0.35, radius * 0.1, -radius * 0.2);
+      ctx.fill();
+
+      // 2. Outer Fibrous Coconut Husk (Lower bowl hemisphere)
+      const huskGrad = ctx.createRadialGradient(0, 6, 2, 0, 6, radius * 1.08);
+      huskGrad.addColorStop(0, '#5a3518');
+      huskGrad.addColorStop(0.65, '#3b200c');
+      huskGrad.addColorStop(1, '#201005');
+
+      ctx.fillStyle = huskGrad;
+      ctx.beginPath();
+      ctx.arc(0, 2, radius, 0, Math.PI, false);
       ctx.closePath();
       ctx.fill();
 
-      // Brown Coconut Shell
-      const grad = ctx.createRadialGradient(-3, -3, 2, 0, 2, radius);
-      grad.addColorStop(0, '#b07d62');
-      grad.addColorStop(0.6, '#6f4518');
-      grad.addColorStop(1, '#382108');
-
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(0, 2, radius * 0.95, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.shadowBlur = 0;
-      // Red Tilak Mark
-      ctx.fillStyle = '#d00000';
-      ctx.beginPath();
-      ctx.arc(0, 1, 3.5, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = '#ffd166';
-      ctx.beginPath();
-      ctx.arc(0, 1, 1.2, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.restore();
-    }
-
-    function drawFlower(x, y, radius, angle, bob) {
-      ctx.save();
-      ctx.translate(x, y + bob);
-      ctx.rotate(angle);
-
-      ctx.shadowColor = 'rgba(255, 77, 109, 0.55)';
-      ctx.shadowBlur = 14;
-
-      const petals = 5;
-      for (let i = 0; i < petals; i++) {
-        ctx.save();
-        ctx.rotate((i * Math.PI * 2) / petals);
-        const grad = ctx.createRadialGradient(0, -radius * 0.5, 2, 0, -radius * 0.5, radius * 0.7);
-        grad.addColorStop(0, '#ff4d6d');
-        grad.addColorStop(0.65, '#d00000');
-        grad.addColorStop(1, '#590d22');
-        ctx.fillStyle = grad;
+      // Outer husk fibrous hair texture lines
+      ctx.strokeStyle = '#201005';
+      ctx.lineWidth = 1.3;
+      for (let f = -radius * 0.85; f <= radius * 0.85; f += 7) {
+        const a = Math.PI * 0.5 + (f / radius) * 0.92;
+        const hx = Math.cos(a) * radius;
+        const hy = 2 + Math.sin(a) * radius;
         ctx.beginPath();
-        ctx.ellipse(0, -radius * 0.6, radius * 0.45, radius * 0.55, 0, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
+        ctx.moveTo(hx, hy);
+        ctx.lineTo(hx * 1.15, hy + 2);
+        ctx.stroke();
       }
 
-      ctx.shadowBlur = 0;
-      ctx.fillStyle = '#ffb703';
-      ctx.beginPath();
-      ctx.arc(0, 0, radius * 0.28, 0, Math.PI * 2);
-      ctx.fill();
+      // 3. The Elliptical Rim of the Cracked Half Coconut
+      const rimH = radius * 0.44;
 
-      ctx.strokeStyle = '#ffe600';
-      ctx.lineWidth = 2;
+      // Outer brown bark rim
+      ctx.fillStyle = '#4a2810';
       ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.lineTo(radius * 0.35, -radius * 0.4);
+      ctx.ellipse(0, 2, radius, rimH, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#241205';
+      ctx.lineWidth = 1.4;
       ctx.stroke();
 
-      ctx.fillStyle = '#d00000';
+      // 4. Pristine, Pure-White Coconut Meat (Kernel) Ring
+      ctx.fillStyle = '#ffffff';
       ctx.beginPath();
-      ctx.arc(radius * 0.35, -radius * 0.4, 2, 0, Math.PI * 2);
+      ctx.ellipse(0, 2, radius * 0.88, rimH * 0.88, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Depth gradient along inside curve of meat
+      const meatShade = ctx.createLinearGradient(0, 2 - rimH, 0, 2 + rimH);
+      meatShade.addColorStop(0, 'rgba(230, 225, 215, 0.9)');
+      meatShade.addColorStop(1, 'rgba(255, 255, 255, 1)');
+      ctx.fillStyle = meatShade;
+      ctx.beginPath();
+      ctx.ellipse(0, 2, radius * 0.88, rimH * 0.88, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // 5. Inner Clear Sweet Coconut Water Basin
+      const waterGrad = ctx.createRadialGradient(0, 3, 2, 0, 3, radius * 0.62);
+      waterGrad.addColorStop(0, '#f0faff');
+      waterGrad.addColorStop(0.45, '#c8edf5');
+      waterGrad.addColorStop(0.85, '#7bc9db');
+      waterGrad.addColorStop(1, '#4a9fb3');
+
+      ctx.fillStyle = waterGrad;
+      ctx.beginPath();
+      ctx.ellipse(0, 3, radius * 0.62, rimH * 0.62, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.shadowBlur = 0;
+
+      // 6. Glistening Water Light Reflection
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+      ctx.beginPath();
+      ctx.ellipse(-radius * 0.22, 1.8, radius * 0.22, rimH * 0.25, -0.35, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Bright white glint star
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(-radius * 0.25, 1.5, 1.8, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.restore();
     }
 
-    // Fiery Red Chilli (Hazard Item to avoid!)
-    function drawChilli(x, y, radius, angle, bob) {
+    // Gleaming Royal Gold Coin (Swarna Mudra with sacred Om relief)
+    function drawCoin(x, y, radius, angle, bob) {
       ctx.save();
       ctx.translate(x, y + bob);
       ctx.rotate(angle);
 
-      // Warning fiery glow
-      ctx.shadowColor = '#ff3300';
+      // Sparkling golden aura
+      ctx.shadowColor = 'rgba(255, 215, 0, 0.85)';
       ctx.shadowBlur = 18;
 
-      // Curved Red Chilli Body
-      const grad = ctx.createLinearGradient(-10, -radius, 10, radius);
-      grad.addColorStop(0, '#ff1a1a');
-      grad.addColorStop(0.5, '#cc0000');
-      grad.addColorStop(1, '#7a0000');
+      // Outer milled coin rim
+      const rimGrad = ctx.createLinearGradient(-radius, -radius, radius, radius);
+      rimGrad.addColorStop(0, '#ffe882');
+      rimGrad.addColorStop(0.3, '#ffb703');
+      rimGrad.addColorStop(0.65, '#ffd166');
+      rimGrad.addColorStop(1, '#b37400');
 
-      ctx.fillStyle = grad;
+      ctx.fillStyle = rimGrad;
       ctx.beginPath();
-      ctx.moveTo(-4, -radius * 0.8);
-      ctx.quadraticCurveTo(-10, 0, -2, radius * 0.95);
-      ctx.quadraticCurveTo(0, radius * 1.1, 3, radius * 0.85);
-      ctx.quadraticCurveTo(8, 0, 4, -radius * 0.8);
-      ctx.closePath();
+      ctx.arc(0, 0, radius, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.shadowBlur = 0;
-      // Green Stem / Calyx
-      ctx.fillStyle = '#38b000';
+
+      // Beaded border dots along perimeter
+      const beadCount = 14;
+      ctx.fillStyle = '#ffe600';
+      for (let b = 0; b < beadCount; b++) {
+        const bAngle = (b * Math.PI * 2) / beadCount;
+        const bx = Math.cos(bAngle) * (radius * 0.84);
+        const by = Math.sin(bAngle) * (radius * 0.84);
+        ctx.beginPath();
+        ctx.arc(bx, by, 1.4, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Inner concentric medallion plate
+      const innerGrad = ctx.createRadialGradient(-radius * 0.3, -radius * 0.3, 1, 0, 0, radius * 0.72);
+      innerGrad.addColorStop(0, '#fff8cc');
+      innerGrad.addColorStop(0.35, '#ffd166');
+      innerGrad.addColorStop(0.8, '#e59b00');
+      innerGrad.addColorStop(1, '#8f5200');
+
+      ctx.fillStyle = innerGrad;
       ctx.beginPath();
-      ctx.arc(0, -radius * 0.8, 4.5, 0, Math.PI * 2);
+      ctx.arc(0, 0, radius * 0.72, 0, Math.PI * 2);
       ctx.fill();
 
-      ctx.strokeStyle = '#2b9348';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(0, -radius * 0.8);
-      ctx.quadraticCurveTo(3, -radius * 1.2, 6, -radius * 1.25);
+      ctx.strokeStyle = '#7a4500';
+      ctx.lineWidth = 1;
       ctx.stroke();
 
-      // Sizzle Smoke puff
-      ctx.fillStyle = 'rgba(255, 200, 150, 0.4)';
+      // Sacred Embossed Om (ॐ) in Relief
+      ctx.fillStyle = '#6b3600'; // shadow relief
+      ctx.font = `bold ${Math.round(radius * 0.84)}px "Segoe UI", sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('ॐ', 0.8, 1.2);
+
+      ctx.fillStyle = '#fffdf0'; // highlight relief
+      ctx.fillText('ॐ', 0, 0);
+
+      // Rotating Star Gleam Sparkle
+      const gleamX = radius * 0.44;
+      const gleamY = -radius * 0.44;
+      ctx.fillStyle = '#ffffff';
       ctx.beginPath();
-      ctx.arc(0, -radius * 1.35, 3, 0, Math.PI * 2);
+      ctx.arc(gleamX, gleamY, 2.2, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+      ctx.lineWidth = 1.3;
+      ctx.beginPath();
+      ctx.moveTo(gleamX - 6, gleamY);
+      ctx.lineTo(gleamX + 6, gleamY);
+      ctx.moveTo(gleamX, gleamY - 6);
+      ctx.lineTo(gleamX, gleamY + 6);
+      ctx.stroke();
+
+      ctx.restore();
+    }
+
+    // Dangerous Explosive Bomb (Hazard Item to avoid!)
+    function drawBomb(x, y, radius, angle, bob, age) {
+      ctx.save();
+      ctx.translate(x, y + bob);
+      ctx.rotate(angle * 0.4);
+
+      // Warning pulsating red danger glow
+      const pulse = Math.sin((age || 0) * 0.25) * 0.35 + 0.65;
+      ctx.shadowColor = `rgba(255, 30, 0, ${pulse})`;
+      ctx.shadowBlur = 20;
+
+      // 1. Obsidian Black Spherical Bomb Body
+      const bombGrad = ctx.createRadialGradient(-radius * 0.35, -radius * 0.35, 2, 0, 0, radius);
+      bombGrad.addColorStop(0, '#555868');
+      bombGrad.addColorStop(0.35, '#2c2e3a');
+      bombGrad.addColorStop(0.85, '#14151c');
+      bombGrad.addColorStop(1, '#06070a');
+
+      ctx.fillStyle = bombGrad;
+      ctx.beginPath();
+      ctx.arc(0, 0, radius, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.shadowBlur = 0;
+
+      // Glossy curved specular highlight
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+      ctx.lineWidth = 2.4;
+      ctx.beginPath();
+      ctx.arc(0, 0, radius * 0.74, -Math.PI * 0.78, -Math.PI * 0.32);
+      ctx.stroke();
+
+      // Yellow Warning Hazard Symbol on Bomb Face
+      ctx.fillStyle = '#ffd166';
+      // Exclamation Mark
+      ctx.beginPath();
+      ctx.arc(0, -4, 2.4, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillRect(-1.8, 1, 3.6, 6);
+      ctx.beginPath();
+      ctx.arc(0, 9.5, 2.0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // 2. Brass Fuse Collar / Cap
+      const collarGrad = ctx.createLinearGradient(-radius * 0.28, -radius * 1.2, radius * 0.28, -radius * 1.2);
+      collarGrad.addColorStop(0, '#d4af37');
+      collarGrad.addColorStop(0.5, '#fff0a0');
+      collarGrad.addColorStop(1, '#947012');
+      ctx.fillStyle = collarGrad;
+      ctx.fillRect(-radius * 0.28, -radius * 1.2, radius * 0.56, radius * 0.32);
+      ctx.strokeStyle = '#4a3504';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(-radius * 0.28, -radius * 1.2, radius * 0.56, radius * 0.32);
+
+      // 3. Curved Rope Fuse
+      ctx.strokeStyle = '#c2a685';
+      ctx.lineWidth = 2.6;
+      ctx.beginPath();
+      ctx.moveTo(0, -radius * 1.2);
+      ctx.quadraticCurveTo(radius * 0.5, -radius * 1.55, radius * 0.4, -radius * 1.9);
+      ctx.stroke();
+
+      // 4. Burning, Crackling Fire Spark at Fuse Tip!
+      const sparkX = radius * 0.4;
+      const sparkY = -radius * 1.9;
+
+      // Outer fire glow
+      ctx.fillStyle = 'rgba(255, 90, 0, 0.7)';
+      ctx.beginPath();
+      ctx.arc(sparkX, sparkY, 9 + Math.random() * 3, 0, Math.PI * 2);
+      ctx.fill();
+
+      // White-hot flame center
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(sparkX, sparkY, 3.2, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Animated crackling sparks radiating
+      ctx.strokeStyle = '#ffe600';
+      ctx.lineWidth = 1.8;
+      for (let s = 0; s < 4; s++) {
+        const sAngle = (s * Math.PI * 0.5) + (age || 0) * 0.45;
+        const sLen = 6 + (s % 2) * 5;
+        ctx.beginPath();
+        ctx.moveTo(sparkX, sparkY);
+        ctx.lineTo(sparkX + Math.cos(sAngle) * sLen, sparkY + Math.sin(sAngle) * sLen);
+        ctx.stroke();
+      }
+
+      // Flying ember dots
+      ctx.fillStyle = '#ff3300';
+      ctx.beginPath();
+      ctx.arc(sparkX + 5 * Math.sin((age || 0) * 0.5), sparkY - 4, 1.3, 0, Math.PI * 2);
+      ctx.arc(sparkX - 4 * Math.cos((age || 0) * 0.7), sparkY - 6, 1.1, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.restore();
@@ -2289,11 +2528,11 @@
       updateLivesUI();
       comboStreak = 0;
       updateComboUI();
-      screenShake = 12;
+      screenShake = 16;
 
-      if (reason === 'chilli') {
-        sound.playChilliSizzle();
-        showToast("Oops! Modaks only, no spicy chillies! 🌶️ -1 Life");
+      if (reason === 'bomb') {
+        sound.playBombExplosion();
+        showToast("💥 BOOM! Bomb caught! 💣 -1 Life");
       } else {
         sound.playMiss();
         showToast("Missed an offering! -1 Life");
@@ -2388,10 +2627,10 @@
             drawLaddoo(item.x, item.y, item.radius, item.rotation, bob);
           } else if (item.type === 'coconut') {
             drawCoconut(item.x, item.y, item.radius, item.rotation, bob);
-          } else if (item.type === 'flower') {
-            drawFlower(item.x, item.y, item.radius, item.rotation, bob);
-          } else if (item.type === 'chilli') {
-            drawChilli(item.x, item.y, item.radius, item.rotation, bob);
+          } else if (item.type === 'coin') {
+            drawCoin(item.x, item.y, item.radius, item.rotation, bob);
+          } else if (item.type === 'bomb') {
+            drawBomb(item.x, item.y, item.radius, item.rotation, bob, item.age);
           }
 
           // Catch Collision Check with Player's Festive Basket
@@ -2408,12 +2647,13 @@
           const isInsideX = item.x >= basketLeft && item.x <= basketRight;
 
           if (isInsideY && isInsideX) {
-            // Check if it's the Fiery Chilli (Hazard!)
-            if (item.type === 'chilli') {
-              addFloatText('Ouch! 🌶️', item.x, basketTop - 25, '#ff3300', 24);
-              createCatchBurst(item.x, basketTop, ['#ff3300', '#ff7700', '#ffffff']);
+            // Check if it's the Dangerous Explosive Bomb (Hazard!)
+            if (item.type === 'bomb') {
+              addFloatText('BOOM! 💣', item.x, basketTop - 25, '#ff3300', 26);
+              createCatchBurst(item.x, basketTop, ['#ff3300', '#ff7700', '#222222', '#ffe600', '#ffffff']);
+              screenShake = 18;
               items.splice(i, 1);
-              loseLife('chilli');
+              loseLife('bomb');
               continue;
             }
 
@@ -2442,11 +2682,12 @@
               addFloatText(`+${mult}`, item.x, basketTop - 18, '#ffd166', 18, false);
             }
 
-            // Burst particles
+            // High-clarity festive burst particles
             let colors = ['#ffd166', '#ffb703', '#ffffff'];
-            if (item.type === 'laddoo') colors = ['#ffb703', '#e85d04', '#ffffff', '#ffd166'];
-            else if (item.type === 'coconut') colors = ['#b07d62', '#38b000', '#ffffff', '#ffd166'];
-            else if (item.type === 'flower') colors = ['#ff4d6d', '#d00000', '#ffe600', '#ff758f'];
+            if (item.type === 'laddoo') colors = ['#ffb703', '#fb8500', '#2ec4b6', '#ffffff'];
+            else if (item.type === 'coconut') colors = ['#5a3518', '#ffffff', '#7bc9db', '#40916c'];
+            else if (item.type === 'coin') colors = ['#ffd700', '#ffe600', '#fff8cc', '#ff9e00'];
+            else if (item.type === 'modak') colors = ['#ffd166', '#ffffff', '#ff9e00', '#d90429'];
 
             createCatchBurst(item.x, basketTop, colors);
             updateComboUI();
@@ -2458,9 +2699,12 @@
           if (item.y - item.radius > V_HEIGHT - 12) {
             const missedType = item.type;
             items.splice(i, 1);
-            // Missing a good item loses a life; letting a chilli fall is good!
-            if (missedType !== 'chilli') {
+            // Missing a good item loses a life; letting a bomb fall harmlessly is safe!
+            if (missedType !== 'bomb') {
               loseLife('miss');
+            } else {
+              // Harmless fizzle puff on floor
+              createCatchBurst(item.x, V_HEIGHT - 15, ['#555555', '#888888', '#ff9900']);
             }
           }
         }
