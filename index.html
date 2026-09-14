@@ -6,7 +6,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <title>Modak Catch v2.2 - Ganesh Chaturthi Celebration</title>
+  <title>Modak Catch v2.3 - Ganesh Chaturthi Celebration</title>
   <style>
     :root {
       --saffron-glow: #ff7700;
@@ -982,7 +982,7 @@
             Steer <strong>Mushak's festive woven basket</strong> at the bottom to catch sacred offerings falling from above for Lord Ganesha!<br>
             Catch consecutive offerings for combo multipliers (up to 5x)! Avoid explosive falling bombs! 💣
           </p>
-          <div class="legend-grid" style="grid-template-columns: repeat(6, 1fr);">
+          <div class="legend-grid" style="grid-template-columns: repeat(5, 1fr);">
             <div class="legend-item">
               <img src="assets/item_modak.png" style="width: 22px; height: 22px; object-fit: contain;" alt="Modak" />
               <span>Modak (+1)</span>
@@ -998,10 +998,6 @@
             <div class="legend-item">
               <img src="assets/item_hibiscus.png" style="width: 22px; height: 22px; object-fit: contain;" alt="Flower" />
               <span>Flower (+1)</span>
-            </div>
-            <div class="legend-item">
-              <span style="font-size: 18px;">🪙</span>
-              <span>Coin (+1)</span>
             </div>
             <div class="legend-item">
               <span style="font-size: 18px;">💣</span>
@@ -1140,15 +1136,6 @@
             gain.gain.exponentialRampToValueAtTime(0.001, now + 0.38);
             osc.start(now);
             osc.stop(now + 0.38);
-          } else if (type === 'coin') {
-            // Bright sparkling crystalline coin chime
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(987.77, now); // B5
-            osc.frequency.exponentialRampToValueAtTime(1567.98, now + 0.1); // G6
-            gain.gain.setValueAtTime(0.32, now);
-            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
-            osc.start(now);
-            osc.stop(now + 0.4);
           } else if (type === 'flower') {
             // Sweet harmonic floral chime
             osc.type = 'triangle';
@@ -1539,11 +1526,11 @@
       }
     }
 
-    // Balanced item bag to guarantee all offerings (Flower, Modak, Laddu, Coconut, Coin) spawn frequently
+    // Balanced item bag to guarantee all offerings (Flower, Modak, Laddu, Coconut) spawn frequently
     let itemBag = [];
     function getNextGoodType() {
       if (itemBag.length === 0) {
-        itemBag = ['flower', 'modak', 'laddoo', 'coconut', 'coin'];
+        itemBag = ['flower', 'modak', 'laddoo', 'coconut'];
         // Fisher-Yates shuffle
         for (let i = itemBag.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
@@ -1555,7 +1542,7 @@
 
     // --- Spawning Logic with Updated Sacred Offerings & Hazard Bomb ---
     function spawnItem() {
-      // Good items: flower (red rose), modak, laddoo, coconut, coin
+      // Good items: flower (red rose), modak, laddoo, coconut
       // Hazard: explosive bomb
       const isHazard = (score >= 2 && Math.random() < 0.20);
       const chosenType = isHazard ? 'bomb' : getNextGoodType();
@@ -1742,7 +1729,7 @@
       ctx.restore();
     }
 
-    // --- Item Rendering: Coconut (Half Coconut), Laddoo, Modak, Coin & Bomb ---
+    // --- Item Rendering: Coconut (Half Coconut), Laddoo, Modak & Bomb ---
     function drawModak(x, y, radius, angle, bob) {
       if (typeof ASSETS !== 'undefined' && ASSETS.itemModak.complete && ASSETS.itemModak.naturalWidth > 0) {
         ctx.save();
@@ -1931,131 +1918,6 @@
       } else if (img && img.src) {
         ctx.drawImage(img, -s / 2, -s / 2, s, s);
       }
-      ctx.restore();
-    }
-
-    // Gleaming Royal Gold Coin (Swarna Mudra with royal sunburst star emblem)
-    function drawCoin(x, y, radius, angle, bob) {
-      ctx.save();
-      ctx.translate(x, y + bob);
-      ctx.rotate(angle);
-
-      // Sparkling golden aura
-      ctx.shadowColor = 'rgba(255, 215, 0, 0.85)';
-      ctx.shadowBlur = 18;
-
-      // Outer milled coin rim
-      const rimGrad = ctx.createLinearGradient(-radius, -radius, radius, radius);
-      rimGrad.addColorStop(0, '#ffe882');
-      rimGrad.addColorStop(0.3, '#ffb703');
-      rimGrad.addColorStop(0.65, '#ffd166');
-      rimGrad.addColorStop(1, '#b37400');
-
-      ctx.fillStyle = rimGrad;
-      ctx.beginPath();
-      ctx.arc(0, 0, radius, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.shadowBlur = 0;
-
-      // Beaded border dots along perimeter
-      const beadCount = 14;
-      ctx.fillStyle = '#ffe600';
-      for (let b = 0; b < beadCount; b++) {
-        const bAngle = (b * Math.PI * 2) / beadCount;
-        const bx = Math.cos(bAngle) * (radius * 0.84);
-        const by = Math.sin(bAngle) * (radius * 0.84);
-        ctx.beginPath();
-        ctx.arc(bx, by, radius * 0.055, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      // Inner concentric medallion plate
-      const innerGrad = ctx.createRadialGradient(-radius * 0.3, -radius * 0.3, 1, 0, 0, radius * 0.72);
-      innerGrad.addColorStop(0, '#fff8cc');
-      innerGrad.addColorStop(0.35, '#ffd166');
-      innerGrad.addColorStop(0.8, '#e59b00');
-      innerGrad.addColorStop(1, '#8f5200');
-
-      ctx.fillStyle = innerGrad;
-      ctx.beginPath();
-      ctx.arc(0, 0, radius * 0.72, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.strokeStyle = '#7a4500';
-      ctx.lineWidth = 1;
-      ctx.stroke();
-
-      // Inner decorative engraved ring
-      ctx.strokeStyle = '#8f5200';
-      ctx.lineWidth = 1.1;
-      ctx.beginPath();
-      ctx.arc(0, 0, radius * 0.52, 0, Math.PI * 2);
-      ctx.stroke();
-
-      // Royal 8-pointed sculpted gold sunburst star in relief
-      const starR_outer = radius * 0.44;
-      const starR_inner = radius * 0.20;
-
-      // Drop shadow relief
-      ctx.fillStyle = '#7a3800';
-      ctx.beginPath();
-      for (let s = 0; s < 16; s++) {
-        const a = (s * Math.PI) / 8 - Math.PI / 2;
-        const r = (s % 2 === 0) ? starR_outer : starR_inner;
-        const sx = 0.8 + Math.cos(a) * r;
-        const sy = 1.0 + Math.sin(a) * r;
-        if (s === 0) ctx.moveTo(sx, sy);
-        else ctx.lineTo(sx, sy);
-      }
-      ctx.closePath();
-      ctx.fill();
-
-      // Highlight relief star
-      const starGrad = ctx.createLinearGradient(-starR_outer, -starR_outer, starR_outer, starR_outer);
-      starGrad.addColorStop(0, '#ffffff');
-      starGrad.addColorStop(0.35, '#fff6b3');
-      starGrad.addColorStop(0.7, '#ffc02b');
-      starGrad.addColorStop(1, '#d48000');
-      ctx.fillStyle = starGrad;
-      ctx.beginPath();
-      for (let s = 0; s < 16; s++) {
-        const a = (s * Math.PI) / 8 - Math.PI / 2;
-        const r = (s % 2 === 0) ? starR_outer : starR_inner;
-        const sx = Math.cos(a) * r;
-        const sy = Math.sin(a) * r;
-        if (s === 0) ctx.moveTo(sx, sy);
-        else ctx.lineTo(sx, sy);
-      }
-      ctx.closePath();
-      ctx.fill();
-      ctx.strokeStyle = '#8a4b00';
-      ctx.lineWidth = 0.8;
-      ctx.stroke();
-
-      // Center glowing jewel dome
-      ctx.fillStyle = '#ffffff';
-      ctx.beginPath();
-      ctx.arc(0, 0, radius * 0.11, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Rotating Star Gleam Sparkle
-      const gleamX = radius * 0.44;
-      const gleamY = -radius * 0.44;
-      ctx.fillStyle = '#ffffff';
-      ctx.beginPath();
-      ctx.arc(gleamX, gleamY, 2.2, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
-      ctx.lineWidth = 1.3;
-      ctx.beginPath();
-      ctx.moveTo(gleamX - 6, gleamY);
-      ctx.lineTo(gleamX + 6, gleamY);
-      ctx.moveTo(gleamX, gleamY - 6);
-      ctx.lineTo(gleamX, gleamY + 6);
-      ctx.stroke();
-
       ctx.restore();
     }
 
@@ -2657,7 +2519,7 @@
       bestCombo = 1;
       totalItemsCaught = 0;
       items = [];
-      itemBag = ['coin', 'coconut', 'laddoo', 'modak', 'flower'];
+      itemBag = ['coconut', 'laddoo', 'modak', 'flower'];
       particles = [];
       floatTexts = [];
       lastSpawnTime = performance.now();
@@ -2901,8 +2763,6 @@
             drawLaddoo(item.x, item.y, item.radius, item.rotation, safeBob);
           } else if (item.type === 'coconut') {
             drawCoconut(item.x, item.y, item.radius, item.rotation, safeBob);
-          } else if (item.type === 'coin') {
-            drawCoin(item.x, item.y, item.radius, item.rotation, safeBob);
           } else if (item.type === 'flower') {
             drawFlower(item.x, item.y, item.radius, item.rotation, safeBob);
           } else if (item.type === 'bomb') {
@@ -2962,7 +2822,6 @@
             let colors = ['#ffd166', '#ffb703', '#ffffff'];
             if (item.type === 'laddoo') colors = ['#ffb703', '#fb8500', '#2ec4b6', '#ffffff'];
             else if (item.type === 'coconut') colors = ['#ffffff', '#fff8f0', '#5a3416', '#d90429', '#ffd166'];
-            else if (item.type === 'coin') colors = ['#ffd700', '#ffe600', '#fff8cc', '#ff9e00'];
             else if (item.type === 'modak') colors = ['#ffd166', '#ffffff', '#ff9e00', '#d90429'];
             else if (item.type === 'flower') colors = ['#ff4d6d', '#d00000', '#ff758f', '#2d6a4f', '#ffffff'];
 
