@@ -992,7 +992,7 @@
               <span>Laddu (+1)</span>
             </div>
             <div class="legend-item">
-              <span style="font-size: 18px;">🥥</span>
+              <img src="assets/item_coconut.png" style="width: 22px; height: 22px; object-fit: contain;" alt="Coconut" />
               <span>Coconut (+1)</span>
             </div>
             <div class="legend-item">
@@ -1341,6 +1341,7 @@
       itemLaddu: new Image(),
       itemHibiscus: new Image(),
       itemLotus: new Image(),
+      itemCoconut: new Image(),
       ganeshaUp: new Image()
     };
 
@@ -1359,6 +1360,7 @@
     ASSETS.itemLaddu.src = 'assets/item_laddu.png';
     ASSETS.itemHibiscus.src = 'assets/item_hibiscus.png';
     ASSETS.itemLotus.src = 'assets/item_lotus.png';
+    ASSETS.itemCoconut.src = 'assets/item_coconut.png';
 
     let playerReaction = 'normal'; // 'normal', 'happy', 'scared'
     let reactionTimer = 0;
@@ -1914,8 +1916,20 @@
       ctx.restore();
     }
 
-    // Sacred Puja Half Coconut (Authentic Kobbari Chippa with pure white meat, deep brown shell & auspicious Kumkum Tilak)
+    // Sacred Puja Coconut (Authentic cracked fresh coconut with rich brown husk & pure white meat)
     function drawCoconut(x, y, radius, angle, bob) {
+      if (typeof ASSETS !== 'undefined' && ASSETS.itemCoconut && ASSETS.itemCoconut.complete && ASSETS.itemCoconut.naturalWidth > 0) {
+        ctx.save();
+        ctx.translate(x, y + bob);
+        ctx.rotate(angle);
+        ctx.shadowColor = 'rgba(255, 235, 190, 0.65)';
+        ctx.shadowBlur = 16;
+        const s = radius * 2.3;
+        ctx.drawImage(ASSETS.itemCoconut, -s / 2, -s / 2, s, s);
+        ctx.restore();
+        return;
+      }
+
       ctx.save();
       ctx.translate(x, y + bob);
       ctx.rotate(angle);
