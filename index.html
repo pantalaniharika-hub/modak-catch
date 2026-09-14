@@ -1004,8 +1004,8 @@
               <span>Coin (+1)</span>
             </div>
             <div class="legend-item">
-              <img src="assets/hazard_glass.png" style="width: 22px; height: 22px; object-fit: contain;" alt="Glass Hazard" />
-              <span style="color: #ff4d4d; font-weight: bold;">Hazard (-1)</span>
+              <span style="font-size: 18px;">💣</span>
+              <span style="color: #ff3300; font-weight: bold;">Bomb (-1)</span>
             </div>
           </div>
         </div>
@@ -1340,8 +1340,7 @@
       itemModak: new Image(),
       itemLaddu: new Image(),
       itemHibiscus: new Image(),
-      itemLotus: new Image(),
-      hazardGlass: new Image()
+      itemLotus: new Image()
     };
 
     ASSETS.ganeshaIdle.src = 'assets/ganesha_idle.png';
@@ -1358,7 +1357,6 @@
     ASSETS.itemLaddu.src = 'assets/item_laddu.png';
     ASSETS.itemHibiscus.src = 'assets/item_hibiscus.png';
     ASSETS.itemLotus.src = 'assets/item_lotus.png';
-    ASSETS.hazardGlass.src = 'assets/hazard_glass.png';
 
     let playerReaction = 'normal'; // 'normal', 'happy', 'scared'
     let reactionTimer = 0;
@@ -1538,13 +1536,8 @@
     function spawnItem() {
       // Good items: flower (red rose), modak, laddoo, coconut, coin
       // Hazard: explosive bomb
-      const isHazard = (score >= 2 && Math.random() < 0.22);
-      let chosenType;
-      if (isHazard) {
-        chosenType = (Math.random() < 0.5) ? 'bomb' : 'glass';
-      } else {
-        chosenType = getNextGoodType();
-      }
+      const isHazard = (score >= 2 && Math.random() < 0.20);
+      const chosenType = isHazard ? 'bomb' : getNextGoodType();
       
       const radius = 23; // Larger, clearer, and attractive item size
       const x = Math.random() * (V_WIDTH - radius * 4) + radius * 2;
@@ -2156,21 +2149,6 @@
     }
 
     // Blooming Sacred Red Flower Offering (Puja Hibiscus / Jaswand)
-    function drawGlass(x, y, radius, angle, bob) {
-      if (typeof ASSETS !== 'undefined' && ASSETS.hazardGlass.complete && ASSETS.hazardGlass.naturalWidth > 0) {
-        ctx.save();
-        ctx.translate(x, y + bob);
-        ctx.rotate(angle);
-        ctx.shadowColor = 'rgba(0, 255, 120, 0.6)';
-        ctx.shadowBlur = 14;
-        const s = radius * 2.3;
-        ctx.drawImage(ASSETS.hazardGlass, -s / 2, -s / 2, s, s);
-        ctx.restore();
-        return;
-      }
-      drawBomb(x, y, radius, angle, bob, 0);
-    }
-
     function drawFlower(x, y, radius, angle, bob) {
       if (typeof ASSETS !== 'undefined' && ASSETS.itemHibiscus.complete && ASSETS.itemHibiscus.naturalWidth > 0) {
         ctx.save();
@@ -2754,7 +2732,7 @@
       bestCombo = 1;
       totalItemsCaught = 0;
       items = [];
-      itemBag = ['coin', 'coconut', 'laddoo', 'modak', 'flower', 'glass'];
+      itemBag = ['coin', 'coconut', 'laddoo', 'modak', 'flower'];
       particles = [];
       floatTexts = [];
       lastSpawnTime = performance.now();
@@ -2848,10 +2826,7 @@
 
       playerReaction = 'scared';
       reactionTimer = 30;
-      if (reason === 'glass') {
-        sound.playBombExplosion();
-        showToast("⚠️ Sharp Broken Glass! 🍶 -1 Life");
-      } else if (reason === 'bomb') {
+      if (reason === 'bomb') {
         sound.playBombExplosion();
         showToast("💥 BOOM! Bomb caught! 💣 -1 Life");
       } else {
@@ -2990,8 +2965,6 @@
             drawCoin(item.x, item.y, item.radius, item.rotation, safeBob);
           } else if (item.type === 'flower') {
             drawFlower(item.x, item.y, item.radius, item.rotation, safeBob);
-          } else if (item.type === 'glass') {
-            drawGlass(item.x, item.y, item.radius, item.rotation, safeBob);
           } else if (item.type === 'bomb') {
             drawBomb(item.x, item.y, item.radius, item.rotation, safeBob, item.age || 0);
           }
