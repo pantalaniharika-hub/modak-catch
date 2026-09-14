@@ -1340,12 +1340,14 @@
       itemModak: new Image(),
       itemLaddu: new Image(),
       itemHibiscus: new Image(),
-      itemLotus: new Image()
+      itemLotus: new Image(),
+      ganeshaUp: new Image()
     };
 
     ASSETS.ganeshaIdle.src = 'assets/ganesha_idle.png';
     ASSETS.ganeshaLeft.src = 'assets/ganesha_left.png';
     ASSETS.ganeshaRight.src = 'assets/ganesha_right.png';
+    ASSETS.ganeshaUp.src = 'assets/ganesha_up.png';
     ASSETS.mushakCatcher.src = 'assets/mushak_catcher.png';
     ASSETS.mushakRun.src = 'assets/mushak_run.png';
     ASSETS.mushakLaddoo.src = 'assets/mushak_laddoo.png';
@@ -2468,8 +2470,10 @@
             sprite = ASSETS.ganeshaLeft;
           } else if (isMovingRight) {
             sprite = ASSETS.ganeshaRight;
-          } else {
+          } else if (playerReaction === 'happy') {
             sprite = ASSETS.ganeshaIdle;
+          } else {
+            sprite = (ASSETS.ganeshaUp && ASSETS.ganeshaUp.complete && ASSETS.ganeshaUp.naturalWidth > 0) ? ASSETS.ganeshaUp : ASSETS.ganeshaIdle;
           }
         } else {
           // Mushak as catcher
