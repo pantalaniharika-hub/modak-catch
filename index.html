@@ -2625,9 +2625,9 @@
     // --- Devotee Profile Management ---
     let currentDevotee = {
       name: 'Devotee',
-      avatar: '🐭'
+      avatar: 'ganesha'
     };
-    let selectedAvatar = '🐭';
+    let selectedAvatar = 'ganesha';
 
     function loadPlayerProfile() {
       try {
@@ -2636,8 +2636,14 @@
           const parsed = JSON.parse(saved);
           if (parsed && typeof parsed.name === 'string' && parsed.name.trim()) {
             currentDevotee.name = parsed.name.trim().slice(0, 15);
-            currentDevotee.avatar = parsed.avatar || '🐭';
+            // Migrate legacy emoji or invalid avatars to authentic 3D Bal Ganesha
+            if (!parsed.avatar || parsed.avatar === '🐭' || !AVATAR_MAP[parsed.avatar]) {
+              currentDevotee.avatar = 'ganesha';
+            } else {
+              currentDevotee.avatar = parsed.avatar;
+            }
             selectedAvatar = currentDevotee.avatar;
+            selectAvatar(selectedAvatar);
             updateDevoteeUI();
             return true;
           }
@@ -2650,7 +2656,7 @@
 
     function savePlayerProfile(name, avatar) {
       const cleanName = (name && name.trim()) ? name.trim().slice(0, 15) : 'Devotee';
-      const cleanAvatar = avatar || '🐭';
+      const cleanAvatar = (avatar && AVATAR_MAP[avatar]) ? avatar : 'ganesha';
       currentDevotee = { name: cleanName, avatar: cleanAvatar };
       try {
         localStorage.setItem('modak_catch_player', JSON.stringify(currentDevotee));
@@ -2704,7 +2710,7 @@
       if (playerNameInput) {
         playerNameInput.value = (currentDevotee.name !== 'Devotee' && currentDevotee.name !== 'Guest Devotee') ? currentDevotee.name : '';
       }
-      selectAvatar(currentDevotee.avatar || '🐭');
+      selectAvatar(currentDevotee.avatar || 'ganesha');
       if (loginGaneshImg && !loginGaneshImg.src) {
         loginGaneshImg.src = ganeshCircleImg.src;
       }
@@ -2731,7 +2737,7 @@
     }
 
     function handleGuestLogin() {
-      savePlayerProfile('Guest Devotee', '🐭');
+      savePlayerProfile('Guest Devotee', 'ganesha');
       hideLoginScreen();
       startScreen.classList.remove('hidden');
       sound.init();
