@@ -1372,7 +1372,9 @@
       targetX: V_WIDTH / 2,
       vx: 0,
       scaleX: 1,
-      scaleY: 1
+      scaleY: 1,
+      facing: 'right', // 'left' or 'right'
+      moveTimer: 0     // frames remaining for active running animation
     };
 
     // Soft Ambient Sacred Sparkles
@@ -1405,7 +1407,16 @@
       const rect = container.getBoundingClientRect();
       const relativeX = clientX - rect.left;
       const normalizedX = (relativeX / rect.width) * V_WIDTH;
-      player.targetX = Math.max(player.width / 2 + 10, Math.min(V_WIDTH - player.width / 2 - 10, normalizedX));
+      const clampedX = Math.max(player.width / 2 + 10, Math.min(V_WIDTH - player.width / 2 - 10, normalizedX));
+      const delta = clampedX - player.targetX;
+      if (delta < -1.5) {
+        player.facing = 'left';
+        player.moveTimer = 20;
+      } else if (delta > 1.5) {
+        player.facing = 'right';
+        player.moveTimer = 20;
+      }
+      player.targetX = clampedX;
     }
 
     window.addEventListener('pointermove', (e) => {
@@ -1436,8 +1447,14 @@
     // Keyboard support: Left/Right Arrow and A/D keys
     const activeKeys = {};
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'a' || e.key === 'A' || e.key === 'd' || e.key === 'D') {
+      if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
         activeKeys[e.key] = true;
+        player.facing = 'left';
+        player.moveTimer = 20;
+      } else if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
+        activeKeys[e.key] = true;
+        player.facing = 'right';
+        player.moveTimer = 20;
       }
     });
 
@@ -2458,22 +2475,34 @@
 
       // 1. Draw 3D Character Behind Basket
       const isGanesha = (typeof currentDevotee !== 'undefined' && currentDevotee.avatar === 'ganesha');
-      const isMovingLeft = (player.vx < -0.6);
-      const isMovingRight = (player.vx > 0.6);
+      const isMoving = (player.moveTimer > 0 || Math.abs(player.vx) > 0.35);
+      const isFacingLeft = (player.facing === 'left');
 
       let sprite = null;
       let flipX = false;
 
       if (typeof ASSETS !== 'undefined') {
         if (isGanesha) {
-          if (isMovingLeft) {
-            sprite = ASSETS.ganeshaLeft;
-          } else if (isMovingRight) {
-            sprite = ASSETS.ganeshaRight;
-          } else if (playerReaction === 'happy') {
+          if (playerReaction === 'happy') {
             sprite = ASSETS.ganeshaIdle;
+          } else if (isMoving) {
+            if (isFacingLeft) {
+              if (ASSETS.ganeshaLeft && ASSETS.ganeshaLeft.complete && ASSETS.ganeshaLeft.naturalWidth > 0) {
+                sprite = ASSETS.ganeshaLeft;
+                flipX = false;
+              } else {
+                sprite = ASSETS.ganeshaRight;
+                flipX = true; // Fallback horizontal mirror
+              }
+            } else {
+              sprite = ASSETS.ganeshaRight;
+              flipX = false;
+            }
           } else {
-            sprite = (ASSETS.ganeshaUp && ASSETS.ganeshaUp.complete && ASSETS.ganeshaUp.naturalWidth > 0) ? ASSETS.ganeshaUp : ASSETS.ganeshaIdle;
+            // Idle: Divine smiling front-facing Bal Ganesha with Abhaya Mudra
+            sprite = (ASSETS.ganeshaIdle && ASSETS.ganeshaIdle.complete && ASSETS.ganeshaIdle.naturalWidth > 0)
+              ? ASSETS.ganeshaIdle
+              : ((ASSETS.ganeshaUp && ASSETS.ganeshaUp.complete && ASSETS.ganeshaUp.naturalWidth > 0) ? ASSETS.ganeshaUp : ASSETS.ganeshaRight);
           }
         } else {
           // Mushak as catcher
@@ -2481,9 +2510,9 @@
             sprite = ASSETS.mushakScared;
           } else if (playerReaction === 'happy') {
             sprite = ASSETS.mushakLaddoo;
-          } else if (isMovingLeft || isMovingRight) {
+          } else if (isMoving) {
             sprite = ASSETS.mushakRun;
-            flipX = isMovingLeft;
+            flipX = isFacingLeft;
           } else {
             sprite = ASSETS.mushakCatcher;
           }
@@ -2492,9 +2521,9 @@
 
       if (sprite && sprite.complete && sprite.naturalWidth > 0) {
         ctx.save();
-        const charW = isGanesha ? 84 : 74;
+        const charW = isGanesha ? 100 : 76;
         const charH = Math.round(charW * (sprite.naturalHeight / sprite.naturalWidth));
-        const charY = topY - charH * 0.72;
+        const charY = topY - charH * 0.82;
 
         ctx.shadowColor = isGanesha ? 'rgba(255, 215, 0, 0.5)' : 'rgba(255, 183, 3, 0.35)';
         ctx.shadowBlur = 12;
@@ -2921,15 +2950,30 @@
         const keySpeed = 16;
         if (activeKeys['ArrowLeft'] || activeKeys['a'] || activeKeys['A']) {
           player.targetX = Math.max(player.width / 2 + 10, player.targetX - keySpeed);
+          player.facing = 'left';
+          player.moveTimer = 20;
         }
         if (activeKeys['ArrowRight'] || activeKeys['d'] || activeKeys['D']) {
           player.targetX = Math.min(V_WIDTH - player.width / 2 - 10, player.targetX + keySpeed);
+          player.facing = 'right';
+          player.moveTimer = 20;
         }
 
         // Basket Lerp Smoothing: glides towards target horizontal position
         const prevPlayerX = player.x;
         player.x += (player.targetX - player.x) * 0.22;
         player.vx = player.x - prevPlayerX;
+
+        // Continuous direction and running animation persistence
+        if (player.vx < -0.35) {
+          player.facing = 'left';
+          player.moveTimer = 20;
+        } else if (player.vx > 0.35) {
+          player.facing = 'right';
+          player.moveTimer = 20;
+        } else if (player.moveTimer > 0) {
+          player.moveTimer--;
+        }
 
         // Squash & Stretch Spring Recovery
         player.scaleX += (1.0 - player.scaleX) * 0.16;
